@@ -8,11 +8,7 @@ type ButtonProps = {
   onClick?: () => void;
 };
 
-const Button = ({
-  text,
-  primary,
-  onClick,
-}: ButtonProps): React.ReactElement => {
+const Button = ({ text, primary, onClick }: ButtonProps): React.ReactElement => {
   return (
     <ButtonContainer onClick={onClick} isPrimary={primary}>
       {text}

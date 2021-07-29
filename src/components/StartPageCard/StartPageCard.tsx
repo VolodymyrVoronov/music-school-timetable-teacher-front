@@ -3,11 +3,7 @@ import React from "react";
 import BoxShadowWrapper from "../common/UI/BoxShadowWrapper/BoxShadowWrapper";
 import Button from "../common/UI/Button/Button";
 
-import {
-  StartPageCardContainer,
-  StartPageCardImage,
-  StartPageCardButton,
-} from "./StartPageCard.styled";
+import { StartPageCardContainer, StartPageCardImage, StartPageCardButton } from "./StartPageCard.styled";
 
 type StartPageCardProps = {
   image: string;
@@ -18,10 +14,7 @@ const onLoginClick = () => {
   console.log(`Click`);
 };
 
-const StartPageCard = ({
-  image,
-  text,
-}: StartPageCardProps): React.ReactElement => {
+const StartPageCard = ({ image, text }: StartPageCardProps): React.ReactElement => {
   return (
     <BoxShadowWrapper>
       <StartPageCardContainer>
