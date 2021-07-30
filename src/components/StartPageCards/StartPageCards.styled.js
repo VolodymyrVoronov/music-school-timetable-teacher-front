@@ -15,7 +15,7 @@ import {
 
 const StartPageCardsContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 
   width: 1000px;
 

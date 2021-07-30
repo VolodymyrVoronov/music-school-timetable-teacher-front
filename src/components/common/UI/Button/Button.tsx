@@ -10,7 +10,7 @@ type ButtonProps = {
 
 const Button = ({ text, primary, onClick }: ButtonProps): React.ReactElement => {
   return (
-    <ButtonContainer onClick={onClick} isPrimary={primary}>
+    <ButtonContainer type="button" onClick={onClick} isPrimary={primary}>
       {text}
     </ButtonContainer>
   );
