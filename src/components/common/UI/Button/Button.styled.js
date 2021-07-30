@@ -12,6 +12,7 @@ const ButtonContainer = styled.button`
 
   padding: ${s16} 0;
 
+  font-family: inherit;
   font-size: ${s24};
   line-height: ${s32};
   font-weight: 500;
