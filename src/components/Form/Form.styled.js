@@ -7,7 +7,6 @@ import { s4, s8, s16, s20, s24, s32, s48, s64, s96, s160 } from "./../../styles/
 
 const FormContainer = styled.div`
   display: flex;
-  justify-content: space-around;
 
   width: 1000px;
 
@@ -18,4 +17,44 @@ const FormContainer = styled.div`
   box-shadow: ${boxShadow};
 `;
 
-export { FormContainer };
+const FormContainerLeft = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 50%;
+
+  padding: ${s64} 0;
+`;
+
+const FormContainerLeftImage = styled.img`
+  display: block;
+
+  width: 75%;
+`;
+
+const FormContainerLeftTitle = styled.h2`
+  display: block;
+
+  margin-top: ${s20};
+  padding: 0 ${s96};
+
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 700;
+  text-align: center;
+
+  color: ${colors.primary};
+`;
+
+const FormContainerRight = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  width: 50%;
+
+  background-color: ${colors.primary};
+`;
+
+export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight };

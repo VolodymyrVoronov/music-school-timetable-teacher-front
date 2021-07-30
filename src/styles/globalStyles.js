@@ -155,8 +155,8 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
 
-    font-family: -apple-system, BlinkMacSystemFont, 'Hind Siliguri', 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue';
+    font-family: 'Comfortaa',-apple-system, BlinkMacSystemFont, 'Hind Siliguri', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', cursive;
     letter-spacing: 1px;
 
     background-size: cover;
