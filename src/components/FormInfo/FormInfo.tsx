@@ -1,6 +1,6 @@
 import React from "react";
 //@ts-ignore
-import Slide from "react-reveal/Slide";
+import Fade from "react-reveal/Fade";
 
 import { FormInfoContainer, FormInfoText } from "./FormInfo.styled";
 
@@ -10,7 +10,7 @@ type FormInfoProps = {
 
 const FormInfo = ({ formType }: FormInfoProps): React.ReactElement => {
   return (
-    <Slide top>
+    <Fade>
       <FormInfoContainer>
         {formType === "login" && (
           <>
@@ -40,7 +40,7 @@ const FormInfo = ({ formType }: FormInfoProps): React.ReactElement => {
           </>
         )}
       </FormInfoContainer>
-    </Slide>
+    </Fade>
   );
 };
 
