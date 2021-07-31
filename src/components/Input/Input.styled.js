@@ -37,6 +37,10 @@ const InputField = styled.input`
   color: ${colors.black};
 
   border: none;
+
+  &::placeholder {
+    color: ${colors.blackOpacity04};
+  }
 `;
 
 export { InputContainer, InputLabel, InputField };

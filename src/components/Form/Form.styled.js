@@ -49,6 +49,7 @@ const FormContainerLeftTitle = styled.h2`
 `;
 
 const FormContainerRight = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -65,4 +66,28 @@ const FormContainerRight = styled.form`
   }
 `;
 
-export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight };
+const FormContainerRightInfoButton = styled.span`
+  position: absolute;
+  display: block;
+
+  top: ${s8};
+  right: ${s8};
+
+  margin: 0;
+  padding: 0;
+
+  font-size: 40px;
+  line-height: 30px;
+
+  border-radius: 50%;
+
+  svg {
+    color: ${colors.white};
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton };

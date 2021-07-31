@@ -6,9 +6,12 @@ import Slide from "react-reveal/Slide";
 import Input from "./../Input/Input";
 import Button from "../common/UI/Button/Button";
 
-import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight } from "./Form.styled";
+import { IoIosInformationCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
+
+import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton } from "./Form.styled";
 
 import Image01 from "./../../assets/sign-in-vector.svg";
+import FormInfo from "../FormInfo/FormInfo";
 
 type LocationState = {
   typeForm: string;
@@ -17,6 +20,8 @@ type LocationState = {
 const Form = (): React.ReactElement => {
   const history = useHistory();
   const location = useLocation<LocationState>();
+
+  const [showInfo, setShowInfo] = React.useState(false);
 
   const formTitle = location.state.typeForm;
 
@@ -43,9 +48,11 @@ const Form = (): React.ReactElement => {
     });
   };
 
-  const checkInputsFormValidity = () => {
-    
+  const onInfoButtonClick = () => {
+    setShowInfo((showInfo) => !showInfo);
   };
+
+  const checkInputsFormValidity = () => {};
 
   console.log(formData);
 
@@ -60,37 +67,49 @@ const Form = (): React.ReactElement => {
         </FormContainerLeft>
 
         <FormContainerRight>
-          {formTitle === "signin" && (
+          <FormContainerRightInfoButton onClick={() => onInfoButtonClick()}>
+            <Slide right duration={1500}>
+              {showInfo ? <IoIosCloseCircleOutline /> : <IoIosInformationCircleOutline />}
+            </Slide>
+          </FormContainerRightInfoButton>
+
+          {showInfo ? (
+            <FormInfo />
+          ) : (
             <>
+              {formTitle === "signin" && (
+                <>
+                  <Slide top>
+                    <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} placeholder="Катерина" />
+                  </Slide>
+
+                  <Slide top>
+                    <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} value={formData.secondName} placeholder="Котова" />
+                  </Slide>
+                </>
+              )}
+
               <Slide top>
-                <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} />
+                <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} value={formData.login} placeholder="kotovak" />
               </Slide>
 
               <Slide top>
-                <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} value={formData.secondName} />
+                <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} placeholder="password12345" />
+              </Slide>
+
+              {formTitle === "signin" && (
+                <>
+                  <Slide top>
+                    <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} placeholder="password12345" />
+                  </Slide>
+                </>
+              )}
+
+              <Slide top duration={1000}>
+                <Button text={`${formTitle === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
               </Slide>
             </>
           )}
-
-          <Slide top>
-            <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} value={formData.login} />
-          </Slide>
-
-          <Slide top>
-            <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} />
-          </Slide>
-
-          {formTitle === "signin" && (
-            <>
-              <Slide top>
-                <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} />
-              </Slide>
-            </>
-          )}
-
-          <Slide top duration={1000}>
-            <Button text={`${formTitle === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
-          </Slide>
         </FormContainerRight>
       </FormContainer>
     </Slide>
