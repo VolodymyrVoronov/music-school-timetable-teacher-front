@@ -4,8 +4,6 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import StartPage from "./../../pages/StartPage/StartPage";
 import AuthForm from "./../../pages/AuthForm/AuthForm";
 
-import BackButton from "./../common/UI/BackButton/BackButton";
-
 const App = (): React.ReactElement => {
   return (
     <>
@@ -18,11 +16,9 @@ const App = (): React.ReactElement => {
         </Route>
         <Route exact path="/login">
           <AuthForm />
-          <BackButton path="/start-page" />
         </Route>
         <Route exact path="/signin">
           <AuthForm />
-          <BackButton path="/start-page" />
         </Route>
       </Switch>
     </>

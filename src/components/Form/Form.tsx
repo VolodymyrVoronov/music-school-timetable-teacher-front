@@ -43,7 +43,9 @@ const Form = (): React.ReactElement => {
     });
   };
 
-  const name = () => {};
+  const checkInputsFormValidity = () => {
+    
+  };
 
   console.log(formData);
 
@@ -61,27 +63,27 @@ const Form = (): React.ReactElement => {
           {formTitle === "signin" && (
             <>
               <Slide top>
-                <Input labelText={"Имя"} inputType={"text"} inputName="firstName" onChange={onFormInputChange} value={formData.firstName} />
+                <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} />
               </Slide>
 
               <Slide top>
-                <Input labelText={"Фамилия"} inputType={"text"} inputName="secondName" onChange={onFormInputChange} value={formData.secondName} />
+                <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} value={formData.secondName} />
               </Slide>
             </>
           )}
 
           <Slide top>
-            <Input labelText={"Логин"} inputType={"text"} inputName="login" onChange={onFormInputChange} value={formData.login} />
+            <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} value={formData.login} />
           </Slide>
 
           <Slide top>
-            <Input labelText={"Пароль"} inputType={"password"} inputName="password" onChange={onFormInputChange} value={formData.password} />
+            <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} />
           </Slide>
 
           {formTitle === "signin" && (
             <>
               <Slide top>
-                <Input labelText={"Подтвердите пароль"} inputType={"password"} inputName="password2" onChange={onFormInputChange} value={formData.password2} />
+                <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} />
               </Slide>
             </>
           )}
