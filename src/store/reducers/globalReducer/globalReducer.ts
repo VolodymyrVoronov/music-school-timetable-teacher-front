@@ -1,4 +1,4 @@
-import { ActionTypes, Actions } from "./actions";
+import { ActionTypes, Actions } from "./actionTypes";
 
 import loginImage01 from "./../../../assets/login-vector.svg";
 import joinImage01 from "./../../../assets/join-vector.svg";

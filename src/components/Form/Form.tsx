@@ -66,7 +66,12 @@ const Form = (): React.ReactElement => {
     }
 
     if (formType === "signin") {
-      console.log("signin");
+      history.replace({
+        pathname: `/login`,
+        state: {
+          typeForm: "login",
+        },
+      });
     }
   };
 
@@ -108,13 +113,13 @@ const Form = (): React.ReactElement => {
               </Slide>
 
               <Slide top>
-                <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} placeholder="password12345" />
+                <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} placeholder="Password12345!" />
               </Slide>
 
               {formType === "signin" && (
                 <>
                   <Slide top>
-                    <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} placeholder="password12345" />
+                    <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} placeholder="Password12345!" />
                   </Slide>
                 </>
               )}
