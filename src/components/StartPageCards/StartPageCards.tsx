@@ -10,11 +10,11 @@ import StartPageCard from "./../StartPageCard/StartPageCard";
 import { StartPageCardsContainer } from "./StartPageCards.styled";
 
 const StartPageCards = (): React.ReactElement => {
-  const { cardsSettings } = useSelector((state: RootState) => state.globalReducer);
+  const { startPageCardsSettings } = useSelector((state: RootState) => state.globalReducer);
 
   return (
     <StartPageCardsContainer>
-      {cardsSettings.map((card: any) => {
+      {startPageCardsSettings.map((card: any) => {
         const { id, image, text, path, type } = card;
         return (
           <Slide top key={id}>

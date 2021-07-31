@@ -56,6 +56,20 @@ const Form = (): React.ReactElement => {
 
   console.log(formData);
 
+  const onAuthButtonClick = () => {
+    if (formType === "login") {
+      console.log("login");
+
+      history.replace({
+        pathname: `/account`,
+      });
+    }
+
+    if (formType === "signin") {
+      console.log("signin");
+    }
+  };
+
   return (
     <Slide top>
       <FormContainer>
@@ -106,7 +120,7 @@ const Form = (): React.ReactElement => {
               )}
 
               <Slide top duration={1000}>
-                <Button text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
+                <Button onClick={() => onAuthButtonClick()} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
               </Slide>
             </>
           )}

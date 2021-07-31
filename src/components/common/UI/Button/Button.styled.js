@@ -15,6 +15,18 @@ const ButtonContainer = styled.button`
 
   padding: ${s16} 0;
 
+  ${(props) =>
+    props.pt &&
+    css`
+      padding-top: ${props.pt};
+    `}
+
+  ${(props) =>
+    props.pb &&
+    css`
+      padding-bottom: ${props.pb};
+    `}
+
   font-family: inherit;
   font-size: ${s24};
   line-height: ${s32};

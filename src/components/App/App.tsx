@@ -1,8 +1,10 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 
+import Header from "../Header/Header";
 import StartPage from "./../../pages/StartPage/StartPage";
-import AuthForm from "./../../pages/AuthForm/AuthForm";
+import FormPage from "../../pages/FormPage/FormPage";
+import AccountPage from "./../../pages/AccountPage/AccountPage";
 
 const App = (): React.ReactElement => {
   return (
@@ -15,10 +17,14 @@ const App = (): React.ReactElement => {
           <StartPage />
         </Route>
         <Route exact path="/login">
-          <AuthForm />
+          <FormPage />
         </Route>
         <Route exact path="/signin">
-          <AuthForm />
+          <FormPage />
+        </Route>
+        <Route exact path="/account">
+          <Header />
+          <AccountPage />
         </Route>
       </Switch>
     </>
