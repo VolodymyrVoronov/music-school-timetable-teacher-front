@@ -24,6 +24,10 @@ const FormInfoText = styled.p`
   span {
     text-decoration: underline;
   }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 `;
 
 export { FormInfoContainer, FormInfoText };

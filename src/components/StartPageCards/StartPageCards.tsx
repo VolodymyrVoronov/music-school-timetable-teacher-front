@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
@@ -6,18 +7,16 @@ import StartPageCard from "./../StartPageCard/StartPageCard";
 
 import { StartPageCardsContainer } from "./StartPageCards.styled";
 
-import loginImage01 from "./../../assets/login-vector.svg";
-import joinImage01 from "./../../assets/join-vector.svg";
-
-const cards = [
-  { id: 1, image: loginImage01, text: "Вход", path: "login", type: "login" },
-  { id: 2, image: joinImage01, text: "Регистрация", path: "signin", type: "signin" },
-];
+import { RootState } from "../../store/store";
 
 const StartPageCards = (): React.ReactElement => {
+  const { cardsSettings } = useSelector((state: RootState) => state.globalReducer);
+
+  console.log(cardsSettings);
+
   return (
     <StartPageCardsContainer>
-      {cards.map((card) => {
+      {cardsSettings.map((card: any) => {
         const { id, image, text, path, type } = card;
         return (
           <Slide top key={id}>
