@@ -23,10 +23,10 @@ const Form = (): React.ReactElement => {
 
   const [showInfo, setShowInfo] = React.useState(false);
 
-  const formTitle = location.state.typeForm;
+  const formType = location.state.typeForm;
 
   const initialFormState =
-    formTitle === "login"
+    formType === "login"
       ? {
           login: "",
           password: "",
@@ -62,7 +62,7 @@ const Form = (): React.ReactElement => {
         <FormContainerLeft>
           <FormContainerLeftImage src={Image01} />
           <Slide top duration={1000}>
-            <FormContainerLeftTitle>{formTitle === "login" ? "Вход в личный кабинет" : "Форма регистрации"}</FormContainerLeftTitle>
+            <FormContainerLeftTitle>{formType === "login" ? "Вход в личный кабинет" : "Форма регистрации"}</FormContainerLeftTitle>
           </Slide>
         </FormContainerLeft>
 
@@ -74,10 +74,10 @@ const Form = (): React.ReactElement => {
           </FormContainerRightInfoButton>
 
           {showInfo ? (
-            <FormInfo />
+            <FormInfo formType={formType} />
           ) : (
             <>
-              {formTitle === "signin" && (
+              {formType === "signin" && (
                 <>
                   <Slide top>
                     <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} placeholder="Катерина" />
@@ -97,7 +97,7 @@ const Form = (): React.ReactElement => {
                 <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} placeholder="password12345" />
               </Slide>
 
-              {formTitle === "signin" && (
+              {formType === "signin" && (
                 <>
                   <Slide top>
                     <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} placeholder="password12345" />
@@ -106,7 +106,7 @@ const Form = (): React.ReactElement => {
               )}
 
               <Slide top duration={1000}>
-                <Button text={`${formTitle === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
+                <Button text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
               </Slide>
             </>
           )}

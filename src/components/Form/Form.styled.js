@@ -9,6 +9,7 @@ const FormContainer = styled.div`
   display: flex;
 
   width: 1000px;
+  min-height: 666px;
 
   margin: auto;
   margin-top: ${s96};
