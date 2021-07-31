@@ -31,7 +31,13 @@ const StartPageCardImage = styled.img`
 const StartPageCardButton = styled.div`
   display: flex;
 
+  width: 100%;
+
   margin: ${s48} 0 0 0;
+
+  div {
+    width: 100%;
+  }
 `;
 
 export { StartPageCardContainer, StartPageCardImage, StartPageCardButton };

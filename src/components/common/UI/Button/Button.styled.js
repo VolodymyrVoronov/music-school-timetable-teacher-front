@@ -8,7 +8,10 @@ const ButtonContainer = styled.button`
   display: flex;
   justify-content: center;
 
-  width: 300px;
+  width: 100%;
+
+  margin-top: ${(props) => props.mt};
+  margin-bottom: ${(props) => props.mb};
 
   padding: ${s16} 0;
 
@@ -16,7 +19,7 @@ const ButtonContainer = styled.button`
   font-size: ${s24};
   line-height: ${s32};
   font-weight: 500;
-  color: ${(props) => (props.isPrimary ? `${colors.white}` : `${colors.black}`)};
+  color: ${(props) => (props.isPrimary ? `${colors.white}` : `${colors.primary}`)};
 
   background-color: ${(props) => (props.isPrimary ? `${colors.primary}` : `${colors.white}`)};
 
@@ -24,6 +27,11 @@ const ButtonContainer = styled.button`
 
   &:hover {
     cursor: pointer;
+  }
+
+  &:disabled {
+    cursor: default;
+    opacity: 0.5;
   }
 `;
 

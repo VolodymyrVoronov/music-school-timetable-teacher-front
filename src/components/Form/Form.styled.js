@@ -11,7 +11,7 @@ const FormContainer = styled.div`
   width: 1000px;
 
   margin: auto;
-  margin-top: ${s160};
+  margin-top: ${s96};
 
   background-color: ${colors.white};
   box-shadow: ${boxShadow};
@@ -21,6 +21,7 @@ const FormContainerLeft = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   width: 50%;
 
@@ -51,10 +52,17 @@ const FormContainerRight = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 
   width: 50%;
 
+  padding: ${s20} ${s64} ${s32};
+
   background-color: ${colors.primary};
+
+  div {
+    width: 100%;
+  }
 `;
 
 export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight };
