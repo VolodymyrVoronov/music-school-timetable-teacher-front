@@ -23,19 +23,25 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
     case Actions.SET_LOGIN: {
       return {
         ...state,
-        authData: action.payload,
+        authData: action.payload as string[],
       };
     }
     case Actions.SET_REGISTRATION: {
       return {
         ...state,
-        authData: action.payload,
+        authData: action.payload as string[],
       };
     }
     case Actions.SET_USER_FULL_NAME: {
       return {
         ...state,
-        userFullName: action.payload,
+        userFullName: action.payload as string[],
+      };
+    }
+    case Actions.SET_IS_AUTHORIZING: {
+      return {
+        ...state,
+        isAuthorizing: action.payload as boolean,
       };
     }
     default:

@@ -35,19 +35,27 @@ export const setUserNameAC = (firstName: UserFullNameData, secondName: UserFullN
   payload: [firstName, secondName].join(" "),
 });
 
+export const isAuthorizingAC = (isAuthorizing: boolean) => ({
+  type: Actions.SET_IS_AUTHORIZING,
+  payload: isAuthorizing,
+});
+
 export const setLogin = (loginData: LoginData) => async (dispatch: any) => {
   console.log(loginData);
 
   try {
+    dispatch(isAuthorizingAC(true));
     const response = await login(loginData);
     if (response.status === 200) {
       localStorage.setItem(`profile`, JSON.stringify(await { ...response.data }));
       dispatch(loginAC(response.data));
       dispatch(setUserNameAC(response.data.result.firstName, response.data.result.secondName));
       console.log(response.data);
+      dispatch(isAuthorizingAC(false));
     }
   } catch (error) {
     console.log(error);
+    dispatch(isAuthorizingAC(false));
   }
 };
 

@@ -4,6 +4,8 @@ import { useLocation, useHistory } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
+import { RootState } from "../../store/store";
+
 import { setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
 
 import Input from "./../Input/Input";
@@ -15,6 +17,7 @@ import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainer
 
 import Image01 from "./../../assets/sign-in-vector.svg";
 import FormInfo from "../FormInfo/FormInfo";
+import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
 
 type LocationState = {
   typeForm: string;
@@ -33,6 +36,7 @@ const Form = (): React.ReactElement => {
   const history = useHistory();
   const location = useLocation<LocationState>();
 
+  const { isAuthorizing } = useSelector((state: RootState) => state.authReducer);
   const [showInfo, setShowInfo] = React.useState(false);
 
   const formType = location.state.typeForm;
@@ -93,6 +97,7 @@ const Form = (): React.ReactElement => {
   return (
     <Slide top>
       <FormContainer>
+        {isAuthorizing && <LoadingBar color="#6C63FF" />}
         <FormContainerLeft>
           <FormContainerLeftImage src={Image01} />
           <Slide top duration={1000}>
@@ -140,7 +145,7 @@ const Form = (): React.ReactElement => {
               )}
 
               <Slide top duration={1000}>
-                <Button onClick={onAuthButtonClick} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
+                <Button disabled={isAuthorizing} onClick={onAuthButtonClick} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
               </Slide>
             </>
           )}
