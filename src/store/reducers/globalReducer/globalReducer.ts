@@ -1,3 +1,5 @@
+import { Reducer } from "redux";
+
 import { ActionTypes, Actions } from "./actionTypes";
 
 import loginImage01 from "./../../../assets/login-vector.svg";
@@ -5,8 +7,6 @@ import joinImage01 from "./../../../assets/join-vector.svg";
 
 import timeTableEditor01 from "./../../../assets/events-vector.svg";
 import studentsEditor01 from "./../../../assets/add-user-vector.svg";
-
-import { Reducer } from "redux";
 
 export type GlobalReducerStateType = {
   startPageCardsSettings: { id: number; image: string; text: string; path: string; type: string }[];

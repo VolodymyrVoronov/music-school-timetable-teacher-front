@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useHistory } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
+
+import { setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
 
 import Input from "./../Input/Input";
 import Button from "../common/UI/Button/Button";
@@ -17,7 +20,16 @@ type LocationState = {
   typeForm: string;
 };
 
+type FormData = {
+  firstName?: string;
+  secondName?: string;
+  login: string;
+  password: string;
+  password2?: string;
+};
+
 const Form = (): React.ReactElement => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation<LocationState>();
 
@@ -39,7 +51,7 @@ const Form = (): React.ReactElement => {
           password2: "",
         };
 
-  const [formData, setFormData] = React.useState(initialFormState);
+  const [formData, setFormData] = React.useState<FormData>(initialFormState);
 
   const onFormInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -60,18 +72,21 @@ const Form = (): React.ReactElement => {
     if (formType === "login") {
       console.log("login");
 
-      history.replace({
-        pathname: `/account`,
-      });
+      dispatch(setLogin(formData));
+
+      // history.replace({
+      //   pathname: `/account`,
+      // });
     }
 
     if (formType === "signin") {
-      history.replace({
-        pathname: `/login`,
-        state: {
-          typeForm: "login",
-        },
-      });
+      dispatch(setRegistration(formData));
+      // history.replace({
+      //   pathname: `/login`,
+      //   state: {
+      //     typeForm: "login",
+      //   },
+      // });
     }
   };
 
@@ -109,7 +124,7 @@ const Form = (): React.ReactElement => {
               )}
 
               <Slide top>
-                <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} value={formData.login} placeholder="kotovak" />
+                <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} value={formData.login} placeholder="kkotova" />
               </Slide>
 
               <Slide top>
@@ -125,7 +140,7 @@ const Form = (): React.ReactElement => {
               )}
 
               <Slide top duration={1000}>
-                <Button onClick={() => onAuthButtonClick()} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
+                <Button onClick={onAuthButtonClick} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
               </Slide>
             </>
           )}
