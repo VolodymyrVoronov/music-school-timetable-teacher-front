@@ -1,11 +1,11 @@
 import { Reducer } from "redux";
 
-import { ActionTypes, Actions, RegistrationActionType, LoginActionType } from "./actionTypes";
+import { ActionTypes, Actions } from "./actionTypes";
 
 type AuthReducerStateType = {
   isAuthorizing: boolean;
   authData: string[];
-  userLogin: string;
+  userFullName: string[];
   isAuthorizingSuccessed: boolean;
   isAuthorizingFailed: boolean;
 };
@@ -13,7 +13,7 @@ type AuthReducerStateType = {
 const initialState = {
   isAuthorizing: false,
   authData: [],
-  userLogin: ``,
+  userFullName: [],
   isAuthorizingSuccessed: false,
   isAuthorizingFailed: false,
 };
@@ -30,6 +30,12 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
       return {
         ...state,
         authData: action.payload,
+      };
+    }
+    case Actions.SET_USER_FULL_NAME: {
+      return {
+        ...state,
+        userFullName: action.payload,
       };
     }
     default:

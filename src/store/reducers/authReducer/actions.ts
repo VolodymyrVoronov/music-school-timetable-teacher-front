@@ -15,6 +15,11 @@ type RegistrationData = {
   password2?: string;
 };
 
+type UserFullNameData = {
+  firstName: string;
+  secondName: string;
+};
+
 export const loginAC = (loginData: LoginData) => ({
   type: Actions.SET_LOGIN,
   payload: loginData,
@@ -25,12 +30,20 @@ export const registrationAC = (registrationData: RegistrationData) => ({
   payload: registrationData,
 });
 
+export const setUserNameAC = (firstName: UserFullNameData, secondName: UserFullNameData) => ({
+  type: Actions.SET_USER_FULL_NAME,
+  payload: [firstName, secondName].join(" "),
+});
+
 export const setLogin = (loginData: LoginData) => async (dispatch: any) => {
   console.log(loginData);
 
   try {
     const response = await login(loginData);
     if (response.status === 200) {
+      localStorage.setItem(`profile`, JSON.stringify(await { ...response.data }));
+      dispatch(loginAC(response.data));
+      dispatch(setUserNameAC(response.data.result.firstName, response.data.result.secondName));
       console.log(response.data);
     }
   } catch (error) {
