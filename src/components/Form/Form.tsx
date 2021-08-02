@@ -1,17 +1,17 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useHistory } from "react-router";
+import { useLocation, useHistory } from "react-router-dom";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
+import { IoIosInformationCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
 import { RootState } from "../../store/store";
-
 import { setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
+
+import { checkInputsLoginFormValidity } from "./../../helpers/checkInputsLoginFormValidity";
 
 import Input from "./../Input/Input";
 import Button from "../common/UI/Button/Button";
-
-import { IoIosInformationCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
 import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton } from "./Form.styled";
 
@@ -38,6 +38,7 @@ const Form = (): React.ReactElement => {
 
   const { isAuthorizing } = useSelector((state: RootState) => state.authReducer);
   const [showInfo, setShowInfo] = React.useState(false);
+  const [isValid, setIsValid] = React.useState(false);
 
   const formType = location.state.typeForm;
 
@@ -68,31 +69,34 @@ const Form = (): React.ReactElement => {
     setShowInfo((showInfo) => !showInfo);
   };
 
-  const checkInputsFormValidity = () => {};
-
   console.log(formData);
 
   const onAuthButtonClick = () => {
     if (formType === "login") {
-      console.log("login");
+      dispatch(setLogin(formData, history));
 
-      dispatch(setLogin(formData));
-
-      // history.replace({
-      //   pathname: `/account`,
-      // });
+      setFormData(initialFormState);
     }
 
     if (formType === "signin") {
       dispatch(setRegistration(formData));
-      // history.replace({
-      //   pathname: `/login`,
-      //   state: {
-      //     typeForm: "login",
-      //   },
-      // });
+      history.replace({
+        pathname: `/login`,
+        state: {
+          typeForm: "login",
+        },
+      });
     }
   };
+
+  React.useEffect(() => {
+    if (formType === "login") {
+      setIsValid(checkInputsLoginFormValidity(formData.login, formData.password));
+    }
+
+    if (formType === "signin") {
+    }
+  }, [formType, formData.login, formData.password]);
 
   return (
     <Slide top>
@@ -145,7 +149,7 @@ const Form = (): React.ReactElement => {
               )}
 
               <Slide top duration={1000}>
-                <Button disabled={isAuthorizing} onClick={onAuthButtonClick} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
+                <Button disabled={isAuthorizing || !isValid} onClick={onAuthButtonClick} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
               </Slide>
             </>
           )}

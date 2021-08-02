@@ -20,6 +20,7 @@ const FormInfo = ({ formType }: FormInfoProps): React.ReactElement => {
             <FormInfoText>
               <span>Пароль:</span> Введите ваш пароль.
             </FormInfoText>
+            <FormInfoText>Поля не должны быть пустыми или содержать пустое место (пробел) в самом начале.</FormInfoText>
           </>
         )}
 
@@ -37,6 +38,7 @@ const FormInfo = ({ formType }: FormInfoProps): React.ReactElement => {
             <FormInfoText>
               <span>Пароль:</span> Пароль должен быть не меньше 8 символов и состоять только из латинских букв, также должен включать в cебя цифры и специальные символы на выбор ({" . , ! ? > < # $ "}). <br /> Пример - Trees54321#
             </FormInfoText>
+            <FormInfoText>Поля не должны быть пустыми или содержать пустое место (пробел) в самом начале.</FormInfoText>
           </>
         )}
       </FormInfoContainer>

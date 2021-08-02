@@ -8,22 +8,32 @@ export const Actions = {
 };
 
 export interface RegistrationActionType {
-  type: "SET_REGISTRATION";
-  payload: string[];
+  type: typeof Actions.SET_REGISTRATION;
+  payload: object[];
 }
 
 export interface LoginActionType {
-  type: "SET_LOGIN";
-  payload: string[];
+  type: typeof Actions.SET_LOGIN;
+  payload: object[];
 }
 
 export interface UserFullNameActionType {
-  type: "SET_USER_FULL_NAME";
+  type: typeof Actions.SET_USER_FULL_NAME;
   payload: string[];
 }
 
 export interface IsAuthorizingActionType {
-  type: "SET_IS_AUTHORIZING";
+  type: typeof Actions.SET_IS_AUTHORIZING;
+  payload: boolean;
+}
+
+export interface IsAuthorizingSucceessedActionType {
+  type: typeof Actions.SET_AUTH_SUCCEEDED;
+  payload: boolean;
+}
+
+export interface IsAuthorizingFailedActionType {
+  type: typeof Actions.SET_AUTH_FAILED;
   payload: boolean;
 }
 

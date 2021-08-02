@@ -1,3 +1,5 @@
+import { History } from "history";
+
 import { Actions } from "./actionTypes";
 
 import { login, registration } from "./../../../api/api";
@@ -40,9 +42,18 @@ export const isAuthorizingAC = (isAuthorizing: boolean) => ({
   payload: isAuthorizing,
 });
 
-export const setLogin = (loginData: LoginData) => async (dispatch: any) => {
-  console.log(loginData);
+export const isAuthorizingSucceessedAC = (isAuthorizingSuccessed: boolean) => ({
+  type: Actions.SET_AUTH_SUCCEEDED,
+  payload: isAuthorizingSuccessed,
+});
 
+export const isAuthorizingFailedAC = (isAuthorizingFailed: boolean) => ({
+  type: Actions.SET_AUTH_FAILED,
+  payload: isAuthorizingFailed,
+});
+
+export const setLogin = (loginData: LoginData, history: History) => async (dispatch: any) => {
+  console.log(loginData);
   try {
     dispatch(isAuthorizingAC(true));
     const response = await login(loginData);
@@ -50,12 +61,16 @@ export const setLogin = (loginData: LoginData) => async (dispatch: any) => {
       localStorage.setItem(`profile`, JSON.stringify(await { ...response.data }));
       dispatch(loginAC(response.data));
       dispatch(setUserNameAC(response.data.result.firstName, response.data.result.secondName));
-      console.log(response.data);
       dispatch(isAuthorizingAC(false));
+      dispatch(isAuthorizingSucceessedAC(true));
+      dispatch(isAuthorizingFailedAC(false));
+      history.replace("/account");
     }
   } catch (error) {
     console.log(error);
     dispatch(isAuthorizingAC(false));
+    dispatch(isAuthorizingSucceessedAC(false));
+    dispatch(isAuthorizingFailedAC(true));
   }
 };
 

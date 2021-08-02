@@ -1,1 +1,1 @@
-import { createAction } from "../../../helpers/createAction";
+export const a = 1;

@@ -15,8 +15,8 @@ const FormInfoText = styled.p`
 
   margin-bottom: ${s20};
 
-  font-size: 20px;
-  line-height: 26px;
+  font-size: 18px;
+  line-height: 24px;
   font-weight: 500;
 
   color: ${colors.white};

@@ -4,18 +4,18 @@ import { ActionTypes, Actions } from "./actionTypes";
 
 type AuthReducerStateType = {
   isAuthorizing: boolean;
-  authData: string[];
+  authData: object[];
   userFullName: string[];
-  isAuthorizingSuccessed: boolean;
-  isAuthorizingFailed: boolean;
+  isAuthorizingSuccessed: boolean | undefined;
+  isAuthorizingFailed: boolean | undefined;
 };
 
 const initialState = {
   isAuthorizing: false,
   authData: [],
   userFullName: [],
-  isAuthorizingSuccessed: false,
-  isAuthorizingFailed: false,
+  isAuthorizingSuccessed: undefined,
+  isAuthorizingFailed: undefined,
 };
 
 const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): AuthReducerStateType => {
@@ -23,25 +23,42 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
     case Actions.SET_LOGIN: {
       return {
         ...state,
-        authData: action.payload as string[],
+        authData: action.payload as object[],
       };
     }
+
     case Actions.SET_REGISTRATION: {
       return {
         ...state,
-        authData: action.payload as string[],
+        authData: action.payload as object[],
       };
     }
+
     case Actions.SET_USER_FULL_NAME: {
       return {
         ...state,
         userFullName: action.payload as string[],
       };
     }
+
     case Actions.SET_IS_AUTHORIZING: {
       return {
         ...state,
         isAuthorizing: action.payload as boolean,
+      };
+    }
+
+    case Actions.SET_AUTH_SUCCEEDED: {
+      return {
+        ...state,
+        isAuthorizingSuccessed: action.payload as boolean,
+      };
+    }
+
+    case Actions.SET_AUTH_FAILED: {
+      return {
+        ...state,
+        isAuthorizingFailed: action.payload as boolean,
       };
     }
     default:
