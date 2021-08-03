@@ -91,4 +91,15 @@ const FormContainerRightInfoButton = styled.span`
   }
 `;
 
-export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton };
+const FormError = styled.p`
+  position: absolute;
+  display: flex;
+
+  padding-top: 5px;
+
+  font-weight: 700;
+
+  color: ${colors.error};
+`;
+
+export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton, FormError };

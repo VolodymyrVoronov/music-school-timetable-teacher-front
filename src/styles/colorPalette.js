@@ -31,4 +31,6 @@ export const colors = {
   primaryOpacity07: `rgba(108,99,255, 0.7)`,
   primaryOpacity08: `rgba(108,99,255, 0.8)`,
   primaryOpacity09: `rgba(108,99,255, 0.9)`,
+
+  error: `#ff9987`,
 };

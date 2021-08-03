@@ -13,11 +13,12 @@ import { checkInputsLoginFormValidity } from "./../../helpers/checkInputsLoginFo
 import Input from "./../Input/Input";
 import Button from "../common/UI/Button/Button";
 
-import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton } from "./Form.styled";
+import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton, FormError } from "./Form.styled";
 
 import Image01 from "./../../assets/sign-in-vector.svg";
 import FormInfo from "../FormInfo/FormInfo";
 import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
+import { checkInputsSigninFormValidity } from "../../helpers/checkInputsSigninFormValidity";
 
 type LocationState = {
   typeForm: string;
@@ -39,6 +40,8 @@ const Form = (): React.ReactElement => {
   const { isAuthorizing } = useSelector((state: RootState) => state.authReducer);
   const [showInfo, setShowInfo] = React.useState(false);
   const [isValid, setIsValid] = React.useState(false);
+  const [touched, setTouched] = React.useState(false);
+  const [inputsErrors, setInputsErrors] = React.useState<{ [key: string]: string }>();
 
   const formType = location.state.typeForm;
 
@@ -69,6 +72,10 @@ const Form = (): React.ReactElement => {
     setShowInfo((showInfo) => !showInfo);
   };
 
+  const onInputTouch = () => {
+    setTouched(() => true);
+  };
+
   console.log(formData);
 
   const onAuthButtonClick = () => {
@@ -95,8 +102,17 @@ const Form = (): React.ReactElement => {
     }
 
     if (formType === "signin") {
+      if (touched) {
+        setInputsErrors(checkInputsSigninFormValidity(formData));
+        setIsValid(false);
+        if (Object.getOwnPropertyNames(checkInputsSigninFormValidity(formData)).length === 0) {
+          setIsValid(true);
+        }
+      }
     }
-  }, [formType, formData.login, formData.password]);
+  }, [formType, formData.login, formData, touched]);
+
+  console.log(inputsErrors?.firstName);
 
   return (
     <Slide top>
@@ -123,27 +139,32 @@ const Form = (): React.ReactElement => {
               {formType === "signin" && (
                 <>
                   <Slide top>
-                    <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} placeholder="Катерина" />
+                    <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.firstName} placeholder="Катерина" />
+                    <FormError>{inputsErrors?.firstName}</FormError>
                   </Slide>
 
                   <Slide top>
-                    <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} value={formData.secondName} placeholder="Котова" />
+                    <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.secondName} placeholder="Котова" />
+                    <FormError>{inputsErrors?.secondName}</FormError>
                   </Slide>
                 </>
               )}
 
               <Slide top>
-                <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} value={formData.login} placeholder="kkotova" />
+                <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.login} placeholder="kkotova" />
+                <FormError>{inputsErrors?.login}</FormError>
               </Slide>
 
               <Slide top>
-                <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} value={formData.password} placeholder="Password12345!" />
+                <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.password} placeholder="Password12345!" />
+                <FormError>{inputsErrors?.password}</FormError>
               </Slide>
 
               {formType === "signin" && (
                 <>
                   <Slide top>
-                    <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} value={formData.password2} placeholder="Password12345!" />
+                    <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.password2} placeholder="Password12345!" />
+                    <FormError>{inputsErrors?.password2}</FormError>
                   </Slide>
                 </>
               )}
