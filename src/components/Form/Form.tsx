@@ -112,8 +112,6 @@ const Form = (): React.ReactElement => {
     }
   }, [formType, formData.login, formData, touched]);
 
-  console.log(inputsErrors?.firstName);
-
   return (
     <Slide top>
       <FormContainer>
