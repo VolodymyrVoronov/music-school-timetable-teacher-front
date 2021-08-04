@@ -2,9 +2,17 @@ import { Reducer } from "redux";
 
 import { ActionTypes, Actions } from "./actionTypes";
 
+export interface AuthDataType {
+  result?: {
+    firstName?: string;
+    lastName?: string;
+  };
+  token?: string;
+}
+
 type AuthReducerStateType = {
   isAuthorizing: boolean;
-  authData: object[];
+  authData: AuthDataType;
   userFullName: string[];
   isAuthorizingSuccessed: boolean | undefined;
   isAuthorizingFailed: boolean | undefined;
@@ -12,7 +20,7 @@ type AuthReducerStateType = {
 
 const initialState = {
   isAuthorizing: false,
-  authData: [],
+  authData: { result: {} },
   userFullName: [],
   isAuthorizingSuccessed: undefined,
   isAuthorizingFailed: undefined,
@@ -23,14 +31,24 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
     case Actions.SET_LOGIN: {
       return {
         ...state,
-        authData: action.payload as object[],
+        authData: action.payload as AuthDataType,
+      };
+    }
+
+    case Actions.SET_LOGOUT: {
+      localStorage.clear();
+
+      return {
+        ...state,
+        authData: { result: {} },
+        isAuthorizing: (state.isAuthorizing = false),
       };
     }
 
     case Actions.SET_REGISTRATION: {
       return {
         ...state,
-        authData: action.payload as object[],
+        authData: action.payload as AuthDataType,
       };
     }
 

@@ -17,14 +17,13 @@ type RegistrationData = {
   password2?: string;
 };
 
-type UserFullNameData = {
-  firstName: string;
-  secondName: string;
-};
-
 export const loginAC = (loginData: LoginData) => ({
   type: Actions.SET_LOGIN,
   payload: loginData,
+});
+
+export const logoutAC = () => ({
+  type: Actions.SET_LOGOUT,
 });
 
 export const registrationAC = (registrationData: RegistrationData) => ({
@@ -32,7 +31,7 @@ export const registrationAC = (registrationData: RegistrationData) => ({
   payload: registrationData,
 });
 
-export const setUserNameAC = (firstName: UserFullNameData, secondName: UserFullNameData) => ({
+export const setUserNameAC = (firstName: string, secondName: string) => ({
   type: Actions.SET_USER_FULL_NAME,
   payload: [firstName, secondName].join(" "),
 });
@@ -53,7 +52,6 @@ export const isAuthorizingFailedAC = (isAuthorizingFailed: boolean) => ({
 });
 
 export const setLogin = (loginData: LoginData, history: History) => async (dispatch: any) => {
-  console.log(loginData);
   try {
     dispatch(isAuthorizingAC(true));
     const response = await login(loginData);
@@ -75,17 +73,21 @@ export const setLogin = (loginData: LoginData, history: History) => async (dispa
 };
 
 export const setRegistration = (registrationData: RegistrationData) => async (dispatch: any) => {
-  console.log(registrationData);
-
   try {
+    dispatch(isAuthorizingAC(true));
     const response = await registration(registrationData);
     if (response.status === 200) {
       localStorage.setItem(`profile`, JSON.stringify(await { ...response.data }));
       dispatch(registrationAC(response.data));
-
-      console.log(response.data);
+      dispatch(setUserNameAC(response.data.result.firstName, response.data.result.secondName));
+      dispatch(isAuthorizingAC(false));
+      dispatch(isAuthorizingSucceessedAC(true));
+      dispatch(isAuthorizingFailedAC(false));
     }
   } catch (error) {
     console.log(error);
+    dispatch(isAuthorizingAC(false));
+    dispatch(isAuthorizingSucceessedAC(false));
+    dispatch(isAuthorizingFailedAC(true));
   }
 };

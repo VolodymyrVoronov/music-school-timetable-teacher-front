@@ -1,20 +1,27 @@
+import { AuthDataType } from "./authReducer";
+
 export const Actions = {
-  SET_REGISTRATION: "auth/SET_REGISTRATION",
   SET_LOGIN: "auth/SET_LOGIN",
+  SET_LOGOUT: "auth/LOGOUT",
+  SET_REGISTRATION: "auth/SET_REGISTRATION",
   SET_USER_FULL_NAME: "auth/SET_USER_FULL_NAME",
   SET_AUTH_SUCCEEDED: "auth/SET_AUTH_SUCCEEDED",
   SET_AUTH_FAILED: "auth/SET_AUTH_FAILED",
   SET_IS_AUTHORIZING: "auth/SET_IS_AUTHORIZING",
 };
 
-export interface RegistrationActionType {
-  type: typeof Actions.SET_REGISTRATION;
-  payload: object[];
-}
-
 export interface LoginActionType {
   type: typeof Actions.SET_LOGIN;
-  payload: object[];
+  payload: AuthDataType;
+}
+
+export interface LogoutActionType {
+  type: typeof Actions.SET_LOGOUT;
+}
+
+export interface RegistrationActionType {
+  type: typeof Actions.SET_REGISTRATION;
+  payload: AuthDataType;
 }
 
 export interface UserFullNameActionType {
