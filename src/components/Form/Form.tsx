@@ -88,7 +88,7 @@ const Form = (): React.ReactElement => {
     if (formType === "signin") {
       dispatch(setRegistration(formData));
       history.replace({
-        pathname: `/login`,
+        pathname: "/login",
         state: {
           typeForm: "login",
         },

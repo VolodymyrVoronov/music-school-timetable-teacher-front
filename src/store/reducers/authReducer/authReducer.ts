@@ -52,6 +52,7 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
       return {
         ...state,
         isAuthorizingSuccessed: action.payload as boolean,
+        isAuthorizingFailed: (state.isAuthorizingFailed = false),
       };
     }
 
@@ -59,6 +60,7 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
       return {
         ...state,
         isAuthorizingFailed: action.payload as boolean,
+        isAuthorizingSuccessed: (state.isAuthorizingSuccessed = false),
       };
     }
     default:

@@ -33,4 +33,7 @@ export const colors = {
   primaryOpacity09: `rgba(108,99,255, 0.9)`,
 
   error: `#ff9987`,
+
+  success: `#80ff70`,
+  fail: `#fbb6aa`,
 };
