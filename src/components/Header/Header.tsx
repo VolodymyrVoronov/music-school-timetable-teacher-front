@@ -14,8 +14,8 @@ import Button from "../common/UI/Button/Button";
 import { HeaderContainer, HeaderUserTitle, HeaderButtonContainer } from "./Header.styled";
 
 interface LocalStorage {
-  result: { firstName: string; secondName: string; login: string; _id: string } | any;
-  token: string;
+  result: { firstName: string; secondName: string };
+  token?: string;
 }
 
 const Header = (): React.ReactElement => {

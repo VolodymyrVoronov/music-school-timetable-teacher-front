@@ -31,7 +31,7 @@ export const registrationAC = (registrationData: RegistrationData) => ({
   payload: registrationData,
 });
 
-export const setUserNameAC = (firstName: string, secondName: string) => ({
+export const setUserNameAC = (firstName: string | undefined, secondName: string | undefined) => ({
   type: Actions.SET_USER_FULL_NAME,
   payload: [firstName, secondName].join(" "),
 });
