@@ -22,11 +22,11 @@ const StudentsEditorContainerLeft = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
 
   width: 50%;
 
-  padding: ${s64} 0;
+  padding: ${s64} ${s32};
 `;
 
 const StudentsEditorContainerRight = styled.form`

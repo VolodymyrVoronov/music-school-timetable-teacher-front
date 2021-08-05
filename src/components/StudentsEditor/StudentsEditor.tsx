@@ -2,13 +2,15 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
-import Button from "../common/UI/Button/Button";
 
+import Button from "../common/UI/Button/Button";
 import Input from "../Input/Input";
+import StudentFormItems from "../StudentFormItems/StudentFormItems";
 
 import { StudentsEditorContainer, StudentsEditorContainerLeft, StudentsEditorContainerRight, StudentsEditorContainerRightLabel, StudentsEditorContainerRightSelectInput, StudentsEditorContainerRightSelectOption, StudentsEditorContainerRightButtonsBlock } from "./StudentsEditor.styled";
 
 type FormData = {
+  _id?: string;
   firstName: string;
   secondName: string;
   studentClass: string;
@@ -63,7 +65,9 @@ const StudentsEditor = (): React.ReactElement => {
   return (
     <Slide top>
       <StudentsEditorContainer>
-        <StudentsEditorContainerLeft>Left</StudentsEditorContainerLeft>
+        <StudentsEditorContainerLeft>
+          <StudentFormItems />
+        </StudentsEditorContainerLeft>
         <StudentsEditorContainerRight>
           <Slide top>
             <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} placeholder="Катерина" />

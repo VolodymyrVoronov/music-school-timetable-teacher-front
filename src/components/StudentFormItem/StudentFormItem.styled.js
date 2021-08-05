@@ -1,0 +1,50 @@
+import styled from "styled-components";
+
+import { colors } from "../../styles/colorPalette";
+import { boxShadow } from "../../styles/globalStylesVariables";
+
+import { s4, s8, s16, s20, s24, s32, s48, s64, s96, s160 } from "../../styles/spacer";
+
+const StudentFormItemContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  margin: ${s8} ${s4} 12px 0;
+
+  border-bottom: 2px solid ${colors.blackOpacity03};
+`;
+
+const StudentFormItemText = styled.p`
+  display: flex;
+
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: 700;
+
+  color: ${colors.black};
+`;
+
+const StudentFormItemButtons = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StudentFormItemButton = styled.span`
+  display: flex;
+
+  margin-left: ${s8};
+
+  font-size: 28px;
+  line-height: 30px;
+  font-weight: 700;
+
+  color: ${colors.primaryOpacity07};
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    color: ${colors.primary};
+  }
+`;
+
+export { StudentFormItemContainer, StudentFormItemText, StudentFormItemButtons, StudentFormItemButton };
