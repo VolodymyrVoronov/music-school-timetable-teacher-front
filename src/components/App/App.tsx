@@ -5,6 +5,8 @@ import Header from "../Header/Header";
 import StartPage from "./../../pages/StartPage/StartPage";
 import FormPage from "../../pages/FormPage/FormPage";
 import AccountPage from "./../../pages/AccountPage/AccountPage";
+import StudentEditorPage from "./../../pages/StudentEditor/StudentEditorPage";
+
 import Toast from "./../common/UI/Toast/Toast";
 
 const App = (): React.ReactElement => {
@@ -48,7 +50,7 @@ const App = (): React.ReactElement => {
 
         <Route exact path="/students-editor">
           <Header />
-          <p></p>
+          <StudentEditorPage />
         </Route>
       </Switch>
     </>
