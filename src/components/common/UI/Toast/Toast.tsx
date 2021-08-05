@@ -16,7 +16,7 @@ const Toast = (): React.ReactElement => {
   const portalContainer = document.getElementById("toast-root") as HTMLElement;
 
   const showAuthSuccess = () =>
-    toast("Вы успешно прошли аутентификацию.😃", {
+    toast("Вы успешно вошли в личный кабинет.😃", {
       backgroundColor: `${colors.primary}`,
       color: `${colors.success}`,
     });

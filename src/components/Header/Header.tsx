@@ -40,8 +40,15 @@ const Header = (): React.ReactElement => {
       }
     }
 
-    setUser(JSON.parse(localStorage.getItem("profile") || "{}"));
-    dispatch(setUserNameAC(user?.result.firstName, user?.result.secondName));
+    if (Object.getOwnPropertyNames(user).length !== 0) {
+      setUser(JSON.parse(localStorage.getItem("profile") || "{}"));
+      dispatch(setUserNameAC(user?.result.firstName, user?.result.secondName));
+    }
+
+    if (Object.getOwnPropertyNames(user).length === 0) {
+      setUser(null);
+      history.replace("/start-page");
+    }
   }, []);
 
   const onLogoutClick = () => {

@@ -12,6 +12,8 @@ const ButtonContainer = styled.button`
 
   margin-top: ${(props) => props.mt};
   margin-bottom: ${(props) => props.mb};
+  margin-left: ${(props) => props.ml};
+  margin-right: ${(props) => props.mr};
 
   padding: ${s16} 0;
 
