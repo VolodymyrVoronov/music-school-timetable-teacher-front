@@ -8,9 +8,18 @@ export type NewStudentType = {
   studentClass: string;
 };
 
+export type StudentsType = {
+  _id: string;
+  firstName: string;
+  secondName: string;
+  studentClass: string;
+  teacher: string;
+};
+
 type StudentsEditorReducerStateType = {
   studentClasses: { id: number; studentClass: string }[];
   newStudent: NewStudentType[];
+  students: StudentsType[];
 };
 
 const initialState = {
@@ -30,6 +39,7 @@ const initialState = {
     { id: 12, studentClass: "12 класс" },
   ],
   newStudent: [],
+  students: [],
 };
 
 const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): StudentsEditorReducerStateType => {
@@ -38,6 +48,13 @@ const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes
       return {
         ...state,
         newStudent: action.payload as NewStudentType[],
+      };
+    }
+
+    case Actions.GET_STUDENTS: {
+      return {
+        ...state,
+        students: action.payload as StudentsType[],
       };
     }
 

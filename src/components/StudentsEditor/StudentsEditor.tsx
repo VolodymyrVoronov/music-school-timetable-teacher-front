@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Slide from "react-reveal/Slide";
 
 import { RootState } from "../../store/store";
-import { addNewStudent } from "../../store/reducers/studentsEditorReducer/actions";
+import { addNewStudent, getStudents } from "../../store/reducers/studentsEditorReducer/actions";
 
 import Button from "../common/UI/Button/Button";
 import Input from "../Input/Input";
@@ -48,12 +48,9 @@ const StudentsEditor = (): React.ReactElement => {
     });
   };
 
-  console.log(formData);
-
   const onSaveButtonClick = () => {
-    console.log("save");
-
     dispatch(addNewStudent(formData));
+    setFormData(initialFormState);
   };
 
   const onCancelButtonClick = () => {
@@ -63,6 +60,10 @@ const StudentsEditor = (): React.ReactElement => {
   React.useEffect(() => {
     setIsValid(checkInputsStudentsEditorFormValidity(formData.firstName, formData.secondName));
   }, [formData.firstName, formData.secondName]);
+
+  React.useEffect(() => {
+    dispatch(getStudents());
+  }, []);
 
   return (
     <Slide top>

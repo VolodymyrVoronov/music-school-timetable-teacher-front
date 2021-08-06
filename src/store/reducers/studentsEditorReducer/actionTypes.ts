@@ -1,7 +1,8 @@
-import { NewStudentType } from "./studentsEditorReducer";
+import { NewStudentType, StudentsType } from "./studentsEditorReducer";
 
 export const Actions = {
   ADD_NEW_STUDENT: "students/ADD_NEW_STUDENT",
+  GET_STUDENTS: "students/GET_STUDENTS",
 };
 
 export interface AddNewStudentType {
@@ -9,4 +10,9 @@ export interface AddNewStudentType {
   payload: NewStudentType[];
 }
 
-export type ActionTypes = AddNewStudentType;
+export interface GetStudent {
+  type: typeof Actions.GET_STUDENTS;
+  payload: StudentsType[];
+}
+
+export type ActionTypes = AddNewStudentType | GetStudent;

@@ -37,5 +37,6 @@ const login = (formData: AuthStoreFormLoginData) => instanceAPI.post(`/user/logi
 const registration = (formData: AuthStoreFormRegistrationData) => instanceAPI.post(`/user/registration`, formData);
 
 const newStudent = (newStudent: NewStudentData) => instanceAPI.post(`/students`, newStudent);
+const fetchStudents = () => instanceAPI.get(`/students/getStudents`);
 
-export { login, registration, newStudent };
+export { login, registration, newStudent, fetchStudents };

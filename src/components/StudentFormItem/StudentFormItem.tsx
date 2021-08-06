@@ -6,7 +6,14 @@ import { IoMdCreate, IoMdTrash } from "react-icons/io";
 
 import { StudentFormItemContainer, StudentFormItemText, StudentFormItemButtons, StudentFormItemButton } from "./StudentFormItem.styled";
 
-const StudentFormItem = (): React.ReactElement => {
+type StudentFormItemProps = {
+  _id: string;
+  firstName: string;
+  secondName: string;
+  teacher?: string;
+};
+
+const StudentFormItem = ({ _id, firstName, secondName, teacher }: StudentFormItemProps): React.ReactElement => {
   const onEditButtonClick = () => {
     console.log("edit");
   };
@@ -18,7 +25,9 @@ const StudentFormItem = (): React.ReactElement => {
   return (
     <Slide top>
       <StudentFormItemContainer>
-        <StudentFormItemText>Катерина Котова</StudentFormItemText>
+        <StudentFormItemText>
+          {firstName} {secondName}
+        </StudentFormItemText>
 
         <StudentFormItemButtons>
           <StudentFormItemButton onClick={() => onEditButtonClick()}>
