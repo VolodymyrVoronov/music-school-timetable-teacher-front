@@ -1,8 +1,9 @@
+import { Dispatch } from "redux";
 import { History } from "history";
 
-import { Actions } from "./actionTypes";
-
 import { login, registration } from "./../../../api/api";
+
+import { Actions } from "./actionTypes";
 
 type LoginData = {
   login: string;
@@ -51,7 +52,7 @@ export const isAuthorizingFailedAC = (isAuthorizingFailed: boolean) => ({
   payload: isAuthorizingFailed,
 });
 
-export const setLogin = (loginData: LoginData, history: History) => async (dispatch: any) => {
+export const setLogin = (loginData: LoginData, history: History) => async (dispatch: Dispatch) => {
   try {
     dispatch(isAuthorizingAC(true));
     const response = await login(loginData);
@@ -72,7 +73,7 @@ export const setLogin = (loginData: LoginData, history: History) => async (dispa
   }
 };
 
-export const setRegistration = (registrationData: RegistrationData) => async (dispatch: any) => {
+export const setRegistration = (registrationData: RegistrationData) => async (dispatch: Dispatch) => {
   try {
     dispatch(isAuthorizingAC(true));
     const response = await registration(registrationData);

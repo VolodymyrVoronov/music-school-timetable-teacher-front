@@ -13,6 +13,12 @@ type AuthStoreFormRegistrationData = {
   password2?: string;
 };
 
+type NewStudentData = {
+  firstName: string;
+  secondName: string;
+  studentClass: string;
+};
+
 const URL = `http://localhost:5000`;
 
 const instanceAPI = axios.create({
@@ -28,7 +34,8 @@ instanceAPI.interceptors.request.use((req) => {
 });
 
 const login = (formData: AuthStoreFormLoginData) => instanceAPI.post(`/user/login`, formData);
-
 const registration = (formData: AuthStoreFormRegistrationData) => instanceAPI.post(`/user/registration`, formData);
 
-export { login, registration };
+const newStudent = (newStudent: NewStudentData) => instanceAPI.post(`/students`, newStudent);
+
+export { login, registration, newStudent };
