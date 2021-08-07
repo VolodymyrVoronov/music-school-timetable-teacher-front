@@ -5,7 +5,7 @@ export const Actions = {
   SET_LOGOUT: "auth/LOGOUT",
   SET_REGISTRATION: "auth/SET_REGISTRATION",
   SET_USER_FULL_NAME: "auth/SET_USER_FULL_NAME",
-  SET_AUTH_SUCCEEDED: "auth/SET_AUTH_SUCCEEDED",
+  SET_AUTH_SUCCEED: "auth/SET_AUTH_SUCCEED",
   SET_AUTH_FAILED: "auth/SET_AUTH_FAILED",
   SET_IS_AUTHORIZING: "auth/SET_IS_AUTHORIZING",
 };
@@ -35,7 +35,7 @@ export interface IsAuthorizingActionType {
 }
 
 export interface IsAuthorizingSucceessedActionType {
-  type: typeof Actions.SET_AUTH_SUCCEEDED;
+  type: typeof Actions.SET_AUTH_SUCCEED;
   payload: boolean;
 }
 

@@ -17,7 +17,7 @@ interface StudentFormItemProps {
   teacher?: string;
 }
 
-const StudentFormItem = ({ _id, firstName, secondName, studentClass, teacher }: StudentFormItemProps): React.ReactElement => {
+const StudentFormItem = ({ _id, firstName, secondName, studentClass }: StudentFormItemProps): React.ReactElement => {
   const dispatch = useDispatch();
 
   const onEditButtonClick = () => {

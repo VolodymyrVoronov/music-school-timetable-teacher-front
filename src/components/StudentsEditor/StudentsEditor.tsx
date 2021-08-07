@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Slide from "react-reveal/Slide";
 
 import { RootState } from "../../store/store";
-import { addNewStudent, getStudents, updateStudentAC } from "../../store/reducers/studentsEditorReducer/actions";
+import { addNewStudent, getStudents, updateStudentAC, getStudentToUpdatedAC } from "../../store/reducers/studentsEditorReducer/actions";
 
 import Button from "../common/UI/Button/Button";
 import Input from "../Input/Input";
@@ -63,11 +63,12 @@ const StudentsEditor = (): React.ReactElement => {
 
   const onCancelButtonClick = () => {
     history.replace("/account");
+    dispatch(getStudentToUpdatedAC(""));
   };
 
   React.useEffect(() => {
-    setIsValid(checkInputsStudentsEditorFormValidity(formData.firstName, formData.secondName));
-  }, [formData.firstName, formData.secondName]);
+    setIsValid(checkInputsStudentsEditorFormValidity(formData.firstName, formData.secondName, formData.studentClass));
+  }, [formData.firstName, formData.secondName, formData.studentClass]);
 
   React.useEffect(() => {
     dispatch(getStudents());
@@ -104,7 +105,10 @@ const StudentsEditor = (): React.ReactElement => {
               </Slide>
 
               <Slide top>
-                <StudentsEditorContainerRightSelectInput name="studentClass" onChange={onFormInputChange}>
+                <StudentsEditorContainerRightSelectInput name="studentClass" onChange={onFormInputChange} defaultValue={"DEFAULT"}>
+                  <StudentsEditorContainerRightSelectOption value="DEFAULT" disabled>
+                    {studentToUpdate.length !== 0 ? studentToUpdate[0]?.studentClass : ""}
+                  </StudentsEditorContainerRightSelectOption>
                   {studentClasses.map((sc) => {
                     const { id, studentClass } = sc;
 

@@ -38,6 +38,16 @@ export const getStudentToUpdatedAC = (studentToUpdate: string) => ({
   payload: studentToUpdate,
 });
 
+export const isStudentsActionSucceedAC = (isStudentsActionSucceed: boolean) => ({
+  type: Actions.SET_STUDENTS_ACTION_SUCCEED,
+  payload: isStudentsActionSucceed,
+});
+
+export const isStudentsActionFailedAC = (isStudentsActionFailed: boolean) => ({
+  type: Actions.SET_STUDENTS_ACTION_FAILED,
+  payload: isStudentsActionFailed,
+});
+
 export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch: Dispatch) => {
   try {
     dispatch(loadginStudentAC(true));
@@ -51,10 +61,16 @@ export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch
     if (response.status === 200) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
+
+      dispatch(isStudentsActionSucceedAC(true));
+      dispatch(isStudentsActionFailedAC(false));
     }
   } catch (error) {
     console.log(error);
     dispatch(loadginStudentAC(false));
+
+    dispatch(isStudentsActionSucceedAC(false));
+    dispatch(isStudentsActionFailedAC(true));
   }
 };
 
@@ -65,10 +81,16 @@ export const getStudents = () => async (dispatch: Dispatch) => {
     if (response.status === 200) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
+
+      dispatch(isStudentsActionSucceedAC(true));
+      dispatch(isStudentsActionFailedAC(false));
     }
   } catch (error) {
     console.log(error);
     dispatch(loadginStudentAC(false));
+
+    dispatch(isStudentsActionSucceedAC(false));
+    dispatch(isStudentsActionFailedAC(true));
   }
 };
 
@@ -76,14 +98,21 @@ export const deleteStudentAC = (id: string) => async (dispatch: Dispatch) => {
   try {
     dispatch(loadginStudentAC(true));
     await deleteStudent(id);
+
     const response = await fetchStudents();
     if (response.status === 200) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
+
+      dispatch(isStudentsActionSucceedAC(true));
+      dispatch(isStudentsActionFailedAC(false));
     }
   } catch (error) {
     console.log(error);
     dispatch(loadginStudentAC(false));
+
+    dispatch(isStudentsActionSucceedAC(false));
+    dispatch(isStudentsActionFailedAC(true));
   }
 };
 
@@ -97,9 +126,15 @@ export const updateStudentAC = (id: string, updatedStudent: any) => async (dispa
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
       dispatch(getStudentToUpdatedAC(""));
+
+      dispatch(isStudentsActionSucceedAC(true));
+      dispatch(isStudentsActionFailedAC(false));
     }
   } catch (error) {
-    dispatch(loadginStudentAC(false));
     console.log(error);
+    dispatch(loadginStudentAC(false));
+
+    dispatch(isStudentsActionSucceedAC(false));
+    dispatch(isStudentsActionFailedAC(true));
   }
 };

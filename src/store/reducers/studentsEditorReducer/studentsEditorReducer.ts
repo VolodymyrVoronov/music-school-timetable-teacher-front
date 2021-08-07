@@ -22,6 +22,8 @@ interface StudentsEditorReducerStateType {
   students: StudentsType[];
   loadingStudents: boolean;
   studentToUpdate: StudentsType[];
+  isStudentsActionSucceed: boolean | undefined;
+  isStudentsActionFailed: boolean | undefined;
 }
 
 const initialState = {
@@ -44,6 +46,8 @@ const initialState = {
   students: [],
   loadingStudents: false,
   studentToUpdate: [],
+  isStudentsActionSucceed: undefined,
+  isStudentsActionFailed: undefined,
 };
 
 const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): StudentsEditorReducerStateType => {
@@ -73,6 +77,22 @@ const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes
       return {
         ...state,
         studentToUpdate: state.students.filter((student) => student._id === (action.payload as string)),
+      };
+    }
+
+    case Actions.SET_STUDENTS_ACTION_SUCCEED: {
+      return {
+        ...state,
+        isStudentsActionSucceed: action.payload as boolean,
+        isStudentsActionFailed: (state.isStudentsActionFailed = false),
+      };
+    }
+
+    case Actions.SET_STUDENTS_ACTION_FAILED: {
+      return {
+        ...state,
+        isStudentsActionFailed: action.payload as boolean,
+        isStudentsActionSucceed: (state.isStudentsActionSucceed = false),
       };
     }
 

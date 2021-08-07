@@ -6,8 +6,9 @@ export const Actions = {
   LOADING_STUDENTS: "students/LOADING_STUDENTS",
   DELETE_STUDENT: "students/DELETE_STUDENT",
   GET_STUDENT_TO_UPDATE: "students/GET_STUDENT_TO_UPDATE",
+  SET_STUDENTS_ACTION_SUCCEED: "students/SET_STUDENTS_ACTION_SUCCEED",
+  SET_STUDENTS_ACTION_FAILED: "students/SET_STUDENTS_ACTION_FAILED",
 };
-
 export interface AddNewStudentType {
   type: typeof Actions.ADD_NEW_STUDENT;
   payload: NewStudentType[];
@@ -33,4 +34,14 @@ export interface StudentToUpdate {
   payload: string;
 }
 
-export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents | DeleteStudent | StudentToUpdate;
+export interface IsStudentsActionSucceedActionType {
+  type: typeof Actions.SET_STUDENTS_ACTION_SUCCEED;
+  payload: boolean;
+}
+
+export interface IsStudentsActionFailedActionType {
+  type: typeof Actions.SET_STUDENTS_ACTION_FAILED;
+  payload: boolean;
+}
+
+export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents | DeleteStudent | StudentToUpdate | IsStudentsActionSucceedActionType | IsStudentsActionFailedActionType;

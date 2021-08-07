@@ -17,7 +17,7 @@ const StudentFormItems = (): React.ReactElement => {
       {!loadingStudents && (
         <>
           {students.map((student) => {
-            const { _id, firstName, secondName, studentClass, teacher } = student;
+            const { _id, firstName, secondName, studentClass } = student;
 
             return <StudentFormItem key={_id} _id={_id} firstName={firstName} secondName={secondName} studentClass={studentClass} />;
           })}

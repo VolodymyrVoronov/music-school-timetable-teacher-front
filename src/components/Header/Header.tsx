@@ -33,6 +33,8 @@ const Header = (): React.ReactElement => {
     if (token) {
       const decodedToken: { exp: number } = decode(token);
 
+      console.log(decodedToken.exp * 1000 - new Date().getTime());
+
       if (decodedToken.exp * 1000 < new Date().getTime()) {
         dispatch(logoutAC());
         setUser(null);

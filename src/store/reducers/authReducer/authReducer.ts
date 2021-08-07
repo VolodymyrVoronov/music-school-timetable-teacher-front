@@ -14,7 +14,7 @@ interface AuthReducerStateType {
   isAuthorizing: boolean;
   authData: AuthDataType;
   userFullName: string[];
-  isAuthorizingSuccessed: boolean | undefined;
+  isAuthorizingSucceed: boolean | undefined;
   isAuthorizingFailed: boolean | undefined;
 }
 
@@ -22,7 +22,7 @@ const initialState = {
   isAuthorizing: false,
   authData: { result: {} },
   userFullName: [],
-  isAuthorizingSuccessed: undefined,
+  isAuthorizingSucceed: undefined,
   isAuthorizingFailed: undefined,
 };
 
@@ -66,10 +66,10 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
       };
     }
 
-    case Actions.SET_AUTH_SUCCEEDED: {
+    case Actions.SET_AUTH_SUCCEED: {
       return {
         ...state,
-        isAuthorizingSuccessed: action.payload as boolean,
+        isAuthorizingSucceed: action.payload as boolean,
         isAuthorizingFailed: (state.isAuthorizingFailed = false),
       };
     }
@@ -78,7 +78,7 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initial
       return {
         ...state,
         isAuthorizingFailed: action.payload as boolean,
-        isAuthorizingSuccessed: (state.isAuthorizingSuccessed = false),
+        isAuthorizingSucceed: (state.isAuthorizingSucceed = false),
       };
     }
     default:

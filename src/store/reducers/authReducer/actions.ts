@@ -42,9 +42,9 @@ export const isAuthorizingAC = (isAuthorizing: boolean) => ({
   payload: isAuthorizing,
 });
 
-export const isAuthorizingSucceessedAC = (isAuthorizingSuccessed: boolean) => ({
-  type: Actions.SET_AUTH_SUCCEEDED,
-  payload: isAuthorizingSuccessed,
+export const isAuthorizingSucceessedAC = (isAuthorizingSucceed: boolean) => ({
+  type: Actions.SET_AUTH_SUCCEED,
+  payload: isAuthorizingSucceed,
 });
 
 export const isAuthorizingFailedAC = (isAuthorizingFailed: boolean) => ({

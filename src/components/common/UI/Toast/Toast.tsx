@@ -11,34 +11,44 @@ import { ToastBox } from "./Toast.styled";
 import { colors } from "../../../../styles/colorPalette";
 
 const Toast = (): React.ReactElement => {
-  const { isAuthorizingSuccessed, isAuthorizingFailed } = useSelector((state: RootState) => state.authReducer);
+  const { isAuthorizingSucceed, isAuthorizingFailed } = useSelector((state: RootState) => state.authReducer);
+
+  const { isStudentsActionSucceed, isStudentsActionFailed } = useSelector((state: RootState) => state.studentsEditorReducer);
 
   const portalContainer = document.getElementById("toast-root") as HTMLElement;
 
-  const showAuthSuccess = () =>
-    toast("Вы успешно вошли в личный кабинет.😃", {
+  const showSuccess = (text: string) =>
+    toast(text, {
       backgroundColor: `${colors.primary}`,
       color: `${colors.success}`,
     });
-  const showAuthError = () =>
-    toast("Что-то пошло не так. 😥 Проверьте введёные данные и попробуйте снова.", {
+  const showError = (text: string) =>
+    toast(text, {
       backgroundColor: `${colors.primary}`,
       color: `${colors.fail}`,
     });
 
   React.useEffect(() => {
-    if (isAuthorizingSuccessed) {
-      showAuthSuccess();
+    if (isAuthorizingSucceed) {
+      showSuccess("Вы успешно вошли в личный кабинет.😃");
     }
 
     if (isAuthorizingFailed) {
-      showAuthError();
+      showError("Что-то пошло не так. 😥 Проверьте введёные данные и попробуйте снова.");
     }
-  }, [isAuthorizingFailed, isAuthorizingSuccessed]);
+
+    if (isStudentsActionSucceed) {
+      showSuccess("Данные упешно обновлены.😃");
+    }
+
+    if (isStudentsActionFailed) {
+      showError("Что-то пошло не так. 🙄 Обновите страницу и попробуйте снова.");
+    }
+  }, [isAuthorizingFailed, isAuthorizingSucceed, isStudentsActionFailed, isStudentsActionSucceed]);
 
   return ReactDOM.createPortal(
     <ToastBox>
-      <ToastContainer position="bottom-center" delay={5000} />
+      <ToastContainer position="bottom-center" delay={3000} />
     </ToastBox>,
     portalContainer
   );
