@@ -1,6 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
+
+import { deleteStudentAC } from "../../store/reducers/studentsEditorReducer/actions";
 
 import { IoMdCreate, IoMdTrash } from "react-icons/io";
 
@@ -10,16 +13,20 @@ interface StudentFormItemProps {
   _id: string;
   firstName: string;
   secondName: string;
+  studentClass: string;
   teacher?: string;
 }
 
-const StudentFormItem = ({ _id, firstName, secondName, teacher }: StudentFormItemProps): React.ReactElement => {
+const StudentFormItem = ({ _id, firstName, secondName, studentClass, teacher }: StudentFormItemProps): React.ReactElement => {
+  const dispatch = useDispatch();
+
   const onEditButtonClick = () => {
     console.log("edit");
   };
 
   const onDeleteButtonClick = () => {
     console.log("delete");
+    dispatch(deleteStudentAC(_id));
   };
 
   return (
@@ -28,6 +35,7 @@ const StudentFormItem = ({ _id, firstName, secondName, teacher }: StudentFormIte
         <StudentFormItemText>
           {firstName} {secondName}
         </StudentFormItemText>
+        <StudentFormItemText>{studentClass}</StudentFormItemText>
 
         <StudentFormItemButtons>
           <StudentFormItemButton onClick={() => onEditButtonClick()}>

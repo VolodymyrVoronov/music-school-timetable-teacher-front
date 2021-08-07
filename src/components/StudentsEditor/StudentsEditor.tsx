@@ -10,6 +10,7 @@ import { addNewStudent, getStudents } from "../../store/reducers/studentsEditorR
 import Button from "../common/UI/Button/Button";
 import Input from "../Input/Input";
 import StudentFormItems from "../StudentFormItems/StudentFormItems";
+import LoaderSpinner from "../common/UI/LoaderSpinner/LoaderSpinner";
 
 import { checkInputsStudentsEditorFormValidity } from "../../helpers/checkInputsStudentsEditorFormValidity";
 
@@ -31,7 +32,7 @@ const initialFormState = {
 const StudentsEditor = (): React.ReactElement => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { studentClasses } = useSelector((state: RootState) => state.studentsEditorReducer);
+  const { studentClasses, loadingStudents } = useSelector((state: RootState) => state.studentsEditorReducer);
   const [isValid, setIsValid] = React.useState(false);
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
 
@@ -49,8 +50,12 @@ const StudentsEditor = (): React.ReactElement => {
   };
 
   const onSaveButtonClick = () => {
+    setFormData({
+      firstName: "",
+      secondName: "",
+      studentClass: "",
+    });
     dispatch(addNewStudent(formData));
-    setFormData(initialFormState);
   };
 
   const onCancelButtonClick = () => {
@@ -71,39 +76,46 @@ const StudentsEditor = (): React.ReactElement => {
         <StudentsEditorContainerLeft>
           <StudentFormItems />
         </StudentsEditorContainerLeft>
+
         <StudentsEditorContainerRight>
-          <Slide top>
-            <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} placeholder="Катерина" />
-          </Slide>
+          {loadingStudents ? (
+            <LoaderSpinner bgColor="white" />
+          ) : (
+            <>
+              <Slide top>
+                <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} value={formData.firstName} placeholder="Катерина" />
+              </Slide>
 
-          <Slide top>
-            <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} value={formData.secondName} placeholder="Котова" />
-          </Slide>
+              <Slide top>
+                <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} value={formData.secondName} placeholder="Котова" />
+              </Slide>
 
-          <Slide top>
-            <StudentsEditorContainerRightLabel>Класс</StudentsEditorContainerRightLabel>
-          </Slide>
+              <Slide top>
+                <StudentsEditorContainerRightLabel>Класс</StudentsEditorContainerRightLabel>
+              </Slide>
 
-          <Slide top>
-            <StudentsEditorContainerRightSelectInput name="studentClass" onChange={onFormInputChange}>
-              {studentClasses.map((sc) => {
-                const { id, studentClass } = sc;
+              <Slide top>
+                <StudentsEditorContainerRightSelectInput name="studentClass" onChange={onFormInputChange}>
+                  {studentClasses.map((sc) => {
+                    const { id, studentClass } = sc;
 
-                return (
-                  <StudentsEditorContainerRightSelectOption defaultValue={formData.studentClass} key={id}>
-                    {studentClass}
-                  </StudentsEditorContainerRightSelectOption>
-                );
-              })}
-            </StudentsEditorContainerRightSelectInput>
-          </Slide>
+                    return (
+                      <StudentsEditorContainerRightSelectOption defaultValue={formData.studentClass} key={id}>
+                        {studentClass}
+                      </StudentsEditorContainerRightSelectOption>
+                    );
+                  })}
+                </StudentsEditorContainerRightSelectInput>
+              </Slide>
 
-          <Slide top>
-            <StudentsEditorContainerRightButtonsBlock>
-              <Button text="Сохранить" primary={false} disabled={!isValid} mr="7.5px" onClick={onSaveButtonClick} />
-              <Button text="Отмена" primary={false} ml="7.5px" onClick={onCancelButtonClick} />
-            </StudentsEditorContainerRightButtonsBlock>
-          </Slide>
+              <Slide top>
+                <StudentsEditorContainerRightButtonsBlock>
+                  <Button text="Сохранить" primary={false} disabled={!isValid} mr="7.5px" onClick={onSaveButtonClick} />
+                  <Button text="Отмена" primary={false} ml="7.5px" onClick={onCancelButtonClick} />
+                </StudentsEditorContainerRightButtonsBlock>
+              </Slide>
+            </>
+          )}
         </StudentsEditorContainerRight>
       </StudentsEditorContainer>
     </Slide>

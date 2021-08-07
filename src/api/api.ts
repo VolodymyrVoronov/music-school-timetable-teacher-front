@@ -38,5 +38,6 @@ const registration = (formData: AuthStoreFormRegistrationData) => instanceAPI.po
 
 const newStudent = (newStudent: NewStudentData) => instanceAPI.post(`/students`, newStudent);
 const fetchStudents = () => instanceAPI.get(`/students/getStudents`);
+const deleteStudent = (id: string) => instanceAPI.delete(`/students/${id}`);
 
-export { login, registration, newStudent, fetchStudents };
+export { login, registration, newStudent, fetchStudents, deleteStudent };

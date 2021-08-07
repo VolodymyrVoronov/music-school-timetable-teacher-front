@@ -5,10 +5,14 @@ import { LoaderSpinnerContainer } from "./LoaderSpinner.styled";
 
 import { colors } from "../../../../styles/colorPalette";
 
-const LoaderSpinner = (): React.ReactElement => {
+interface LoaderSpinnerProps {
+  bgColor?: string;
+}
+
+const LoaderSpinner = ({ bgColor }: LoaderSpinnerProps): React.ReactElement => {
   return (
     <LoaderSpinnerContainer>
-      <Loader type="ThreeDots" color={colors.primary} height={25} width={100} />
+      <Loader type="ThreeDots" color={bgColor || colors.primary} height={25} width={100} />
     </LoaderSpinnerContainer>
   );
 };

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 
-import { newStudent, fetchStudents } from "./../../../api/api";
+import { newStudent, fetchStudents, deleteStudent } from "./../../../api/api";
 
 import { Actions } from "./actionTypes";
 
@@ -36,9 +36,15 @@ export const loadginStudentAC = (loadingStudents: boolean) => ({
 export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch: Dispatch) => {
   try {
     dispatch(loadginStudentAC(true));
-    const response = await newStudent(newStudentData);
+    const responseNewStudent = await newStudent(newStudentData);
+    if (responseNewStudent.status === 201) {
+      dispatch(addNewStudentAC(responseNewStudent.data));
+      dispatch(loadginStudentAC(false));
+    }
+
+    const response = await fetchStudents();
     if (response.status === 200) {
-      dispatch(addNewStudentAC(response.data));
+      dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
     }
   } catch (error) {
@@ -50,6 +56,21 @@ export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch
 export const getStudents = () => async (dispatch: Dispatch) => {
   try {
     dispatch(loadginStudentAC(true));
+    const response = await fetchStudents();
+    if (response.status === 200) {
+      dispatch(getStudentAC(response.data));
+      dispatch(loadginStudentAC(false));
+    }
+  } catch (error) {
+    console.log(error);
+    dispatch(loadginStudentAC(false));
+  }
+};
+
+export const deleteStudentAC = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(loadginStudentAC(true));
+    await deleteStudent(id);
     const response = await fetchStudents();
     if (response.status === 200) {
       dispatch(getStudentAC(response.data));

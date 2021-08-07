@@ -4,6 +4,7 @@ export const Actions = {
   ADD_NEW_STUDENT: "students/ADD_NEW_STUDENT",
   GET_STUDENTS: "students/GET_STUDENTS",
   LOADING_STUDENTS: "students/LOADING_STUDENTS",
+  DELETED_STUDENT: "students/DELETED_STUDENT",
 };
 
 export interface AddNewStudentType {
@@ -21,4 +22,9 @@ export interface LoadingStudents {
   payload: boolean;
 }
 
-export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents;
+export interface DeleteStudent {
+  type: typeof Actions.DELETED_STUDENT;
+  payload: string;
+}
+
+export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents | DeleteStudent;

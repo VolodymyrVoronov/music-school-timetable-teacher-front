@@ -17,14 +17,14 @@ const StudentFormItems = (): React.ReactElement => {
       {!loadingStudents && (
         <>
           {students.map((student) => {
-            const { _id, firstName, secondName, teacher } = student;
+            const { _id, firstName, secondName, studentClass, teacher } = student;
 
-            return <StudentFormItem key={_id} _id={_id} firstName={firstName} secondName={secondName} />;
+            return <StudentFormItem key={_id} _id={_id} firstName={firstName} secondName={secondName} studentClass={studentClass} />;
           })}
         </>
       )}
 
-      {students.length === 0 && <StudentFormItemsText>Список учеников пуст. 📃</StudentFormItemsText>}
+      {students.length === 0 && !loadingStudents && <StudentFormItemsText>Список учеников пуст. 📃</StudentFormItemsText>}
     </StudentFormItemsContainer>
   );
 };
