@@ -2,25 +2,26 @@ import { Reducer } from "redux";
 
 import { ActionTypes, Actions } from "./actionTypes";
 
-export type NewStudentType = {
+export interface NewStudentType {
   firstName: string;
   secondName: string;
   studentClass: string;
-};
+}
 
-export type StudentsType = {
+export interface StudentsType {
   _id: string;
   firstName: string;
   secondName: string;
   studentClass: string;
   teacher: string;
-};
+}
 
-type StudentsEditorReducerStateType = {
+interface StudentsEditorReducerStateType {
   studentClasses: { id: number; studentClass: string }[];
   newStudent: NewStudentType[];
   students: StudentsType[];
-};
+  loadingStudents: boolean;
+}
 
 const initialState = {
   studentClasses: [
@@ -40,6 +41,7 @@ const initialState = {
   ],
   newStudent: [],
   students: [],
+  loadingStudents: false,
 };
 
 const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): StudentsEditorReducerStateType => {
@@ -55,6 +57,13 @@ const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes
       return {
         ...state,
         students: action.payload as StudentsType[],
+      };
+    }
+
+    case Actions.LOADING_STUDENTS: {
+      return {
+        ...state,
+        loadingStudents: action.payload as boolean,
       };
     }
 

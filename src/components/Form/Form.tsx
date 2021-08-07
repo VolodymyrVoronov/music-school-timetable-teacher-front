@@ -20,17 +20,17 @@ import FormInfo from "../FormInfo/FormInfo";
 import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
 import { checkInputsSigninFormValidity } from "../../helpers/checkInputsSigninFormValidity";
 
-type LocationState = {
+interface LocationState {
   typeForm: string;
-};
+}
 
-type FormData = {
+interface FormData {
   firstName?: string;
   secondName?: string;
   login: string;
   password: string;
   password2?: string;
-};
+}
 
 const Form = (): React.ReactElement => {
   const dispatch = useDispatch();

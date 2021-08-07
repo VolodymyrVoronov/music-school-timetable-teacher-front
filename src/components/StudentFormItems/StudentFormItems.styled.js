@@ -31,4 +31,15 @@ const StudentFormItemsContainer = styled.div`
   }
 `;
 
-export { StudentFormItemsContainer };
+const StudentFormItemsText = styled.p`
+  display: flex;
+  justify-content: center;
+
+  font-size: 22px;
+  line-height: 36px;
+  font-weight: 700;
+
+  color: ${colors.primary};
+`;
+
+export { StudentFormItemsContainer, StudentFormItemsText };

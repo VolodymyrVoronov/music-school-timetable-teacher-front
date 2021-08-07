@@ -10,13 +10,13 @@ export interface AuthDataType {
   token?: string;
 }
 
-type AuthReducerStateType = {
+interface AuthReducerStateType {
   isAuthorizing: boolean;
   authData: AuthDataType;
   userFullName: string[];
   isAuthorizingSuccessed: boolean | undefined;
   isAuthorizingFailed: boolean | undefined;
-};
+}
 
 const initialState = {
   isAuthorizing: false,

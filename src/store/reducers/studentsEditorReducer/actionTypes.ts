@@ -3,6 +3,7 @@ import { NewStudentType, StudentsType } from "./studentsEditorReducer";
 export const Actions = {
   ADD_NEW_STUDENT: "students/ADD_NEW_STUDENT",
   GET_STUDENTS: "students/GET_STUDENTS",
+  LOADING_STUDENTS: "students/LOADING_STUDENTS",
 };
 
 export interface AddNewStudentType {
@@ -15,4 +16,9 @@ export interface GetStudent {
   payload: StudentsType[];
 }
 
-export type ActionTypes = AddNewStudentType | GetStudent;
+export interface LoadingStudents {
+  type: typeof Actions.LOADING_STUDENTS;
+  payload: boolean;
+}
+
+export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents;

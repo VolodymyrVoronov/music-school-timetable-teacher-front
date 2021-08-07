@@ -15,12 +15,12 @@ import { checkInputsStudentsEditorFormValidity } from "../../helpers/checkInputs
 
 import { StudentsEditorContainer, StudentsEditorContainerLeft, StudentsEditorContainerRight, StudentsEditorContainerRightLabel, StudentsEditorContainerRightSelectInput, StudentsEditorContainerRightSelectOption, StudentsEditorContainerRightButtonsBlock } from "./StudentsEditor.styled";
 
-type FormData = {
+interface FormData {
   _id?: string;
   firstName: string;
   secondName: string;
   studentClass: string;
-};
+}
 
 const initialFormState = {
   firstName: "",

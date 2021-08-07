@@ -5,18 +5,18 @@ import { login, registration } from "./../../../api/api";
 
 import { Actions } from "./actionTypes";
 
-type LoginData = {
+interface LoginData {
   login: string;
   password: string;
-};
+}
 
-type RegistrationData = {
+interface RegistrationData {
   firstName?: string;
   secondName?: string;
   login: string;
   password: string;
   password2?: string;
-};
+}
 
 export const loginAC = (loginData: LoginData) => ({
   type: Actions.SET_LOGIN,

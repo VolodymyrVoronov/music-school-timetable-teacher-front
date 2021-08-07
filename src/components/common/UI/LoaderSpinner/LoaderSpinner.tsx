@@ -1,8 +1,16 @@
 import React from "react";
 import Loader from "react-loader-spinner";
 
+import { LoaderSpinnerContainer } from "./LoaderSpinner.styled";
+
+import { colors } from "../../../../styles/colorPalette";
+
 const LoaderSpinner = (): React.ReactElement => {
-  return <Loader type="ThreeDots" color="#fff" height={100} width={100} />;
+  return (
+    <LoaderSpinnerContainer>
+      <Loader type="ThreeDots" color={colors.primary} height={25} width={100} />
+    </LoaderSpinnerContainer>
+  );
 };
 
 export default LoaderSpinner;

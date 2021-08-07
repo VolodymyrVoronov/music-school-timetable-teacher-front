@@ -1,23 +1,23 @@
 import axios from "axios";
 
-type AuthStoreFormLoginData = {
+interface AuthStoreFormLoginData {
   login: string;
   password: string;
-};
+}
 
-type AuthStoreFormRegistrationData = {
+interface AuthStoreFormRegistrationData {
   firstName?: string;
   secondName?: string;
   login: string;
   password: string;
   password2?: string;
-};
+}
 
-type NewStudentData = {
+interface NewStudentData {
   firstName: string;
   secondName: string;
   studentClass: string;
-};
+}
 
 const URL = `http://localhost:5000`;
 
