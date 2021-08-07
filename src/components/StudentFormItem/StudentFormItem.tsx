@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
-import { deleteStudentAC } from "../../store/reducers/studentsEditorReducer/actions";
+import { deleteStudentAC, getStudentToUpdatedAC } from "../../store/reducers/studentsEditorReducer/actions";
 
 import { IoMdCreate, IoMdTrash } from "react-icons/io";
 
@@ -21,7 +21,7 @@ const StudentFormItem = ({ _id, firstName, secondName, studentClass, teacher }: 
   const dispatch = useDispatch();
 
   const onEditButtonClick = () => {
-    console.log("edit");
+    dispatch(getStudentToUpdatedAC(_id));
   };
 
   const onDeleteButtonClick = () => {

@@ -71,4 +71,4 @@ const Header = (): React.ReactElement => {
   );
 };
 
-export default React.memo(Header);
+export default Header;

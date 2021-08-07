@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import Slide from "react-reveal/Slide";
 
 import { RootState } from "../../store/store";
-import { addNewStudent, getStudents } from "../../store/reducers/studentsEditorReducer/actions";
+import { addNewStudent, getStudents, updateStudentAC } from "../../store/reducers/studentsEditorReducer/actions";
 
 import Button from "../common/UI/Button/Button";
 import Input from "../Input/Input";
@@ -21,6 +21,7 @@ interface FormData {
   firstName: string;
   secondName: string;
   studentClass: string;
+  teacher?: string;
 }
 
 const initialFormState = {
@@ -32,7 +33,8 @@ const initialFormState = {
 const StudentsEditor = (): React.ReactElement => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { studentClasses, loadingStudents } = useSelector((state: RootState) => state.studentsEditorReducer);
+  const { studentClasses, loadingStudents, studentToUpdate } = useSelector((state: RootState) => state.studentsEditorReducer);
+
   const [isValid, setIsValid] = React.useState(false);
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
 
@@ -50,12 +52,13 @@ const StudentsEditor = (): React.ReactElement => {
   };
 
   const onSaveButtonClick = () => {
-    setFormData({
-      firstName: "",
-      secondName: "",
-      studentClass: "",
-    });
-    dispatch(addNewStudent(formData));
+    if (studentToUpdate.length !== 0) {
+      dispatch(updateStudentAC(studentToUpdate[0]._id, formData));
+      setFormData(initialFormState);
+    } else {
+      dispatch(addNewStudent(formData));
+      setFormData(initialFormState);
+    }
   };
 
   const onCancelButtonClick = () => {
@@ -69,6 +72,12 @@ const StudentsEditor = (): React.ReactElement => {
   React.useEffect(() => {
     dispatch(getStudents());
   }, []);
+
+  React.useEffect(() => {
+    if (studentToUpdate.length !== 0) {
+      setFormData(studentToUpdate[0]);
+    }
+  }, [studentToUpdate]);
 
   return (
     <Slide top>

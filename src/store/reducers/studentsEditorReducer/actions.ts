@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 
-import { newStudent, fetchStudents, deleteStudent } from "./../../../api/api";
+import { newStudent, fetchStudents, deleteStudent, updateStudent } from "./../../../api/api";
 
 import { Actions } from "./actionTypes";
 
@@ -31,6 +31,11 @@ export const getStudentAC = (students: StudentsData) => ({
 export const loadginStudentAC = (loadingStudents: boolean) => ({
   type: Actions.LOADING_STUDENTS,
   payload: loadingStudents,
+});
+
+export const getStudentToUpdatedAC = (studentToUpdate: string) => ({
+  type: Actions.GET_STUDENT_TO_UPDATE,
+  payload: studentToUpdate,
 });
 
 export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch: Dispatch) => {
@@ -79,5 +84,22 @@ export const deleteStudentAC = (id: string) => async (dispatch: Dispatch) => {
   } catch (error) {
     console.log(error);
     dispatch(loadginStudentAC(false));
+  }
+};
+
+export const updateStudentAC = (id: string, updatedStudent: any) => async (dispatch: Dispatch) => {
+  try {
+    dispatch(loadginStudentAC(true));
+    await updateStudent(id, updatedStudent);
+
+    const response = await fetchStudents();
+    if (response.status === 200) {
+      dispatch(getStudentAC(response.data));
+      dispatch(loadginStudentAC(false));
+      dispatch(getStudentToUpdatedAC(""));
+    }
+  } catch (error) {
+    dispatch(loadginStudentAC(false));
+    console.log(error);
   }
 };

@@ -4,7 +4,8 @@ export const Actions = {
   ADD_NEW_STUDENT: "students/ADD_NEW_STUDENT",
   GET_STUDENTS: "students/GET_STUDENTS",
   LOADING_STUDENTS: "students/LOADING_STUDENTS",
-  DELETED_STUDENT: "students/DELETED_STUDENT",
+  DELETE_STUDENT: "students/DELETE_STUDENT",
+  GET_STUDENT_TO_UPDATE: "students/GET_STUDENT_TO_UPDATE",
 };
 
 export interface AddNewStudentType {
@@ -23,8 +24,13 @@ export interface LoadingStudents {
 }
 
 export interface DeleteStudent {
-  type: typeof Actions.DELETED_STUDENT;
+  type: typeof Actions.DELETE_STUDENT;
   payload: string;
 }
 
-export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents | DeleteStudent;
+export interface StudentToUpdate {
+  type: typeof Actions.GET_STUDENT_TO_UPDATE;
+  payload: string;
+}
+
+export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents | DeleteStudent | StudentToUpdate;

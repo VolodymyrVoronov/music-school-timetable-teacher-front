@@ -21,6 +21,7 @@ interface StudentsEditorReducerStateType {
   newStudent: NewStudentType[];
   students: StudentsType[];
   loadingStudents: boolean;
+  studentToUpdate: StudentsType[];
 }
 
 const initialState = {
@@ -42,6 +43,7 @@ const initialState = {
   newStudent: [],
   students: [],
   loadingStudents: false,
+  studentToUpdate: [],
 };
 
 const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): StudentsEditorReducerStateType => {
@@ -64,6 +66,13 @@ const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes
       return {
         ...state,
         loadingStudents: action.payload as boolean,
+      };
+    }
+
+    case Actions.GET_STUDENT_TO_UPDATE: {
+      return {
+        ...state,
+        studentToUpdate: state.students.filter((student) => student._id === (action.payload as string)),
       };
     }
 
