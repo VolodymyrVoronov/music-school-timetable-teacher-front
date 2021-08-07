@@ -4,9 +4,9 @@ import Fade from "react-reveal/Fade";
 
 import { FormInfoContainer, FormInfoText } from "./FormInfo.styled";
 
-type FormInfoProps = {
+interface FormInfoProps {
   formType?: string;
-};
+}
 
 const FormInfo = ({ formType }: FormInfoProps): React.ReactElement => {
   return (

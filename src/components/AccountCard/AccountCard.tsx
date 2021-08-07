@@ -7,11 +7,11 @@ import Button from "../common/UI/Button/Button";
 
 import { AccountCardContainer, AccountCardImage, AccountCardButton } from "./AccountCard.styled";
 
-type AccountCardProps = {
+interface AccountCardProps {
   image: string;
   text: string;
   path: string;
-};
+}
 
 const AccountCard = ({ image, text, path }: AccountCardProps): React.ReactElement => {
   const history = useHistory();

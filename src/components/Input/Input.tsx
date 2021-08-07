@@ -2,7 +2,7 @@ import React from "react";
 
 import { InputContainer, InputLabel, InputField } from "./Input.styled";
 
-type InputProps = {
+interface InputProps {
   labelText: string;
   inputType: string;
   inputName: string;
@@ -10,7 +10,7 @@ type InputProps = {
   placeholder?: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-};
+}
 
 const Input = ({ labelText, inputType, inputName, value, placeholder, onChange, onBlur }: InputProps): React.ReactElement => {
   return (

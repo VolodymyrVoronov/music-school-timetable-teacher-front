@@ -7,12 +7,12 @@ import Button from "../common/UI/Button/Button";
 
 import { StartPageCardContainer, StartPageCardImage, StartPageCardButton } from "./StartPageCard.styled";
 
-type StartPageCardProps = {
+interface StartPageCardProps {
   image: string;
   text: string;
   path: string;
   type: string;
-};
+}
 
 const StartPageCard = ({ image, text, path, type }: StartPageCardProps): React.ReactElement => {
   const history = useHistory();

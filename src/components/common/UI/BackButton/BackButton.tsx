@@ -8,9 +8,9 @@ import { IoIosArrowDropleft } from "react-icons/io";
 
 import { BackButtonContainer } from "./BackButton.styled";
 
-type BackButtonProps = {
+interface BackButtonProps {
   path: string;
-};
+}
 
 const BackButton = ({ path }: BackButtonProps): React.ReactElement => {
   const portalContainer = document.getElementById("back-button-root") as HTMLElement;

@@ -2,7 +2,7 @@ import React from "react";
 
 import { ButtonContainer } from "./Button.styled";
 
-type ButtonProps = {
+interface ButtonProps {
   text: string;
   primary: boolean;
   onClick?: () => void;
@@ -13,7 +13,7 @@ type ButtonProps = {
   pt?: string;
   pb?: string;
   disabled?: boolean;
-};
+}
 
 const Button = ({ text, primary, onClick, disabled, mt = "0px", mb = "0px", ml = "0px", mr = "0px", pt, pb }: ButtonProps): React.ReactElement => {
   return (

@@ -4,9 +4,9 @@ import Skeleton from "@yisheng90/react-loading";
 
 import { LoadingBarContainer } from "./LoadingBar.styled";
 
-type LoadingBarProps = {
+interface LoadingBarProps {
   color: "#6C63FF" | "white";
-};
+}
 
 const LoadingBar = ({ color }: LoadingBarProps): React.ReactElement => {
   const portalContainer = document.getElementById("loading-bar-root") as HTMLElement;
