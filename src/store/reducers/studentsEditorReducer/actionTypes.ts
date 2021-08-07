@@ -9,6 +9,7 @@ export const Actions = {
   SET_STUDENTS_ACTION_SUCCEED: "students/SET_STUDENTS_ACTION_SUCCEED",
   SET_STUDENTS_ACTION_FAILED: "students/SET_STUDENTS_ACTION_FAILED",
 };
+
 export interface AddNewStudentType {
   type: typeof Actions.ADD_NEW_STUDENT;
   payload: NewStudentType[];
