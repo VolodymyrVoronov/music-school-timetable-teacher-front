@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { colors } from "../../styles/colorPalette";
 import { boxShadow } from "../../styles/globalStylesVariables";
@@ -17,9 +17,21 @@ const StudentFormItemContainer = styled.div`
 const StudentFormItemText = styled.p`
   display: flex;
 
+  ${(props) =>
+    props.ml &&
+    css`
+      margin-left: auto;
+    `}
+
   font-size: 22px;
   line-height: 28px;
   font-weight: 700;
+
+  ${(props) =>
+    props.ta &&
+    css`
+      text-align: center;
+    `}
 
   color: ${colors.black};
 `;
@@ -27,6 +39,8 @@ const StudentFormItemText = styled.p`
 const StudentFormItemButtons = styled.div`
   display: flex;
   align-items: center;
+
+  margin-left: ${s4};
 `;
 
 const StudentFormItemButton = styled.span`

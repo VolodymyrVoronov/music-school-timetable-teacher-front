@@ -34,7 +34,9 @@ const StudentFormItem = ({ _id, firstName, secondName, studentClass }: StudentFo
         <StudentFormItemText>
           {firstName} {secondName}
         </StudentFormItemText>
-        <StudentFormItemText>{studentClass}</StudentFormItemText>
+        <StudentFormItemText ta ml>
+          {studentClass}
+        </StudentFormItemText>
 
         <StudentFormItemButtons>
           <StudentFormItemButton onClick={() => onEditButtonClick()}>
