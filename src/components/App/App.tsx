@@ -7,11 +7,13 @@ import FormPage from "../../pages/FormPage/FormPage";
 import AccountPage from "./../../pages/AccountPage/AccountPage";
 import StudentsEditorPage from "../../pages/StudentsEditor/StudentEditorPage";
 import CalendarPage from "./../../pages/CalendarPage/CalendarPage";
+import NoMatchPage from "./../../pages/NoMatchPage/NoMatchPage";
 
 import Toast from "./../common/UI/Toast/Toast";
 
 const App = (): React.ReactElement => {
   const token = JSON.parse(localStorage.getItem("profile") || "{}").token;
+  console.log(token);
 
   return (
     <>
@@ -57,6 +59,11 @@ const App = (): React.ReactElement => {
         <Route exact path="/students-editor">
           <Header />
           <StudentsEditorPage />
+        </Route>
+
+        <Route path="*">
+          <Header />
+          <NoMatchPage />
         </Route>
       </Switch>
     </>

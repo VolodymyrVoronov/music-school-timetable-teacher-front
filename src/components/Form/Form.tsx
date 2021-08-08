@@ -9,6 +9,7 @@ import { RootState } from "../../store/store";
 import { setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
 
 import { checkInputsLoginFormValidity } from "./../../helpers/checkInputsLoginFormValidity";
+import { checkInputsSigninFormValidity } from "../../helpers/checkInputsSigninFormValidity";
 
 import Input from "./../Input/Input";
 import Button from "../common/UI/Button/Button";
@@ -18,7 +19,6 @@ import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainer
 import Image01 from "./../../assets/sign-in-vector.svg";
 import FormInfo from "../FormInfo/FormInfo";
 import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
-import { checkInputsSigninFormValidity } from "../../helpers/checkInputsSigninFormValidity";
 
 interface LocationState {
   typeForm: string;
