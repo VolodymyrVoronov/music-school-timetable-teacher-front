@@ -6,19 +6,19 @@ import Slide from "react-reveal/Slide";
 import { IoIosInformationCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
 import { RootState } from "../../store/store";
-import { setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
+import { isAuthorizingFailedAC, isAuthorizingSucceessedAC, setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
 
 import { checkInputsLoginFormValidity } from "./../../helpers/checkInputsLoginFormValidity";
 import { checkInputsSigninFormValidity } from "../../helpers/checkInputsSigninFormValidity";
 
 import Input from "./../Input/Input";
+import FormInfo from "../FormInfo/FormInfo";
 import Button from "../common/UI/Button/Button";
+import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
 
 import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton, FormError } from "./Form.styled";
 
-import Image01 from "./../../assets/sign-in-vector.svg";
-import FormInfo from "../FormInfo/FormInfo";
-import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
+import authFormImage01 from "./../../assets/sign-in-vector.svg";
 
 interface LocationState {
   typeForm: string;
@@ -38,6 +38,7 @@ const Form = (): React.ReactElement => {
   const location = useLocation<LocationState>();
 
   const { isAuthorizing } = useSelector((state: RootState) => state.authReducer);
+
   const [showInfo, setShowInfo] = React.useState(false);
   const [isValid, setIsValid] = React.useState(false);
   const [touched, setTouched] = React.useState(false);
@@ -99,6 +100,9 @@ const Form = (): React.ReactElement => {
   React.useEffect(() => {
     if (formType === "login") {
       setIsValid(checkInputsLoginFormValidity(formData.login, formData.password));
+
+      dispatch(isAuthorizingSucceessedAC(false));
+      dispatch(isAuthorizingFailedAC(false));
     }
 
     if (formType === "signin") {
@@ -107,17 +111,20 @@ const Form = (): React.ReactElement => {
         setIsValid(false);
         if (Object.getOwnPropertyNames(checkInputsSigninFormValidity(formData)).length === 0) {
           setIsValid(true);
+
+          dispatch(isAuthorizingSucceessedAC(false));
+          dispatch(isAuthorizingFailedAC(false));
         }
       }
     }
-  }, [formType, formData.login, formData, touched]);
+  }, [formType, formData.login, formData, touched, dispatch]);
 
   return (
     <Slide top>
       <FormContainer>
         {isAuthorizing && <LoadingBar color="#6C63FF" />}
         <FormContainerLeft>
-          <FormContainerLeftImage src={Image01} />
+          <FormContainerLeftImage src={authFormImage01} />
           <Slide top duration={1000}>
             <FormContainerLeftTitle>{formType === "login" ? "Вход в личный кабинет" : "Форма регистрации"}</FormContainerLeftTitle>
           </Slide>

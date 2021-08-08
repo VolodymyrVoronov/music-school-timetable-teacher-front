@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 
 import { RootState } from "../../store/store";
 
-import { StudentFormItemsContainer, StudentFormItemsText } from "./StudentFormItems.styled";
 import StudentFormItem from "./../StudentFormItem/StudentFormItem";
 import LoaderSpinner from "./../common/UI/LoaderSpinner/LoaderSpinner";
+
+import { StudentFormItemsContainer, StudentFormItemsText } from "./StudentFormItems.styled";
 
 const StudentFormItems = (): React.ReactElement => {
   const { students, loadingStudents } = useSelector((state: RootState) => state.studentsEditorReducer);

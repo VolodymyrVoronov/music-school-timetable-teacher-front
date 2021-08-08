@@ -2,10 +2,9 @@ import React from "react";
 import { useDispatch } from "react-redux";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
+import { IoMdCreate, IoMdTrash } from "react-icons/io";
 
 import { deleteStudentAC, getStudentToUpdatedAC } from "../../store/reducers/studentsEditorReducer/actions";
-
-import { IoMdCreate, IoMdTrash } from "react-icons/io";
 
 import { StudentFormItemContainer, StudentFormItemText, StudentFormItemButtons, StudentFormItemButton } from "./StudentFormItem.styled";
 

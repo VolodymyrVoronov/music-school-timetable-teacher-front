@@ -7,12 +7,12 @@ import Slide from "react-reveal/Slide";
 import { RootState } from "../../store/store";
 import { addNewStudent, getStudents, updateStudentAC, getStudentToUpdatedAC } from "../../store/reducers/studentsEditorReducer/actions";
 
+import { checkInputsStudentsEditorFormValidity } from "../../helpers/checkInputsStudentsEditorFormValidity";
+
 import Button from "../common/UI/Button/Button";
 import Input from "../Input/Input";
 import StudentFormItems from "../StudentFormItems/StudentFormItems";
 import LoaderSpinner from "../common/UI/LoaderSpinner/LoaderSpinner";
-
-import { checkInputsStudentsEditorFormValidity } from "../../helpers/checkInputsStudentsEditorFormValidity";
 
 import { StudentsEditorContainer, StudentsEditorContainerLeft, StudentsEditorContainerRight, StudentsEditorContainerRightLabel, StudentsEditorContainerRightSelectInput, StudentsEditorContainerRightSelectOption, StudentsEditorContainerRightButtonsBlock } from "./StudentsEditor.styled";
 
