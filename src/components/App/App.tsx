@@ -7,6 +7,7 @@ import FormPage from "../../pages/FormPage/FormPage";
 import AccountPage from "./../../pages/AccountPage/AccountPage";
 import StudentsEditorPage from "../../pages/StudentsEditor/StudentEditorPage";
 import CalendarPage from "./../../pages/CalendarPage/CalendarPage";
+import TimetableEditorPage from "./../../pages/TimetableEditorPage/TimetableEditorPage";
 import NoMatchPage from "./../../pages/NoMatchPage/NoMatchPage";
 
 import Toast from "./../common/UI/Toast/Toast";
@@ -53,7 +54,7 @@ const App = (): React.ReactElement => {
 
         <Route exact path="/timetable-editor">
           <Header />
-          <p>timetable-editor</p>
+          <TimetableEditorPage />
         </Route>
 
         <Route exact path="/students-editor">

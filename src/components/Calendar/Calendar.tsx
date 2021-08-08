@@ -15,9 +15,7 @@ import "react-day-picker/lib/style.css";
 const Calendar = (): React.ReactElement => {
   let history = useHistory();
 
-  const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => any }): void => {
-    console.log(e.toLocaleString("uk-UA", { timeZoneName: "short" }).slice(0, 10));
-
+  const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => string }): void => {
     history.push({
       pathname: "/timetable-editor",
       state: {
