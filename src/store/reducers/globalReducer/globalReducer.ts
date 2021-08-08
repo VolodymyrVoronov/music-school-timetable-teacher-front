@@ -21,7 +21,7 @@ const initialState = {
   ],
 
   accountCardsSettings: [
-    { id: 1, image: timeTableEditor01, text: "Редактировать расписание", path: "timetable-editor" },
+    { id: 1, image: timeTableEditor01, text: "Редактировать расписание", path: "calendar" },
     { id: 2, image: studentsEditor01, text: "Добавить/удалить ученика", path: "students-editor" },
   ],
 };

@@ -44,9 +44,14 @@ const App = (): React.ReactElement => {
           <AccountPage />
         </Route>
 
-        <Route exact path="/timetable-editor">
+        <Route exact path="/calendar">
           <Header />
           <CalendarPage />
+        </Route>
+
+        <Route exact path="/timetable-editor">
+          <Header />
+          <p>timetable-editor</p>
         </Route>
 
         <Route exact path="/students-editor">
