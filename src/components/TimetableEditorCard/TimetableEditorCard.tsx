@@ -1,25 +1,12 @@
 import React from "react";
 
-const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop }: any): React.ReactElement => {
+import { TimetableEditorCardContainer } from "./TimetableEditorCard.styled";
+
+const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumber, onCardDragEnd }: any): React.ReactElement => {
   return (
-    <div
-      draggable={true}
-      id={boxNumber}
-      onDragOver={(e) => e.preventDefault()}
-      onDragStart={onCardDrag}
-      onDrop={onCardDrop}
-      style={{
-        // backgroundColor: boxColor,
-        border: "1px solid",
-        // borderColor: boxColor,
-        borderRadius: "5px",
-        color: "#000",
-        width: "100%",
-        height: "100px",
-      }}
-    >
-      {boxNumber}
-    </div>
+    <TimetableEditorCardContainer draggable id={boxNumber} onDragOver={(e: any) => e.preventDefault()} onDragStart={onCardDrag} onDrop={onCardDrop} onDragEnd={onCardDragEnd}>
+      {cardsOrderNumber} {boxNumber}
+    </TimetableEditorCardContainer>
   );
 };
 

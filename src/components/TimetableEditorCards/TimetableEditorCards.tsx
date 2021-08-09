@@ -8,6 +8,8 @@ import { setCurrentDrugIdAC, setNewTimeTableEditorAC } from "./../../store/reduc
 
 import TimetableEditorCard from "./../TimetableEditorCard/TimetableEditorCard";
 
+import { TimetableEditorCardsContainer } from "./TimetableEditorCards.styled";
+
 const TimetableEditorCards = (): React.ReactElement => {
   const dispatch = useDispatch();
 
@@ -42,7 +44,7 @@ const TimetableEditorCards = (): React.ReactElement => {
   };
 
   return (
-    <>
+    <TimetableEditorCardsContainer>
       {timeTablesCards
         .sort((a, b) => a.order - b.order)
         .map((card) => {
@@ -50,7 +52,7 @@ const TimetableEditorCards = (): React.ReactElement => {
 
           return <TimetableEditorCard key={id} boxNumber={id} data={data} cardsOrderNumber={order} onCardDrag={onCardDrag} onCardDrop={onCardDrop} />;
         })}
-    </>
+    </TimetableEditorCardsContainer>
   );
 };
 
