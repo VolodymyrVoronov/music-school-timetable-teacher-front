@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
+import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
 
 import { TimetableEditorContainer, TimetableEditorHeader, TimetableEditorTitle, TimetableEditorButtons } from "./TimetableEditor.styled";
@@ -38,6 +39,10 @@ const TimetableEditor = (): React.ReactElement => {
               <Button onClick={onCancelButtonClick} text="Отмена" primary ml="5px" />
             </TimetableEditorButtons>
           </TimetableEditorHeader>
+        </Slide>
+
+        <Slide top>
+          <TimetableEditorCards />
         </Slide>
       </TimetableEditorContainer>
     </Slide>
