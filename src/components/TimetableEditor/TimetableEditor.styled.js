@@ -13,7 +13,8 @@ const TimetableEditorContainer = styled.div`
   min-height: 666px;
 
   margin: auto;
-  margin-top: ${s160};
+  margin-top: ${s96};
+  margin-bottom: ${s32};
   padding: ${s24};
 
   background-color: ${colors.white};
