@@ -1,6 +1,8 @@
 import React from "react";
 
-import { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption } from "./TimetableEditorCard.styled";
+import { IoMdCreate, IoMdCheckmark } from "react-icons/io";
+
+import { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton } from "./TimetableEditorCard.styled";
 
 interface TimetableEditorCardProps {
   boxNumber: string;
@@ -21,6 +23,7 @@ const initialFormState = { lessonStart: ``, lessonEnd: ``, student: `` };
 
 const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumber, data, students }: TimetableEditorCardProps): React.ReactElement => {
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
+  const [editingMode, setEditingMode] = React.useState(false);
 
   const onFormInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -30,6 +33,14 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
   };
 
   console.log(formData);
+
+  const onEditButtonClick = () => {
+    setEditingMode((editingMode) => !editingMode);
+  };
+
+  const onSaveButtonClick = () => {
+    setEditingMode((editingMode) => !editingMode);
+  };
 
   return (
     <TimetableEditorCardContainer draggable id={boxNumber} onDragOver={(e: any) => e.preventDefault()} onDragStart={onCardDrag} onDrop={onCardDrop}>
@@ -54,6 +65,17 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
             );
           })}
         </TimetableEditorCardStudentSelect>
+        <TimetableEditorCardButtons>
+          {editingMode ? (
+            <TimetableEditorCardButton onClick={() => onSaveButtonClick()}>
+              <IoMdCheckmark />
+            </TimetableEditorCardButton>
+          ) : (
+            <TimetableEditorCardButton onClick={() => onEditButtonClick()}>
+              <IoMdCreate />
+            </TimetableEditorCardButton>
+          )}
+        </TimetableEditorCardButtons>
       </TimetableEditorCardTime>
     </TimetableEditorCardContainer>
   );

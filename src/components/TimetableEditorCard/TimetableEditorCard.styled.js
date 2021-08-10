@@ -7,6 +7,7 @@ import { s4, s8, s16, s20, s24, s32, s48, s64, s96, s160 } from "./../../styles/
 
 const TimetableEditorCardContainer = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
 
   padding: ${s16} ${s8};
@@ -87,4 +88,28 @@ const TimetableEditorCardStudentOption = styled.option`
   display: flex;
 `;
 
-export { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption };
+const TimetableEditorCardButtons = styled.div`
+  display: flex;
+
+  margin-left: ${s32};
+`;
+
+const TimetableEditorCardButton = styled.span`
+  display: flex;
+
+  margin-left: ${s16};
+
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 700;
+
+  color: ${colors.primaryOpacity07};
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    color: ${colors.primary};
+  }
+`;
+
+export { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton };
