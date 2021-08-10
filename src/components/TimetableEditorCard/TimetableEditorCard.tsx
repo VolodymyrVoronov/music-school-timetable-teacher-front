@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IoMdCreate, IoMdCheckmark } from "react-icons/io";
+import { IoMdCreate, IoMdCheckmark, IoMdClose } from "react-icons/io";
 
 import { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton, TimetableEditorCardTimeText } from "./TimetableEditorCard.styled";
 
@@ -50,6 +50,10 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
     setEditingMode((editingMode) => !editingMode);
   };
 
+  const onCancelButtonClick = () => {
+    setEditingMode(() => false);
+  };
+
   return (
     <TimetableEditorCardContainer draggable id={boxNumber} onDragOver={(e: any) => e.preventDefault()} onDragStart={onCardDrag} onDrop={onCardDrop}>
       <TimetableEditorCardNumber>{cardsOrderNumber}:</TimetableEditorCardNumber>
@@ -84,9 +88,14 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
 
         <TimetableEditorCardButtons>
           {editingMode ? (
-            <TimetableEditorCardButton onClick={() => onSaveButtonClick()}>
-              <IoMdCheckmark />
-            </TimetableEditorCardButton>
+            <>
+              <TimetableEditorCardButton onClick={() => onSaveButtonClick()}>
+                <IoMdCheckmark />
+              </TimetableEditorCardButton>
+              <TimetableEditorCardButton onClick={() => onCancelButtonClick()}>
+                <IoMdClose />
+              </TimetableEditorCardButton>
+            </>
           ) : (
             <TimetableEditorCardButton onClick={() => onEditButtonClick()}>
               <IoMdCreate />

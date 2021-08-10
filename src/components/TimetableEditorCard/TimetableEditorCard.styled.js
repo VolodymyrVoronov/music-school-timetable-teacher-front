@@ -62,7 +62,7 @@ const TimetableEditorCardTimeInput = styled.input`
   display: flex;
 
   margin: 0 ${s8};
-  padding: ${s4};
+  padding: 0 ${s8};
 
   font-size: 18px;
   line-height: 24px;
@@ -75,7 +75,7 @@ const TimetableEditorCardStudentSelect = styled.select`
   display: flex;
 
   margin: 0 ${s8};
-  padding: ${s8};
+  padding: ${s4} ${s8};
 
   font-size: 18px;
   line-height: 24px;

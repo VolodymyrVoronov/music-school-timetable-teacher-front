@@ -3,6 +3,7 @@ import { Reducer } from "redux";
 import { Actions, ActionTypes } from "./actionTypes";
 
 export interface TimeTablesCardType {
+  date?: string;
   id: string;
   order: number;
   data: {
@@ -15,6 +16,7 @@ export interface TimeTablesCardType {
 interface TimeTableEditorReducerStateType {
   dragId?: string;
   timeTablesCards: TimeTablesCardType[];
+  updatedTimeTablesCards: TimeTablesCardType[];
 }
 
 const initialState = {
@@ -111,6 +113,7 @@ const initialState = {
       },
     },
   ],
+  updatedTimeTablesCards: [],
 };
 
 const timeTableEditorReducer: Reducer<TimeTableEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): TimeTableEditorReducerStateType => {
@@ -127,6 +130,15 @@ const timeTableEditorReducer: Reducer<TimeTableEditorReducerStateType, ActionTyp
         ...state,
         timeTablesCards: action.payload as TimeTablesCardType[],
       };
+    }
+
+    case Actions.UPDATE_TIME_TABLE_EDITOR_CARDS: {
+
+
+      return {
+        ...state,
+        // updatedTimeTablesCards: ,
+      }
     }
 
     default:
