@@ -31,7 +31,7 @@ const TimetableEditorCardContainer = styled.div`
 const TimetableEditorCardNumber = styled.p`
   display: flex;
 
-  margin-right: ${s32};
+  margin-right: ${s20};
 
   font-size: 18px;
   line-height: 24px;
@@ -49,7 +49,7 @@ const TimetableEditorCardTime = styled.div`
 const TimetableEditorCardTimeLabel = styled.label`
   display: flex;
 
-  margin-right: ${s20};
+  margin: 0 ${s8};
 
   font-size: 18px;
   line-height: 24px;
@@ -61,7 +61,7 @@ const TimetableEditorCardTimeLabel = styled.label`
 const TimetableEditorCardTimeInput = styled.input`
   display: flex;
 
-  margin-right: ${s20};
+  margin: 0 ${s8};
   padding: ${s4};
 
   font-size: 18px;
@@ -74,7 +74,7 @@ const TimetableEditorCardTimeInput = styled.input`
 const TimetableEditorCardStudentSelect = styled.select`
   display: flex;
 
-  margin-left: ${s20};
+  margin: 0 ${s8};
   padding: ${s8};
 
   font-size: 18px;
@@ -91,7 +91,7 @@ const TimetableEditorCardStudentOption = styled.option`
 const TimetableEditorCardButtons = styled.div`
   display: flex;
 
-  margin-left: ${s32};
+  margin-left: ${s16};
 `;
 
 const TimetableEditorCardButton = styled.span`
@@ -112,4 +112,16 @@ const TimetableEditorCardButton = styled.span`
   }
 `;
 
-export { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton };
+const TimetableEditorCardTimeText = styled.p`
+  display: flex;
+
+  margin: 0 ${s16};
+
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 500;
+
+  color: ${colors.primaryOpacity05};
+`;
+
+export { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton, TimetableEditorCardTimeText };
