@@ -44,6 +44,7 @@ const TimetableEditorCardTime = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
 `;
 
 const TimetableEditorCardTimeLabel = styled.label`
@@ -91,7 +92,7 @@ const TimetableEditorCardStudentOption = styled.option`
 const TimetableEditorCardButtons = styled.div`
   display: flex;
 
-  margin-left: ${s16};
+  margin-left: auto;
 `;
 
 const TimetableEditorCardButton = styled.span`
@@ -121,7 +122,7 @@ const TimetableEditorCardTimeText = styled.p`
   line-height: 24px;
   font-weight: 500;
 
-  color: ${colors.primaryOpacity05};
+  color: ${colors.primary};
 `;
 
 export { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton, TimetableEditorCardTimeText };

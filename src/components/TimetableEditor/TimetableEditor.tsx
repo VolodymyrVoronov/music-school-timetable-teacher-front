@@ -18,7 +18,7 @@ const TimetableEditor = (): React.ReactElement => {
 
   let chosenDate;
 
-  if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || null;
+  if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || undefined;
 
   console.log(chosenDate);
 

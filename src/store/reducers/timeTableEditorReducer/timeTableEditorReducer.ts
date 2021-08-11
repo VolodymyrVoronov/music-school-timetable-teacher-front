@@ -1,10 +1,9 @@
 import { Reducer, Action } from "redux";
 
-import { SET_CURRENT_DRUG_ID, SET_NEW_TIME_TABLE_EDITOR_CARDS, UPDATE_TIME_TABLE_EDITOR_CARDS } from "./actionTypes";
+import { SET_CURRENT_DRUG_ID, SET_NEW_TIME_TABLE_EDITOR_CARDS, UPDATE_TIME_TABLE_EDITOR_CARDS, GET_CHOSEN_DATE } from "./actionTypes";
 import { ActionTypes } from "./actions";
 
 export interface TimeTablesCardType {
-  date?: string;
   id: string;
   order: number;
   data: {
@@ -16,12 +15,14 @@ export interface TimeTablesCardType {
 
 interface TimeTableEditorReducerStateType {
   dragId: string;
+  date: string;
   timeTablesCards: TimeTablesCardType[];
-  updatedTimeTablesCards: TimeTablesCardType[];
+  // updatedTimeTablesCards: TimeTablesCardType[];
 }
 
 const initialState = {
   dragId: "",
+  date: "",
   timeTablesCards: [
     {
       id: "Box-1",
@@ -114,7 +115,7 @@ const initialState = {
       },
     },
   ],
-  updatedTimeTablesCards: [],
+  // updatedTimeTablesCards: [],
 };
 
 const timeTableEditorReducer = (state: TimeTableEditorReducerStateType = initialState, action: ActionTypes): TimeTableEditorReducerStateType => {
@@ -134,9 +135,31 @@ const timeTableEditorReducer = (state: TimeTableEditorReducerStateType = initial
     }
 
     case UPDATE_TIME_TABLE_EDITOR_CARDS: {
+      const newTimeTableEditorCard = {
+        lessonStart: action.payload.updatedCard.lessonStart,
+        lessonEnd: action.payload.updatedCard.lessonEnd,
+        student: action.payload.updatedCard.student,
+      };
       return {
         ...state,
-        // updatedTimeTablesCards: ,
+        timeTablesCards: state.timeTablesCards.map((card) => {
+          if (card.id === action.payload.boxId) {
+            return {
+              ...card,
+              data: {
+                ...newTimeTableEditorCard,
+              },
+            };
+          }
+          return card;
+        }) as TimeTablesCardType[],
+      };
+    }
+
+    case GET_CHOSEN_DATE: {
+      return {
+        ...state,
+        date: action.payload.chosenDate,
       };
     }
 

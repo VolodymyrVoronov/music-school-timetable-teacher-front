@@ -1,4 +1,7 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
+import { updateTimeTableEditorCardsAC } from "./../../store/reducers/timeTableEditorReducer/actions";
 
 import { IoMdCreate, IoMdCheckmark, IoMdClose } from "react-icons/io";
 
@@ -19,6 +22,7 @@ interface TimetableEditorCardProps {
   cardsOrderNumber: number;
   data: { lessonEnd: string; lessonStart: string; student: string };
   students: StundentType[];
+  chosenDate?: string;
 }
 
 interface FormData {
@@ -29,7 +33,9 @@ interface FormData {
 
 const initialFormState = { lessonStart: ``, lessonEnd: ``, student: `` };
 
-const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumber, data, students }: TimetableEditorCardProps): React.ReactElement => {
+const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumber, data, students, chosenDate }: TimetableEditorCardProps): React.ReactElement => {
+  const dispatch = useDispatch();
+
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
   const [editingMode, setEditingMode] = React.useState(false);
 
@@ -48,6 +54,8 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
 
   const onSaveButtonClick = () => {
     setEditingMode((editingMode) => !editingMode);
+
+    dispatch(updateTimeTableEditorCardsAC(formData, boxNumber));
   };
 
   const onCancelButtonClick = () => {
@@ -71,6 +79,7 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
             <TimetableEditorCardStudentSelect name="student" onChange={onFormInputChange}>
               {/* <TimetableEditorCardStudentOption value={data.student}>{data.student}</TimetableEditorCardStudentOption> */}
 
+              <TimetableEditorCardStudentOption></TimetableEditorCardStudentOption>
               {students.map((student: StundentType) => {
                 const { _id, firstName, secondName, studentClass } = student;
 
@@ -85,24 +94,23 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
         ) : (
           <TimetableEditorCardTimeText>{data.student.length !== 0 ? data.student : `________________`}</TimetableEditorCardTimeText>
         )}
-
-        <TimetableEditorCardButtons>
-          {editingMode ? (
-            <>
-              <TimetableEditorCardButton onClick={() => onSaveButtonClick()}>
-                <IoMdCheckmark />
-              </TimetableEditorCardButton>
-              <TimetableEditorCardButton onClick={() => onCancelButtonClick()}>
-                <IoMdClose />
-              </TimetableEditorCardButton>
-            </>
-          ) : (
-            <TimetableEditorCardButton onClick={() => onEditButtonClick()}>
-              <IoMdCreate />
-            </TimetableEditorCardButton>
-          )}
-        </TimetableEditorCardButtons>
       </TimetableEditorCardTime>
+      <TimetableEditorCardButtons>
+        {editingMode ? (
+          <>
+            <TimetableEditorCardButton onClick={() => onSaveButtonClick()}>
+              <IoMdCheckmark />
+            </TimetableEditorCardButton>
+            <TimetableEditorCardButton onClick={() => onCancelButtonClick()}>
+              <IoMdClose />
+            </TimetableEditorCardButton>
+          </>
+        ) : (
+          <TimetableEditorCardButton onClick={() => onEditButtonClick()}>
+            <IoMdCreate />
+          </TimetableEditorCardButton>
+        )}
+      </TimetableEditorCardButtons>
     </TimetableEditorCardContainer>
   );
 };
