@@ -1,6 +1,7 @@
-import { Reducer } from "redux";
+import { Reducer, Action } from "redux";
 
-import { Actions, ActionTypes } from "./actionTypes";
+import { SET_CURRENT_DRUG_ID, SET_NEW_TIME_TABLE_EDITOR_CARDS, UPDATE_TIME_TABLE_EDITOR_CARDS } from "./actionTypes";
+import { ActionTypes } from "./actions";
 
 export interface TimeTablesCardType {
   date?: string;
@@ -14,7 +15,7 @@ export interface TimeTablesCardType {
 }
 
 interface TimeTableEditorReducerStateType {
-  dragId?: string;
+  dragId: string;
   timeTablesCards: TimeTablesCardType[];
   updatedTimeTablesCards: TimeTablesCardType[];
 }
@@ -116,29 +117,27 @@ const initialState = {
   updatedTimeTablesCards: [],
 };
 
-const timeTableEditorReducer: Reducer<TimeTableEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): TimeTableEditorReducerStateType => {
+const timeTableEditorReducer = (state: TimeTableEditorReducerStateType = initialState, action: ActionTypes): TimeTableEditorReducerStateType => {
   switch (action.type) {
-    case Actions.SET_CURRENT_DRUG_ID: {
+    case SET_CURRENT_DRUG_ID: {
       return {
         ...state,
-        dragId: action.payload as string,
+        dragId: action.payload.dragId,
       };
     }
 
-    case Actions.SET_NEW_TIME_TABLE_EDITOR_CARDS: {
+    case SET_NEW_TIME_TABLE_EDITOR_CARDS: {
       return {
         ...state,
-        timeTablesCards: action.payload as TimeTablesCardType[],
+        timeTablesCards: action.payload.newCards,
       };
     }
 
-    case Actions.UPDATE_TIME_TABLE_EDITOR_CARDS: {
-
-
+    case UPDATE_TIME_TABLE_EDITOR_CARDS: {
       return {
         ...state,
         // updatedTimeTablesCards: ,
-      }
+      };
     }
 
     default:
