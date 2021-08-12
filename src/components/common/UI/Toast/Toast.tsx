@@ -13,7 +13,9 @@ import { colors } from "../../../../styles/colorPalette";
 const Toast = (): React.ReactElement => {
   const { isAuthorizingSucceed, isAuthorizingFailed } = useSelector((state: RootState) => state.authReducer);
 
-  const { isStudentsActionSucceed, isStudentsActionFailed } = useSelector((state: RootState) => state.studentsEditorReducer);
+  const { isStudentsActionSucceed, isStudentsActionFailed } = useSelector(
+    (state: RootState) => state.studentsEditorReducer
+  );
 
   const token = JSON.parse(localStorage.getItem("profile") || "{}").token;
 

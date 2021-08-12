@@ -49,7 +49,6 @@ const TimetableEditorCards = (): React.ReactElement => {
       }
       return box;
     });
-    console.log(newBoxState);
     dispatch(setNewTimeTableEditorAC(newBoxState));
   };
 

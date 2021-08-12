@@ -6,7 +6,12 @@ import Slide from "react-reveal/Slide";
 import { IoIosInformationCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 
 import { RootState } from "../../store/store";
-import { isAuthorizingFailedAC, isAuthorizingSucceessedAC, setLogin, setRegistration } from "./../../store/reducers/authReducer/actions";
+import {
+  isAuthorizingFailedAC,
+  isAuthorizingSucceessedAC,
+  setLogin,
+  setRegistration,
+} from "./../../store/reducers/authReducer/actions";
 
 import { checkInputsLoginFormValidity } from "./../../helpers/checkInputsLoginFormValidity";
 import { checkInputsSigninFormValidity } from "../../helpers/checkInputsSigninFormValidity";
@@ -16,7 +21,15 @@ import FormInfo from "../FormInfo/FormInfo";
 import Button from "../common/UI/Button/Button";
 import LoadingBar from "../common/UI/LoadingBar/LoadingBar";
 
-import { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton, FormError } from "./Form.styled";
+import {
+  FormContainer,
+  FormContainerLeft,
+  FormContainerLeftImage,
+  FormContainerLeftTitle,
+  FormContainerRight,
+  FormContainerRightInfoButton,
+  FormError,
+} from "./Form.styled";
 
 import authFormImage01 from "./../../assets/sign-in-vector.svg";
 
@@ -126,7 +139,9 @@ const Form = (): React.ReactElement => {
         <FormContainerLeft>
           <FormContainerLeftImage src={authFormImage01} />
           <Slide top duration={1000}>
-            <FormContainerLeftTitle>{formType === "login" ? "Вход в личный кабинет" : "Форма регистрации"}</FormContainerLeftTitle>
+            <FormContainerLeftTitle>
+              {formType === "login" ? "Вход в личный кабинет" : "Форма регистрации"}
+            </FormContainerLeftTitle>
           </Slide>
         </FormContainerLeft>
 
@@ -144,38 +159,85 @@ const Form = (): React.ReactElement => {
               {formType === "signin" && (
                 <>
                   <Slide top>
-                    <Input labelText="Имя" inputType="text" inputName="firstName" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.firstName} placeholder="Катерина" />
+                    <Input
+                      labelText="Имя"
+                      inputType="text"
+                      inputName="firstName"
+                      onChange={onFormInputChange}
+                      onBlur={onInputTouch}
+                      value={formData.firstName}
+                      placeholder="Катерина"
+                    />
                     <FormError>{inputsErrors?.firstName}</FormError>
                   </Slide>
 
                   <Slide top>
-                    <Input labelText="Фамилия" inputType="text" inputName="secondName" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.secondName} placeholder="Котова" />
+                    <Input
+                      labelText="Фамилия"
+                      inputType="text"
+                      inputName="secondName"
+                      onChange={onFormInputChange}
+                      onBlur={onInputTouch}
+                      value={formData.secondName}
+                      placeholder="Котова"
+                    />
                     <FormError>{inputsErrors?.secondName}</FormError>
                   </Slide>
                 </>
               )}
 
               <Slide top>
-                <Input labelText="Логин" inputType="text" inputName="login" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.login} placeholder="kkotova" />
+                <Input
+                  labelText="Логин"
+                  inputType="text"
+                  inputName="login"
+                  onChange={onFormInputChange}
+                  onBlur={onInputTouch}
+                  value={formData.login}
+                  placeholder="kkotova"
+                />
                 <FormError>{inputsErrors?.login}</FormError>
               </Slide>
 
               <Slide top>
-                <Input labelText="Пароль" inputType="password" inputName="password" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.password} placeholder="Password12345!" />
+                <Input
+                  labelText="Пароль"
+                  inputType="password"
+                  inputName="password"
+                  onChange={onFormInputChange}
+                  onBlur={onInputTouch}
+                  value={formData.password}
+                  placeholder="Password12345!"
+                />
                 <FormError>{inputsErrors?.password}</FormError>
               </Slide>
 
               {formType === "signin" && (
                 <>
                   <Slide top>
-                    <Input labelText="Подтвердите пароль" inputType="password" inputName="password2" onChange={onFormInputChange} onBlur={onInputTouch} value={formData.password2} placeholder="Password12345!" />
+                    <Input
+                      labelText="Подтвердите пароль"
+                      inputType="password"
+                      inputName="password2"
+                      onChange={onFormInputChange}
+                      onBlur={onInputTouch}
+                      value={formData.password2}
+                      placeholder="Password12345!"
+                    />
                     <FormError>{inputsErrors?.password2}</FormError>
                   </Slide>
                 </>
               )}
 
               <Slide top duration={1000}>
-                <Button disabled={isAuthorizing || !isValid} onClick={onAuthButtonClick} text={`${formType === "login" ? "Вход" : "Регистрация"}`} primary={false} mt="40px" mb="10px" />
+                <Button
+                  disabled={isAuthorizing || !isValid}
+                  onClick={onAuthButtonClick}
+                  text={`${formType === "login" ? "Вход" : "Регистрация"}`}
+                  primary={false}
+                  mt="40px"
+                  mb="10px"
+                />
               </Slide>
             </>
           )}

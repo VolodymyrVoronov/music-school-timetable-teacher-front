@@ -61,7 +61,9 @@ const Header = (): React.ReactElement => {
   return ReactDOM.createPortal(
     <HeaderContainer>
       <Slide top>
-        <HeaderUserTitle>{authData.token === undefined && user?.token === undefined ? null : userFullName}</HeaderUserTitle>
+        <HeaderUserTitle>
+          {authData.token === undefined && user?.token === undefined ? null : userFullName}
+        </HeaderUserTitle>
         <HeaderButtonContainer>
           <Button onClick={onLogoutClick} text="Выход" primary={false} pt="8px" pb="8px" />
         </HeaderButtonContainer>

@@ -39,7 +39,7 @@ const TimetableEditor = (): React.ReactElement => {
             <TimetableEditorTitle>{chosenDate ? "Дата: " + chosenDate : "Дата не выбрана!"}</TimetableEditorTitle>
             <TimetableEditorButtons>
               <Button disabled text="Сохранить" primary mr="5px" />
-              <Button onClick={onCancelButtonClick} text="Отмена" primary ml="5px" />
+              <Button onClick={onCancelButtonClick} text="Назад" primary ml="5px" />
             </TimetableEditorButtons>
           </TimetableEditorHeader>
         </Slide>
