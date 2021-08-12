@@ -1,6 +1,6 @@
 import { Reducer, Action } from "redux";
 
-import { SET_CURRENT_DRUG_ID, SET_NEW_TIME_TABLE_EDITOR_CARDS, UPDATE_TIME_TABLE_EDITOR_CARDS, GET_CHOSEN_DATE } from "./actionTypes";
+import { SET_CURRENT_DRUG_ID, SET_NEW_TIME_TABLE_EDITOR_CARDS, UPDATE_TIME_TABLE_EDITOR_CARDS, GET_CHOSEN_DATE, GET_CARD_TO_UPDATE } from "./actionTypes";
 import { ActionTypes } from "./actions";
 
 export interface TimeTablesCardType {
@@ -18,6 +18,7 @@ interface TimeTableEditorReducerStateType {
   date: string;
   timeTablesCards: TimeTablesCardType[];
   // updatedTimeTablesCards: TimeTablesCardType[];
+  cardToUpdate: any;
 }
 
 const initialState = {
@@ -115,6 +116,7 @@ const initialState = {
       },
     },
   ],
+  cardToUpdate: [],
   // updatedTimeTablesCards: [],
 };
 
@@ -160,6 +162,13 @@ const timeTableEditorReducer = (state: TimeTableEditorReducerStateType = initial
       return {
         ...state,
         date: action.payload.chosenDate,
+      };
+    }
+
+    case GET_CARD_TO_UPDATE: {
+      return {
+        ...state,
+        cardToUpdate: state.timeTablesCards.filter((card) => card.id === action.payload.cardId),
       };
     }
 

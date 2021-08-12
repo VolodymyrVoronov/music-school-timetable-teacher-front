@@ -6,7 +6,12 @@ import { IoMdCreate, IoMdTrash } from "react-icons/io";
 
 import { deleteStudentAC, getStudentToUpdatedAC } from "../../store/reducers/studentsEditorReducer/actions";
 
-import { StudentFormItemContainer, StudentFormItemText, StudentFormItemButtons, StudentFormItemButton } from "./StudentFormItem.styled";
+import {
+  StudentFormItemContainer,
+  StudentFormItemText,
+  StudentFormItemButtons,
+  StudentFormItemButton,
+} from "./StudentFormItem.styled";
 
 interface StudentFormItemProps {
   _id: string;

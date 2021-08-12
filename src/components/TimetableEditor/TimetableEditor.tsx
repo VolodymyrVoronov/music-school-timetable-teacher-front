@@ -6,7 +6,12 @@ import Slide from "react-reveal/Slide";
 import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
 
-import { TimetableEditorContainer, TimetableEditorHeader, TimetableEditorTitle, TimetableEditorButtons } from "./TimetableEditor.styled";
+import {
+  TimetableEditorContainer,
+  TimetableEditorHeader,
+  TimetableEditorTitle,
+  TimetableEditorButtons,
+} from "./TimetableEditor.styled";
 
 interface RouteStateProps {
   chosenDate?: string;
@@ -19,8 +24,6 @@ const TimetableEditor = (): React.ReactElement => {
   let chosenDate;
 
   if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || undefined;
-
-  console.log(chosenDate);
 
   const onSaveButtonClick = () => {};
 

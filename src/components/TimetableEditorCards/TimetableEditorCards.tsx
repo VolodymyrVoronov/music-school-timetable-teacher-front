@@ -19,14 +19,14 @@ const TimetableEditorCards = (): React.ReactElement => {
 
   const { students } = useSelector((state: RootState) => state.studentsEditorReducer);
 
-  console.log(students);
+  // console.log(students);
 
   React.useEffect(() => {
     dispatch(getStudents());
   }, []);
 
-  console.log(dragId);
-  console.log(timeTablesCards);
+  // console.log(dragId);
+  // console.log(timeTablesCards);
 
   const onCardDrag = (e: { id: string; order: number; currentTarget: { id: string } }) => {
     console.log(e.currentTarget.id);
@@ -60,7 +60,17 @@ const TimetableEditorCards = (): React.ReactElement => {
         .map((card) => {
           const { id, order, data } = card;
 
-          return <TimetableEditorCard key={id} boxNumber={id} data={data} students={students} cardsOrderNumber={order} onCardDrag={onCardDrag} onCardDrop={onCardDrop} />;
+          return (
+            <TimetableEditorCard
+              key={id}
+              boxNumber={id}
+              data={data}
+              students={students}
+              cardsOrderNumber={order}
+              onCardDrag={onCardDrag}
+              onCardDrop={onCardDrop}
+            />
+          );
         })}
     </TimetableEditorCardsContainer>
   );

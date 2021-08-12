@@ -1,11 +1,26 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
-import { updateTimeTableEditorCardsAC } from "./../../store/reducers/timeTableEditorReducer/actions";
+import { RootState } from "../../store/store";
+import {
+  getCardToUpdatedAC,
+  updateTimeTableEditorCardsAC,
+} from "./../../store/reducers/timeTableEditorReducer/actions";
 
 import { IoMdCreate, IoMdCheckmark, IoMdClose } from "react-icons/io";
 
-import { TimetableEditorCardContainer, TimetableEditorCardNumber, TimetableEditorCardTime, TimetableEditorCardTimeLabel, TimetableEditorCardTimeInput, TimetableEditorCardStudentSelect, TimetableEditorCardStudentOption, TimetableEditorCardButtons, TimetableEditorCardButton, TimetableEditorCardTimeText } from "./TimetableEditorCard.styled";
+import {
+  TimetableEditorCardContainer,
+  TimetableEditorCardNumber,
+  TimetableEditorCardTime,
+  TimetableEditorCardTimeLabel,
+  TimetableEditorCardTimeInput,
+  TimetableEditorCardStudentSelect,
+  TimetableEditorCardStudentOption,
+  TimetableEditorCardButtons,
+  TimetableEditorCardButton,
+  TimetableEditorCardTimeText,
+} from "./TimetableEditorCard.styled";
 
 interface StundentType {
   firstName: string;
@@ -33,8 +48,17 @@ interface FormData {
 
 const initialFormState = { lessonStart: ``, lessonEnd: ``, student: `` };
 
-const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumber, data, students, chosenDate }: TimetableEditorCardProps): React.ReactElement => {
+const TimetableEditorCard = ({
+  boxNumber,
+  onCardDrag,
+  onCardDrop,
+  cardsOrderNumber,
+  data,
+  students,
+}: TimetableEditorCardProps): React.ReactElement => {
   const dispatch = useDispatch();
+
+  const { cardToUpdate } = useSelector((state: RootState) => state.timeTableEditorReducer);
 
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
   const [editingMode, setEditingMode] = React.useState(false);
@@ -50,6 +74,7 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
 
   const onEditButtonClick = () => {
     setEditingMode((editingMode) => !editingMode);
+    dispatch(getCardToUpdatedAC(boxNumber));
   };
 
   const onSaveButtonClick = () => {
@@ -62,24 +87,76 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
     setEditingMode(() => false);
   };
 
+  React.useEffect(() => {
+    if (cardToUpdate.length !== 0) {
+      const { lessonStart, lessonEnd, student } = cardToUpdate[0].data;
+      setFormData({ lessonStart, lessonEnd, student });
+    }
+  }, [cardToUpdate]);
+
   return (
-    <TimetableEditorCardContainer draggable id={boxNumber} onDragOver={(e: any) => e.preventDefault()} onDragStart={onCardDrag} onDrop={onCardDrop}>
+    <TimetableEditorCardContainer
+      draggable
+      id={boxNumber}
+      onDragOver={(e: any) => e.preventDefault()}
+      onDragStart={onCardDrag}
+      onDrop={onCardDrop}
+    >
       <TimetableEditorCardNumber>{cardsOrderNumber}:</TimetableEditorCardNumber>
 
       <TimetableEditorCardTime>
         <TimetableEditorCardTimeLabel>С</TimetableEditorCardTimeLabel>
 
-        {editingMode ? <TimetableEditorCardTimeInput type="time" onChange={onFormInputChange} name="lessonStart" /> : <TimetableEditorCardTimeText>{data.lessonStart.length !== 0 ? data.lessonStart : `__ : __`}</TimetableEditorCardTimeText>}
+        {editingMode ? (
+          <>
+            {cardToUpdate.length !== 0 ? (
+              <TimetableEditorCardTimeInput
+                defaultValue={cardToUpdate[0].data.lessonStart}
+                type="time"
+                onChange={onFormInputChange}
+                name="lessonStart"
+              />
+            ) : (
+              <TimetableEditorCardTimeInput type="time" onChange={onFormInputChange} name="lessonStart" />
+            )}
+          </>
+        ) : (
+          <TimetableEditorCardTimeText>
+            {data.lessonStart.length !== 0 ? data.lessonStart : `__ : __`}
+          </TimetableEditorCardTimeText>
+        )}
 
         <TimetableEditorCardTimeLabel>до</TimetableEditorCardTimeLabel>
-        {editingMode ? <TimetableEditorCardTimeInput type="time" onChange={onFormInputChange} name="lessonEnd" /> : <TimetableEditorCardTimeText>{data.lessonEnd.length !== 0 ? data.lessonEnd : `__ : __`}</TimetableEditorCardTimeText>}
 
         {editingMode ? (
           <>
-            <TimetableEditorCardStudentSelect name="student" onChange={onFormInputChange}>
-              {/* <TimetableEditorCardStudentOption value={data.student}>{data.student}</TimetableEditorCardStudentOption> */}
+            {cardToUpdate.length !== 0 ? (
+              <TimetableEditorCardTimeInput
+                defaultValue={cardToUpdate[0].data.lessonEnd}
+                type="time"
+                onChange={onFormInputChange}
+                name="lessonEnd"
+              />
+            ) : (
+              <TimetableEditorCardTimeInput type="time" onChange={onFormInputChange} name="lessonEnd" />
+            )}
+          </>
+        ) : (
+          <TimetableEditorCardTimeText>
+            {data.lessonEnd.length !== 0 ? data.lessonEnd : `__ : __`}
+          </TimetableEditorCardTimeText>
+        )}
 
-              <TimetableEditorCardStudentOption></TimetableEditorCardStudentOption>
+        {editingMode ? (
+          <>
+            <TimetableEditorCardStudentSelect name="student" onChange={onFormInputChange} defaultValue={"DEFAULT"}>
+              {editingMode && cardToUpdate.length !== 0 && (
+                <TimetableEditorCardStudentOption value="DEFAULT" disabled>
+                  {cardToUpdate[0].data.student}
+                </TimetableEditorCardStudentOption>
+              )}
+
+              <TimetableEditorCardStudentOption />
               {students.map((student: StundentType) => {
                 const { _id, firstName, secondName, studentClass } = student;
 
@@ -92,7 +169,9 @@ const TimetableEditorCard = ({ boxNumber, onCardDrag, onCardDrop, cardsOrderNumb
             </TimetableEditorCardStudentSelect>
           </>
         ) : (
-          <TimetableEditorCardTimeText>{data.student.length !== 0 ? data.student : `________________`}</TimetableEditorCardTimeText>
+          <TimetableEditorCardTimeText>
+            {data.student.length !== 0 ? data.student : `________________`}
+          </TimetableEditorCardTimeText>
         )}
       </TimetableEditorCardTime>
       <TimetableEditorCardButtons>
