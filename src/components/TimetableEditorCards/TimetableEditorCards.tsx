@@ -75,4 +75,4 @@ const TimetableEditorCards = ({ setTouched }: TimetableEditorCardsProps): React.
   );
 };
 
-export default TimetableEditorCards;
+export default React.memo(TimetableEditorCards);

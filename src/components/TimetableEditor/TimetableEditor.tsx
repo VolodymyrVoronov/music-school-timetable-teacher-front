@@ -31,10 +31,10 @@ const TimetableEditor = (): React.ReactElement => {
 
   if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || undefined;
 
-  const onSaveButtonClick = () => {
+  const onSaveButtonClick = React.useCallback(() => {
     setTouched(false);
     disptach(setNewTimetableAC());
-  };
+  }, [disptach]);
 
   const onCancelButtonClick = () => {
     history.replace("/calendar");
