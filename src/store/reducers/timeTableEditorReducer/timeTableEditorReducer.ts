@@ -1,4 +1,4 @@
-import { Reducer, Action } from "redux";
+import { ActionTypes } from "./actions";
 
 import {
   SET_CURRENT_DRUG_ID,
@@ -7,7 +7,6 @@ import {
   GET_CHOSEN_DATE,
   GET_CARD_TO_UPDATE,
 } from "./actionTypes";
-import { ActionTypes } from "./actions";
 
 export interface TimeTablesCardType {
   id: string;

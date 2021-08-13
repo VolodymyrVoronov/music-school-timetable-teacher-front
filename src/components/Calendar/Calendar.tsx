@@ -16,8 +16,8 @@ import { CalendarContainer, CalendarTitle, CalendarBlock, CalendarButtons } from
 import "react-day-picker/lib/style.css";
 
 const Calendar = (): React.ReactElement => {
-  const history = useHistory();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => string }): void => {
     const date = e.toLocaleString("uk-UA", { timeZoneName: "short" }).slice(0, 10);

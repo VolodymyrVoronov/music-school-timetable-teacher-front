@@ -63,7 +63,7 @@ const TimetableEditorCard = ({
   const { cardToUpdate } = useSelector((state: RootState) => state.timeTableEditorReducer);
 
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
-  const [editingMode, setEditingMode] = React.useState(false);
+  const [editingMode, setEditingMode] = React.useState<boolean>(false);
 
   const onFormInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setFormData({

@@ -1,4 +1,5 @@
 import { Dispatch, AnyAction } from "redux";
+
 import { RootState } from "../../store";
 
 import { newTimetable, updateTimetable } from "../../../api/api";

@@ -21,11 +21,11 @@ interface RouteStateProps {
 }
 
 const TimetableEditor = (): React.ReactElement => {
+  const disptach = useDispatch();
   const history = useHistory();
   const location = useLocation();
-  const disptach = useDispatch();
 
-  const [touched, setTouched] = React.useState(false);
+  const [touched, setTouched] = React.useState<boolean>(false);
 
   let chosenDate;
 
