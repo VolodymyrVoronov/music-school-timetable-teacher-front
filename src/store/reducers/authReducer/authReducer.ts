@@ -26,7 +26,10 @@ const initialState = {
   isAuthorizingFailed: undefined,
 };
 
-const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): AuthReducerStateType => {
+const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (
+  state = initialState,
+  action: ActionTypes
+): AuthReducerStateType => {
   switch (action.type) {
     case Actions.SET_LOGIN: {
       return {

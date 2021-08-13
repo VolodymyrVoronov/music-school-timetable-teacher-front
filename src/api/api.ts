@@ -1,5 +1,7 @@
 import axios from "axios";
 
+import { TimeTablesCardType } from "../store/reducers/timeTableEditorReducer/timeTableEditorReducer";
+
 interface AuthStoreFormLoginData {
   login: string;
   password: string;
@@ -41,4 +43,6 @@ const fetchStudents = () => instanceAPI.get(`/students/getStudents`);
 const deleteStudent = (id: string) => instanceAPI.delete(`/students/${id}`);
 const updateStudent = (id: string, updatedStudent: any) => instanceAPI.patch(`/students/${id}`, updatedStudent);
 
-export { login, registration, newStudent, fetchStudents, deleteStudent, updateStudent };
+const updateTimetable = (cards: TimeTablesCardType[], date: string) => {};
+
+export { login, registration, newStudent, fetchStudents, deleteStudent, updateStudent, updateTimetable };

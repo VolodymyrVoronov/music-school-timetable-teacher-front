@@ -45,4 +45,11 @@ export interface IsStudentsActionFailedActionType {
   payload: boolean;
 }
 
-export type ActionTypes = AddNewStudentType | GetStudent | LoadingStudents | DeleteStudent | StudentToUpdate | IsStudentsActionSucceedActionType | IsStudentsActionFailedActionType;
+export type ActionTypes =
+  | AddNewStudentType
+  | GetStudent
+  | LoadingStudents
+  | DeleteStudent
+  | StudentToUpdate
+  | IsStudentsActionSucceedActionType
+  | IsStudentsActionFailedActionType;

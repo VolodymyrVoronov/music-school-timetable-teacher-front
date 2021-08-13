@@ -50,7 +50,10 @@ const initialState = {
   isStudentsActionFailed: undefined,
 };
 
-const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (state = initialState, action: ActionTypes): StudentsEditorReducerStateType => {
+const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (
+  state = initialState,
+  action: ActionTypes
+): StudentsEditorReducerStateType => {
   switch (action.type) {
     case Actions.ADD_NEW_STUDENT: {
       return {

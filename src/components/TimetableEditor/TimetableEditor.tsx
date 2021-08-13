@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
+
+import { updateTimetableAC } from "../../store/reducers/timeTableEditorReducer/actions";
 
 import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
@@ -20,6 +23,9 @@ interface RouteStateProps {
 const TimetableEditor = (): React.ReactElement => {
   const history = useHistory();
   const location = useLocation();
+
+  const disptach = useDispatch();
+
   const [touched, setTouched] = React.useState(false);
 
   let chosenDate;
@@ -28,6 +34,7 @@ const TimetableEditor = (): React.ReactElement => {
 
   const onSaveButtonClick = () => {
     setTouched(false);
+    disptach(updateTimetableAC());
   };
 
   const onCancelButtonClick = () => {
