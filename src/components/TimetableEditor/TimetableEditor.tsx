@@ -20,12 +20,15 @@ interface RouteStateProps {
 const TimetableEditor = (): React.ReactElement => {
   const history = useHistory();
   const location = useLocation();
+  const [touched, setTouched] = React.useState(false);
 
   let chosenDate;
 
   if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || undefined;
 
-  const onSaveButtonClick = () => {};
+  const onSaveButtonClick = () => {
+    setTouched(false);
+  };
 
   const onCancelButtonClick = () => {
     history.replace("/calendar");
@@ -38,14 +41,14 @@ const TimetableEditor = (): React.ReactElement => {
           <TimetableEditorHeader>
             <TimetableEditorTitle>{chosenDate ? "Дата: " + chosenDate : "Дата не выбрана!"}</TimetableEditorTitle>
             <TimetableEditorButtons>
-              <Button disabled text="Сохранить" primary mr="5px" />
+              <Button disabled={!touched} onClick={onSaveButtonClick} text="Сохранить" primary mr="5px" />
               <Button onClick={onCancelButtonClick} text="Назад" primary ml="5px" />
             </TimetableEditorButtons>
           </TimetableEditorHeader>
         </Slide>
 
         <Slide top>
-          <TimetableEditorCards />
+          <TimetableEditorCards setTouched={setTouched} />
         </Slide>
       </TimetableEditorContainer>
     </Slide>

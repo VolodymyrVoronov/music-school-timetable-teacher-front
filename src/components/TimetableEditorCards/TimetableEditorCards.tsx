@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { TimeTablesCardType } from "../../store/reducers/timeTableEditorReducer/timeTableEditorReducer";
@@ -12,21 +12,20 @@ import TimetableEditorCard from "./../TimetableEditorCard/TimetableEditorCard";
 
 import { TimetableEditorCardsContainer } from "./TimetableEditorCards.styled";
 
-const TimetableEditorCards = (): React.ReactElement => {
+interface TimetableEditorCardsProps {
+  setTouched: Dispatch<SetStateAction<boolean>>;
+}
+
+const TimetableEditorCards = ({ setTouched }: TimetableEditorCardsProps): React.ReactElement => {
   const dispatch = useDispatch();
 
   const { timeTablesCards, dragId } = useSelector((state: RootState) => state.timeTableEditorReducer);
 
   const { students } = useSelector((state: RootState) => state.studentsEditorReducer);
 
-  // console.log(students);
-
   React.useEffect(() => {
     dispatch(getStudents());
   }, []);
-
-  // console.log(dragId);
-  // console.log(timeTablesCards);
 
   const onCardDrag = (e: { id: string; order: number; currentTarget: { id: string } }) => {
     console.log(e.currentTarget.id);
@@ -50,6 +49,7 @@ const TimetableEditorCards = (): React.ReactElement => {
       return box;
     });
     dispatch(setNewTimeTableEditorAC(newBoxState));
+    setTouched(true);
   };
 
   return (
@@ -68,6 +68,7 @@ const TimetableEditorCards = (): React.ReactElement => {
               cardsOrderNumber={order}
               onCardDrag={onCardDrag}
               onCardDrop={onCardDrop}
+              setTouched={setTouched}
             />
           );
         })}

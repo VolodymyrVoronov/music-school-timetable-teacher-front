@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { RootState } from "../../store/store";
@@ -38,6 +38,7 @@ interface TimetableEditorCardProps {
   data: { lessonEnd: string; lessonStart: string; student: string };
   students: StundentType[];
   chosenDate?: string;
+  setTouched: Dispatch<SetStateAction<boolean>>;
 }
 
 interface FormData {
@@ -55,6 +56,7 @@ const TimetableEditorCard = ({
   cardsOrderNumber,
   data,
   students,
+  setTouched,
 }: TimetableEditorCardProps): React.ReactElement => {
   const dispatch = useDispatch();
 
@@ -79,12 +81,16 @@ const TimetableEditorCard = ({
 
   const onSaveButtonClick = () => {
     setEditingMode((editingMode) => !editingMode);
-
+    setTouched(true);
     dispatch(updateTimeTableEditorCardsAC(formData, boxNumber));
   };
 
   const onCancelButtonClick = () => {
     setEditingMode(() => false);
+  };
+
+  const onInputTouch = () => {
+    setTouched(true);
   };
 
   React.useEffect(() => {
@@ -114,10 +120,16 @@ const TimetableEditorCard = ({
                 defaultValue={cardToUpdate[0].data.lessonStart}
                 type="time"
                 onChange={onFormInputChange}
+                onBlur={onInputTouch}
                 name="lessonStart"
               />
             ) : (
-              <TimetableEditorCardTimeInput type="time" onChange={onFormInputChange} name="lessonStart" />
+              <TimetableEditorCardTimeInput
+                type="time"
+                onBlur={onInputTouch}
+                onChange={onFormInputChange}
+                name="lessonStart"
+              />
             )}
           </>
         ) : (
@@ -135,10 +147,16 @@ const TimetableEditorCard = ({
                 defaultValue={cardToUpdate[0].data.lessonEnd}
                 type="time"
                 onChange={onFormInputChange}
+                onBlur={onInputTouch}
                 name="lessonEnd"
               />
             ) : (
-              <TimetableEditorCardTimeInput type="time" onChange={onFormInputChange} name="lessonEnd" />
+              <TimetableEditorCardTimeInput
+                type="time"
+                onBlur={onInputTouch}
+                onChange={onFormInputChange}
+                name="lessonEnd"
+              />
             )}
           </>
         ) : (
@@ -149,8 +167,13 @@ const TimetableEditorCard = ({
 
         {editingMode ? (
           <>
-            <TimetableEditorCardStudentSelect name="student" onChange={onFormInputChange} defaultValue={"DEFAULT"}>
-              {editingMode && cardToUpdate.length !== 0 && (
+            <TimetableEditorCardStudentSelect
+              name="student"
+              onBlur={onInputTouch}
+              onChange={onFormInputChange}
+              defaultValue={"DEFAULT"}
+            >
+              {editingMode && cardToUpdate[0].data.student.length !== 0 && (
                 <TimetableEditorCardStudentOption value="DEFAULT" disabled>
                   {cardToUpdate[0].data.student}
                 </TimetableEditorCardStudentOption>
