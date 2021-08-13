@@ -1,7 +1,7 @@
 import { Dispatch, AnyAction } from "redux";
 import { RootState } from "../../store";
 
-import { updateTimetable } from "../../../api/api";
+import { newTimetable, updateTimetable } from "../../../api/api";
 
 import { typedAction } from "../helpers";
 
@@ -38,13 +38,29 @@ export const getCardToUpdatedAC = (cardId: string) => {
   return typedAction(GET_CARD_TO_UPDATE, { cardId });
 };
 
-export const updateTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+export const setNewTimetable = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
-    console.log({
+    const newTimetableData = {
       cards: getState().timeTableEditorReducer.timeTablesCards,
       date: getState().timeTableEditorReducer.date,
-    });
-    // updateTimetable();
+    };
+    console.log(newTimetableData);
+
+    newTimetable(newTimetableData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateNewTimetable = (id: string) => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+  try {
+    const updatedTimetableData = {
+      cards: getState().timeTableEditorReducer.timeTablesCards,
+      date: getState().timeTableEditorReducer.date,
+    };
+    console.log(updatedTimetableData);
+
+    updateTimetable(id, updatedTimetableData);
   } catch (error) {
     console.log(error);
   }

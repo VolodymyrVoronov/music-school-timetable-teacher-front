@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
-import { updateTimetableAC } from "../../store/reducers/timeTableEditorReducer/actions";
+import { setNewTimetable } from "../../store/reducers/timeTableEditorReducer/actions";
 
 import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
@@ -34,7 +34,7 @@ const TimetableEditor = (): React.ReactElement => {
 
   const onSaveButtonClick = () => {
     setTouched(false);
-    disptach(updateTimetableAC());
+    disptach(setNewTimetable());
   };
 
   const onCancelButtonClick = () => {

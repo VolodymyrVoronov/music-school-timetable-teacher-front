@@ -43,6 +43,9 @@ const fetchStudents = () => instanceAPI.get(`/students/getStudents`);
 const deleteStudent = (id: string) => instanceAPI.delete(`/students/${id}`);
 const updateStudent = (id: string, updatedStudent: any) => instanceAPI.patch(`/students/${id}`, updatedStudent);
 
-const updateTimetable = (cards: TimeTablesCardType[], date: string) => {};
+const newTimetable = (updatedTimetableData: { cards: TimeTablesCardType[]; date: string }) =>
+  instanceAPI.post(`timetable`, updatedTimetableData);
+const updateTimetable = (id: string, updatedTimetableData: { cards: TimeTablesCardType[]; date: string }) =>
+  instanceAPI.post(`timetable/${id}`, updatedTimetableData);
 
-export { login, registration, newStudent, fetchStudents, deleteStudent, updateStudent, updateTimetable };
+export { login, registration, newStudent, fetchStudents, deleteStudent, updateStudent, newTimetable, updateTimetable };
