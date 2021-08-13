@@ -52,7 +52,7 @@ const Toast = (): React.ReactElement => {
 
   return ReactDOM.createPortal(
     <ToastBox>
-      <ToastContainer position="bottom-center" delay={3000} />
+      <ToastContainer position="bottom-center" delay={2000} />
     </ToastBox>,
     portalContainer
   );

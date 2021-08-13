@@ -20,7 +20,6 @@ const TimetableEditorCards = ({ setTouched }: TimetableEditorCardsProps): React.
   const dispatch = useDispatch();
 
   const { timeTablesCards, dragId } = useSelector((state: RootState) => state.timeTableEditorReducer);
-
   const { students } = useSelector((state: RootState) => state.studentsEditorReducer);
 
   React.useEffect(() => {

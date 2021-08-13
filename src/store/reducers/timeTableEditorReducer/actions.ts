@@ -38,7 +38,7 @@ export const getCardToUpdatedAC = (cardId: string) => {
   return typedAction(GET_CARD_TO_UPDATE, { cardId });
 };
 
-export const setNewTimetable = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
     const newTimetableData = {
       cards: getState().timeTableEditorReducer.timeTablesCards,
@@ -52,7 +52,7 @@ export const setNewTimetable = () => async (dispatch: Dispatch<AnyAction>, getSt
   }
 };
 
-export const updateNewTimetable = (id: string) => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+export const updateTimetableAC = (id: string) => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
     const updatedTimetableData = {
       cards: getState().timeTableEditorReducer.timeTablesCards,

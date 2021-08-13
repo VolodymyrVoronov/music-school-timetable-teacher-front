@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
-import { setNewTimetable } from "../../store/reducers/timeTableEditorReducer/actions";
+import { setNewTimetableAC } from "../../store/reducers/timeTableEditorReducer/actions";
 
 import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
@@ -23,7 +23,6 @@ interface RouteStateProps {
 const TimetableEditor = (): React.ReactElement => {
   const history = useHistory();
   const location = useLocation();
-
   const disptach = useDispatch();
 
   const [touched, setTouched] = React.useState(false);
@@ -34,7 +33,7 @@ const TimetableEditor = (): React.ReactElement => {
 
   const onSaveButtonClick = () => {
     setTouched(false);
-    disptach(setNewTimetable());
+    disptach(setNewTimetableAC());
   };
 
   const onCancelButtonClick = () => {
