@@ -28,8 +28,6 @@ const TimetableEditorCards = ({ setTouched }: TimetableEditorCardsProps): React.
   }, []);
 
   const onCardDrag = (e: { id: string; order: number; currentTarget: { id: string } }) => {
-    console.log(e.currentTarget.id);
-
     dispatch(setCurrentDrugIdAC(e.currentTarget.id));
   };
 

@@ -47,7 +47,7 @@ const newTimetable = (updatedTimetableData: { cards: TimeTablesCardType[]; date:
   instanceAPI.post(`timetable`, updatedTimetableData);
 const fetchTimetable = () => instanceAPI.get(`/timetable/getTimetable`);
 const updateTimetable = (id: string, updatedTimetableData: { cards: TimeTablesCardType[]; date: string }) =>
-  instanceAPI.post(`timetable/${id}`, updatedTimetableData);
+  instanceAPI.patch(`timetable/${id}`, updatedTimetableData);
 
 export {
   login,

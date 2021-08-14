@@ -1,10 +1,16 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useLocation } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
-import { setNewTimetableAC, fetchTimetableAC } from "../../store/reducers/timeTableEditorReducer/actions";
+import {
+  setNewTimetableAC,
+  fetchTimetableAC,
+  updateTimetableAC,
+} from "../../store/reducers/timeTableEditorReducer/actions";
+
+import { RootState } from "../../store/store";
 
 import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
@@ -26,14 +32,21 @@ const TimetableEditor = (): React.ReactElement => {
   const location = useLocation();
   const [touched, setTouched] = React.useState<boolean>(false);
 
+  const { cardsIdToUpdate } = useSelector((state: RootState) => state.timeTableEditorReducer);
+
   let chosenDate = ("" as string) || undefined;
 
   if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || undefined;
 
   const onSaveButtonClick = React.useCallback(() => {
     setTouched(false);
-    disptach(setNewTimetableAC());
-  }, [disptach]);
+
+    if (cardsIdToUpdate) {
+      disptach(updateTimetableAC());
+    } else {
+      disptach(setNewTimetableAC());
+    }
+  }, [cardsIdToUpdate, disptach]);
 
   const onCancelButtonClick = () => {
     history.replace("/calendar");

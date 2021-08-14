@@ -13,6 +13,7 @@ import {
   UPDATE_TIME_TABLE_EDITOR_CARDS,
   GET_CARD_TO_UPDATE,
   LOADING_TIME_TABLE,
+  SET_CARDS_ID_TO_UPDATE,
 } from "./actionTypes";
 
 import { TimeTablesCardType } from "./timeTableEditorReducer";
@@ -46,6 +47,10 @@ export const loadingTimetableAC = (isLoading: boolean) => {
   return typedAction(LOADING_TIME_TABLE, { isLoading });
 };
 
+export const setCardsIdToUpdatedAC = (id: string) => {
+  return typedAction(SET_CARDS_ID_TO_UPDATE, { id });
+};
+
 export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
     dispatch(loadingTimetableAC(true));
@@ -73,8 +78,10 @@ export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispat
 
       if (filteredCards.length !== 0) {
         dispatch(setNewTimeTableEditorAC(filteredCards[0].cards));
+        dispatch(setCardsIdToUpdatedAC(filteredCards[0]._id));
       } else {
         dispatch(setNewTimeTableEditorAC(cards));
+        dispatch(setCardsIdToUpdatedAC(""));
       }
     }
     dispatch(loadingTimetableAC(false));
@@ -84,17 +91,22 @@ export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispat
   }
 };
 
-export const updateTimetableAC = (id: string) => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
+export const updateTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
+    dispatch(loadingTimetableAC(true));
+
     const updatedTimetableData = {
       cards: getState().timeTableEditorReducer.timeTablesCards,
       date: getState().timeTableEditorReducer.date,
     };
-    console.log(updatedTimetableData);
+    const cardsIdToUpdate = getState().timeTableEditorReducer.cardsIdToUpdate;
 
-    updateTimetable(id, updatedTimetableData);
+    await updateTimetable(cardsIdToUpdate, updatedTimetableData);
+
+    dispatch(loadingTimetableAC(false));
   } catch (error) {
     console.log(error);
+    dispatch(loadingTimetableAC(false));
   }
 };
 
@@ -105,4 +117,5 @@ export type ActionTypes = ReturnType<
   | typeof getChosenDateAC
   | typeof getCardToUpdatedAC
   | typeof loadingTimetableAC
+  | typeof setCardsIdToUpdatedAC
 >;

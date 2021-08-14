@@ -14,7 +14,6 @@ import Toast from "./../common/UI/Toast/Toast";
 
 const App = (): React.ReactElement => {
   const token = JSON.parse(localStorage.getItem("profile") || "{}").token;
-  console.log(token);
 
   return (
     <>
