@@ -19,6 +19,8 @@ const Calendar = (): React.ReactElement => {
   const dispatch = useDispatch();
   const history = useHistory();
 
+  const token = JSON.parse(localStorage.getItem("profile") || "{}").token;
+
   const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => string }): void => {
     const date = e.toLocaleString("uk-UA", { timeZoneName: "short" }).slice(0, 10);
     dispatch(getChosenDateAC(date));
@@ -33,6 +35,12 @@ const Calendar = (): React.ReactElement => {
   const onCancelButtonClick = () => {
     history.replace("/account");
   };
+
+  React.useEffect(() => {
+    if (!token) {
+      history.replace("/start-page");
+    }
+  }, []);
 
   return (
     <Slide top>

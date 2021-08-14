@@ -17,6 +17,8 @@ const Toast = (): React.ReactElement => {
     (state: RootState) => state.studentsEditorReducer
   );
 
+  const { errorOccured } = useSelector((state: RootState) => state.timeTableEditorReducer);
+
   const token = JSON.parse(localStorage.getItem("profile") || "{}").token;
 
   const portalContainer = document.getElementById("toast-root") as HTMLElement;
@@ -48,7 +50,11 @@ const Toast = (): React.ReactElement => {
     if (isStudentsActionFailed && token) {
       showError("Что-то пошло не так. 🙄 Обновите страницу и попробуйте снова.");
     }
-  }, [isAuthorizingFailed, isAuthorizingSucceed, isStudentsActionFailed, isStudentsActionSucceed, token]);
+
+    if (errorOccured && token) {
+      showError("Что-то пошло не так. 🙄 Обновите страницу и попробуйте снова.");
+    }
+  }, [errorOccured, isAuthorizingFailed, isAuthorizingSucceed, isStudentsActionFailed, isStudentsActionSucceed, token]);
 
   return ReactDOM.createPortal(
     <ToastBox>

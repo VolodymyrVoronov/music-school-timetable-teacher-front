@@ -8,6 +8,7 @@ import {
   GET_CARD_TO_UPDATE,
   LOADING_TIME_TABLE,
   SET_CARDS_ID_TO_UPDATE,
+  SET_ERROR_OCCURED,
 } from "./actionTypes";
 
 export interface TimeTablesCardType {
@@ -27,6 +28,7 @@ interface TimeTableEditorReducerStateType {
   cardToUpdate: any;
   isLoading: boolean;
   cardsIdToUpdate: string;
+  errorOccured: boolean;
 }
 
 const initialState = {
@@ -127,6 +129,7 @@ const initialState = {
   cardToUpdate: [],
   isLoading: false,
   cardsIdToUpdate: "",
+  errorOccured: false,
 };
 
 const timeTableEditorReducer = (
@@ -195,6 +198,13 @@ const timeTableEditorReducer = (
       return {
         ...state,
         cardsIdToUpdate: action.payload.id,
+      };
+    }
+
+    case SET_ERROR_OCCURED: {
+      return {
+        ...state,
+        errorOccured: action.payload.errorOccured,
       };
     }
 

@@ -14,6 +14,7 @@ import {
   GET_CARD_TO_UPDATE,
   LOADING_TIME_TABLE,
   SET_CARDS_ID_TO_UPDATE,
+  SET_ERROR_OCCURED,
 } from "./actionTypes";
 
 import { TimeTablesCardType } from "./timeTableEditorReducer";
@@ -51,8 +52,13 @@ export const setCardsIdToUpdatedAC = (id: string) => {
   return typedAction(SET_CARDS_ID_TO_UPDATE, { id });
 };
 
+export const setErrorOccuredAC = (errorOccured: boolean) => {
+  return typedAction(SET_ERROR_OCCURED, { errorOccured });
+};
+
 export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
+    dispatch(setErrorOccuredAC(false));
     dispatch(loadingTimetableAC(true));
     const newTimetableData = {
       cards: getState().timeTableEditorReducer.timeTablesCards,
@@ -65,11 +71,13 @@ export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, get
   } catch (error) {
     console.log(error);
     dispatch(loadingTimetableAC(false));
+    dispatch(setErrorOccuredAC(true));
   }
 };
 
 export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispatch<AnyAction>) => {
   try {
+    dispatch(setErrorOccuredAC(false));
     dispatch(loadingTimetableAC(true));
     const response = await fetchTimetable();
 
@@ -88,11 +96,13 @@ export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispat
   } catch (error) {
     console.log(error);
     dispatch(loadingTimetableAC(false));
+    dispatch(setErrorOccuredAC(true));
   }
 };
 
 export const updateTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
+    dispatch(setErrorOccuredAC(false));
     dispatch(loadingTimetableAC(true));
 
     const updatedTimetableData = {
@@ -107,6 +117,7 @@ export const updateTimetableAC = () => async (dispatch: Dispatch<AnyAction>, get
   } catch (error) {
     console.log(error);
     dispatch(loadingTimetableAC(false));
+    dispatch(setErrorOccuredAC(true));
   }
 };
 
@@ -118,4 +129,5 @@ export type ActionTypes = ReturnType<
   | typeof getCardToUpdatedAC
   | typeof loadingTimetableAC
   | typeof setCardsIdToUpdatedAC
+  | typeof setErrorOccuredAC
 >;
