@@ -9,7 +9,7 @@ import {
 } from "./actionTypes";
 
 export interface TimeTablesCardType {
-  id: string;
+  cardId: string;
   order: number;
   data: {
     lessonStart: string;
@@ -31,7 +31,7 @@ const initialState = {
   date: "",
   timeTablesCards: [
     {
-      id: "Box-1",
+      cardId: "Box-1",
       order: 1,
       data: {
         lessonStart: ``,
@@ -40,7 +40,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-2",
+      cardId: "Box-2",
       order: 2,
       data: {
         lessonStart: ``,
@@ -49,7 +49,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-3",
+      cardId: "Box-3",
       order: 3,
       data: {
         lessonStart: ``,
@@ -58,7 +58,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-4",
+      cardId: "Box-4",
       order: 4,
       data: {
         lessonStart: ``,
@@ -67,7 +67,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-5",
+      cardId: "Box-5",
       order: 5,
       data: {
         lessonStart: ``,
@@ -76,7 +76,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-6",
+      cardId: "Box-6",
       order: 6,
       data: {
         lessonStart: ``,
@@ -85,7 +85,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-7",
+      cardId: "Box-7",
       order: 7,
       data: {
         lessonStart: ``,
@@ -94,7 +94,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-8",
+      cardId: "Box-8",
       order: 8,
       data: {
         lessonStart: ``,
@@ -103,7 +103,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-9",
+      cardId: "Box-9",
       order: 9,
       data: {
         lessonStart: ``,
@@ -112,7 +112,7 @@ const initialState = {
       },
     },
     {
-      id: "Box-10",
+      cardId: "Box-10",
       order: 10,
       data: {
         lessonStart: ``,
@@ -153,7 +153,7 @@ const timeTableEditorReducer = (
       return {
         ...state,
         timeTablesCards: state.timeTablesCards.map((card) => {
-          if (card.id === action.payload.boxId) {
+          if (card.cardId === action.payload.boxId) {
             return {
               ...card,
               data: {
@@ -176,7 +176,7 @@ const timeTableEditorReducer = (
     case GET_CARD_TO_UPDATE: {
       return {
         ...state,
-        cardToUpdate: state.timeTablesCards.filter((card) => card.id === action.payload.cardId),
+        cardToUpdate: state.timeTablesCards.filter((card) => card.cardId === action.payload.cardId),
       };
     }
 
