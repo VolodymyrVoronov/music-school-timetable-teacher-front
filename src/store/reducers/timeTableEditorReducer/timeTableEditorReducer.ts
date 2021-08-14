@@ -6,6 +6,7 @@ import {
   UPDATE_TIME_TABLE_EDITOR_CARDS,
   GET_CHOSEN_DATE,
   GET_CARD_TO_UPDATE,
+  LOADING_TIME_TABLE,
 } from "./actionTypes";
 
 export interface TimeTablesCardType {
@@ -22,8 +23,8 @@ interface TimeTableEditorReducerStateType {
   dragId: string;
   date: string;
   timeTablesCards: TimeTablesCardType[];
-  // updatedTimeTablesCards: TimeTablesCardType[];
   cardToUpdate: any;
+  isLoading: boolean;
 }
 
 const initialState = {
@@ -122,7 +123,7 @@ const initialState = {
     },
   ],
   cardToUpdate: [],
-  // updatedTimeTablesCards: [],
+  isLoading: false,
 };
 
 const timeTableEditorReducer = (
@@ -177,6 +178,13 @@ const timeTableEditorReducer = (
       return {
         ...state,
         cardToUpdate: state.timeTablesCards.filter((card) => card.cardId === action.payload.cardId),
+      };
+    }
+
+    case LOADING_TIME_TABLE: {
+      return {
+        ...state,
+        isLoading: action.payload.isLoading,
       };
     }
 

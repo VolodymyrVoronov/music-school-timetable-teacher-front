@@ -9,6 +9,7 @@ import { RootState } from "../../store/store";
 import { setCurrentDrugIdAC, setNewTimeTableEditorAC } from "./../../store/reducers/timeTableEditorReducer/actions";
 
 import TimetableEditorCard from "./../TimetableEditorCard/TimetableEditorCard";
+import LoaderSpinner from "../common/UI/LoaderSpinner/LoaderSpinner";
 
 import { TimetableEditorCardsContainer } from "./TimetableEditorCards.styled";
 
@@ -19,7 +20,7 @@ interface TimetableEditorCardsProps {
 const TimetableEditorCards = ({ setTouched }: TimetableEditorCardsProps): React.ReactElement => {
   const dispatch = useDispatch();
 
-  const { timeTablesCards, dragId } = useSelector((state: RootState) => state.timeTableEditorReducer);
+  const { timeTablesCards, dragId, isLoading } = useSelector((state: RootState) => state.timeTableEditorReducer);
   const { students } = useSelector((state: RootState) => state.studentsEditorReducer);
 
   React.useEffect(() => {
@@ -53,26 +54,32 @@ const TimetableEditorCards = ({ setTouched }: TimetableEditorCardsProps): React.
   };
 
   return (
-    <TimetableEditorCardsContainer>
-      {timeTablesCards
-        .sort((a, b) => a.order - b.order)
-        .map((card) => {
-          const { cardId, order, data } = card;
+    <>
+      {isLoading ? (
+        <LoaderSpinner mt="50px" />
+      ) : (
+        <TimetableEditorCardsContainer>
+          {timeTablesCards
+            .sort((a, b) => a.order - b.order)
+            .map((card) => {
+              const { cardId, order, data } = card;
 
-          return (
-            <TimetableEditorCard
-              key={cardId}
-              boxNumber={cardId}
-              data={data}
-              students={students}
-              cardsOrderNumber={order}
-              onCardDrag={onCardDrag}
-              onCardDrop={onCardDrop}
-              setTouched={setTouched}
-            />
-          );
-        })}
-    </TimetableEditorCardsContainer>
+              return (
+                <TimetableEditorCard
+                  key={cardId}
+                  boxNumber={cardId}
+                  data={data}
+                  students={students}
+                  cardsOrderNumber={order}
+                  onCardDrag={onCardDrag}
+                  onCardDrop={onCardDrop}
+                  setTouched={setTouched}
+                />
+              );
+            })}
+        </TimetableEditorCardsContainer>
+      )}
+    </>
   );
 };
 

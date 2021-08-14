@@ -7,11 +7,12 @@ import { colors } from "../../../../styles/colorPalette";
 
 interface LoaderSpinnerProps {
   bgColor?: string;
+  mt?: string;
 }
 
-const LoaderSpinner = ({ bgColor }: LoaderSpinnerProps): React.ReactElement => {
+const LoaderSpinner = ({ bgColor, mt }: LoaderSpinnerProps): React.ReactElement => {
   return (
-    <LoaderSpinnerContainer>
+    <LoaderSpinnerContainer mt={mt}>
       <Loader type="ThreeDots" color={bgColor || colors.primary} height={25} width={100} />
     </LoaderSpinnerContainer>
   );

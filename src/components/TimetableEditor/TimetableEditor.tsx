@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 //@ts-ignore
 import Slide from "react-reveal/Slide";
 
-import { setNewTimetableAC } from "../../store/reducers/timeTableEditorReducer/actions";
+import { setNewTimetableAC, fetchTimetableAC } from "../../store/reducers/timeTableEditorReducer/actions";
 
 import TimetableEditorCards from "./../TimetableEditorCards/TimetableEditorCards";
 import Button from "../common/UI/Button/Button";
@@ -24,10 +24,9 @@ const TimetableEditor = (): React.ReactElement => {
   const disptach = useDispatch();
   const history = useHistory();
   const location = useLocation();
-
   const [touched, setTouched] = React.useState<boolean>(false);
 
-  let chosenDate;
+  let chosenDate = ("" as string) || undefined;
 
   if (location.state) chosenDate = (location.state as RouteStateProps).chosenDate || undefined;
 
@@ -39,6 +38,10 @@ const TimetableEditor = (): React.ReactElement => {
   const onCancelButtonClick = () => {
     history.replace("/calendar");
   };
+
+  React.useEffect(() => {
+    disptach(fetchTimetableAC(chosenDate));
+  }, [chosenDate, disptach]);
 
   return (
     <Slide top>

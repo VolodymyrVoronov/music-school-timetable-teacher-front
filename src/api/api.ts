@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 import { TimeTablesCardType } from "../store/reducers/timeTableEditorReducer/timeTableEditorReducer";
 
@@ -45,7 +45,18 @@ const updateStudent = (id: string, updatedStudent: any) => instanceAPI.patch(`/s
 
 const newTimetable = (updatedTimetableData: { cards: TimeTablesCardType[]; date: string }) =>
   instanceAPI.post(`timetable`, updatedTimetableData);
+const fetchTimetable = () => instanceAPI.get(`/timetable/getTimetable`);
 const updateTimetable = (id: string, updatedTimetableData: { cards: TimeTablesCardType[]; date: string }) =>
   instanceAPI.post(`timetable/${id}`, updatedTimetableData);
 
-export { login, registration, newStudent, fetchStudents, deleteStudent, updateStudent, newTimetable, updateTimetable };
+export {
+  login,
+  registration,
+  newStudent,
+  fetchStudents,
+  deleteStudent,
+  updateStudent,
+  newTimetable,
+  fetchTimetable,
+  updateTimetable,
+};

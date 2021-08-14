@@ -1,5 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 
 import { RootState } from "../../store/store";
 import {
@@ -59,8 +60,9 @@ const TimetableEditorCard = ({
   setTouched,
 }: TimetableEditorCardProps): React.ReactElement => {
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  const { cardToUpdate } = useSelector((state: RootState) => state.timeTableEditorReducer);
+  const { cardToUpdate, date } = useSelector((state: RootState) => state.timeTableEditorReducer);
 
   const [formData, setFormData] = React.useState<FormData>(initialFormState);
   const [editingMode, setEditingMode] = React.useState<boolean>(false);
@@ -72,7 +74,7 @@ const TimetableEditorCard = ({
     });
   };
 
-  console.log(formData);
+  // console.log(formData);
 
   const onEditButtonClick = () => {
     setEditingMode((editingMode) => !editingMode);
@@ -99,6 +101,12 @@ const TimetableEditorCard = ({
       setFormData({ lessonStart, lessonEnd, student });
     }
   }, [cardToUpdate]);
+
+  React.useEffect(() => {
+    if (!date) {
+      history.replace("/calendar");
+    }
+  }, []);
 
   return (
     <TimetableEditorCardContainer
