@@ -74,8 +74,6 @@ const TimetableEditorCard = ({
     });
   };
 
-  // console.log(formData);
-
   const onEditButtonClick = () => {
     setEditingMode((editingMode) => !editingMode);
     dispatch(getCardToUpdatedAC(boxNumber));

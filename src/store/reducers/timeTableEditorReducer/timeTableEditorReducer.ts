@@ -25,7 +25,7 @@ interface TimeTableEditorReducerStateType {
   dragId: string;
   date: string;
   timeTablesCards: TimeTablesCardType[];
-  cardToUpdate: any;
+  cardToUpdate: TimeTablesCardType[];
   isLoading: boolean;
   cardsIdToUpdate: string;
   errorOccured: boolean;

@@ -19,7 +19,7 @@ import {
 
 import { TimeTablesCardType } from "./timeTableEditorReducer";
 
-import { cards } from "./../../../components/data/cardsShape";
+import { cards } from "../../../data/cardsShape";
 
 export const setCurrentDrugIdAC = (dragId: string) => {
   return typedAction(SET_CURRENT_DRUG_ID, { dragId });
