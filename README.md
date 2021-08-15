@@ -1,4 +1,4 @@
-# Timetable and student editor.timetable and student editor.
+# Timetable and students editor.
 
 **Start page.**
 ![](./screenshots/start-page.JPG)
