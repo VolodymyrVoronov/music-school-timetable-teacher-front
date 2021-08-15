@@ -21,6 +21,9 @@
 **Add student**
 ![](./screenshots/add-student.JPG)
 
+**Demo**
+![](./demo/demo.gif)
+
 
 To install und run the project:
 
