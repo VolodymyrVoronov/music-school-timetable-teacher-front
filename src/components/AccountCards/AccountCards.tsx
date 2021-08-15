@@ -11,9 +11,10 @@ import { AccountCardsContainer } from "./AccountCards.styled";
 
 const AccountCards = (): React.ReactElement => {
   const { accountCardsSettings } = useSelector((state: RootState) => state.globalReducer);
+
   return (
     <AccountCardsContainer>
-      {accountCardsSettings.map((card: any) => {
+      {accountCardsSettings.map((card) => {
         const { id, image, text, path } = card;
         return (
           <Slide top key={id}>
