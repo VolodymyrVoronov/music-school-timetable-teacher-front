@@ -29,7 +29,6 @@ const StudentFormItem = ({ _id, firstName, secondName, studentClass }: StudentFo
   };
 
   const onDeleteButtonClick = () => {
-    console.log("delete");
     dispatch(deleteStudentAC(_id));
   };
 

@@ -1,6 +1,16 @@
 import { Reducer } from "redux";
 
-import { ActionTypes, Actions } from "./actionTypes";
+import { ActionTypes } from "./actions";
+
+import {
+  SET_AUTH_FAILED,
+  SET_AUTH_SUCCEED,
+  SET_IS_AUTHORIZING,
+  SET_LOGIN,
+  SET_LOGOUT,
+  SET_REGISTRATION,
+  SET_USER_FULL_NAME,
+} from "./actionTypes";
 
 export interface AuthDataType {
   result?: {
@@ -13,7 +23,7 @@ export interface AuthDataType {
 interface AuthReducerStateType {
   isAuthorizing: boolean;
   authData: AuthDataType;
-  userFullName: string[];
+  userFullName: string;
   isAuthorizingSucceed: boolean | undefined;
   isAuthorizingFailed: boolean | undefined;
 }
@@ -21,24 +31,21 @@ interface AuthReducerStateType {
 const initialState = {
   isAuthorizing: false,
   authData: { result: {} },
-  userFullName: [],
+  userFullName: "",
   isAuthorizingSucceed: undefined,
   isAuthorizingFailed: undefined,
 };
 
-const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (
-  state = initialState,
-  action: ActionTypes
-): AuthReducerStateType => {
+const authReducer = (state: AuthReducerStateType = initialState, action: ActionTypes): AuthReducerStateType => {
   switch (action.type) {
-    case Actions.SET_LOGIN: {
+    case SET_LOGIN: {
       return {
         ...state,
-        authData: action.payload as AuthDataType,
+        authData: action.payload.loginData,
       };
     }
 
-    case Actions.SET_LOGOUT: {
+    case SET_LOGOUT: {
       localStorage.clear();
 
       return {
@@ -48,39 +55,39 @@ const authReducer: Reducer<AuthReducerStateType, ActionTypes> = (
       };
     }
 
-    case Actions.SET_REGISTRATION: {
+    case SET_REGISTRATION: {
       return {
         ...state,
-        authData: action.payload as AuthDataType,
+        authData: action.payload.registrationData,
       };
     }
 
-    case Actions.SET_USER_FULL_NAME: {
+    case SET_USER_FULL_NAME: {
       return {
         ...state,
-        userFullName: action.payload as string[],
+        userFullName: action.payload,
       };
     }
 
-    case Actions.SET_IS_AUTHORIZING: {
+    case SET_IS_AUTHORIZING: {
       return {
         ...state,
-        isAuthorizing: action.payload as boolean,
+        isAuthorizing: action.payload.isAuthorizing,
       };
     }
 
-    case Actions.SET_AUTH_SUCCEED: {
+    case SET_AUTH_SUCCEED: {
       return {
         ...state,
-        isAuthorizingSucceed: action.payload as boolean,
+        isAuthorizingSucceed: action.payload.isAuthorizingSucceed,
         isAuthorizingFailed: (state.isAuthorizingFailed = false),
       };
     }
 
-    case Actions.SET_AUTH_FAILED: {
+    case SET_AUTH_FAILED: {
       return {
         ...state,
-        isAuthorizingFailed: action.payload as boolean,
+        isAuthorizingFailed: action.payload.isAuthorizingFailed,
         isAuthorizingSucceed: (state.isAuthorizingSucceed = false),
       };
     }

@@ -1,54 +1,36 @@
-import { Dispatch } from "redux";
+import { AnyAction, Dispatch } from "redux";
 
 import { newStudent, fetchStudents, deleteStudent, updateStudent } from "./../../../api/api";
 
-import { Actions } from "./actionTypes";
+import { typedAction } from "./../helpers";
 
-interface NewStudentData {
-  firstName: string;
-  secondName: string;
-  studentClass: string;
-}
+import { NewStudentType, StudentsType } from "./studentsEditorReducer";
 
-interface StudentsData {
-  _id: string;
-  firstName: string;
-  secondName: string;
-  studentClass: string;
-  teacher: string;
-}
+import {
+  ADD_NEW_STUDENT,
+  GET_STUDENTS,
+  LOADING_STUDENTS,
+  GET_STUDENT_TO_UPDATE,
+  SET_STUDENTS_ACTION_SUCCEED,
+  SET_STUDENTS_ACTION_FAILED,
+} from "./actionTypes";
 
-export const addNewStudentAC = (newStudentData: NewStudentData) => ({
-  type: Actions.ADD_NEW_STUDENT,
-  payload: newStudentData,
-});
+export const addNewStudentAC = (newStudentData: NewStudentType[]) => typedAction(ADD_NEW_STUDENT, { newStudentData });
 
-export const getStudentAC = (students: StudentsData) => ({
-  type: Actions.GET_STUDENTS,
-  payload: students,
-});
+export const getStudentAC = (students: StudentsType[]) => typedAction(GET_STUDENTS, { students });
 
-export const loadginStudentAC = (loadingStudents: boolean) => ({
-  type: Actions.LOADING_STUDENTS,
-  payload: loadingStudents,
-});
+export const loadginStudentAC = (loadingStudents: boolean) => typedAction(LOADING_STUDENTS, { loadingStudents });
 
-export const getStudentToUpdatedAC = (studentToUpdate: string) => ({
-  type: Actions.GET_STUDENT_TO_UPDATE,
-  payload: studentToUpdate,
-});
+export const getStudentToUpdatedAC = (studentToUpdate: string) =>
+  typedAction(GET_STUDENT_TO_UPDATE, { studentToUpdate });
 
-export const isStudentsActionSucceedAC = (isStudentsActionSucceed: boolean) => ({
-  type: Actions.SET_STUDENTS_ACTION_SUCCEED,
-  payload: isStudentsActionSucceed,
-});
+export const isStudentsActionSucceedAC = (isStudentsActionSucceed: boolean) =>
+  typedAction(SET_STUDENTS_ACTION_SUCCEED, { isStudentsActionSucceed });
 
-export const isStudentsActionFailedAC = (isStudentsActionFailed: boolean) => ({
-  type: Actions.SET_STUDENTS_ACTION_FAILED,
-  payload: isStudentsActionFailed,
-});
+export const isStudentsActionFailedAC = (isStudentsActionFailed: boolean) =>
+  typedAction(SET_STUDENTS_ACTION_FAILED, { isStudentsActionFailed });
 
-export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch: Dispatch) => {
+export const addNewStudent = (newStudentData: NewStudentType) => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadginStudentAC(true));
     const responseNewStudent = await newStudent(newStudentData);
@@ -74,7 +56,7 @@ export const addNewStudent = (newStudentData: NewStudentData) => async (dispatch
   }
 };
 
-export const getStudents = () => async (dispatch: Dispatch) => {
+export const getStudents = () => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadginStudentAC(true));
     const response = await fetchStudents();
@@ -94,7 +76,7 @@ export const getStudents = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const deleteStudentAC = (id: string) => async (dispatch: Dispatch) => {
+export const deleteStudentAC = (id: string) => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadginStudentAC(true));
     await deleteStudent(id);
@@ -116,7 +98,7 @@ export const deleteStudentAC = (id: string) => async (dispatch: Dispatch) => {
   }
 };
 
-export const updateStudentAC = (id: string, updatedStudent: any) => async (dispatch: Dispatch) => {
+export const updateStudentAC = (id: string, updatedStudent: any) => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadginStudentAC(true));
     await updateStudent(id, updatedStudent);
@@ -138,3 +120,12 @@ export const updateStudentAC = (id: string, updatedStudent: any) => async (dispa
     dispatch(isStudentsActionFailedAC(true));
   }
 };
+
+export type ActionTypes = ReturnType<
+  | typeof addNewStudentAC
+  | typeof getStudentAC
+  | typeof loadginStudentAC
+  | typeof getStudentToUpdatedAC
+  | typeof isStudentsActionSucceedAC
+  | typeof isStudentsActionFailedAC
+>;

@@ -21,45 +21,31 @@ import { TimeTablesCardType } from "./timeTableEditorReducer";
 
 import { cards } from "../../../data/cardsShape";
 
-export const setCurrentDrugIdAC = (dragId: string) => {
-  return typedAction(SET_CURRENT_DRUG_ID, { dragId });
-};
+export const setCurrentDrugIdAC = (dragId: string) => typedAction(SET_CURRENT_DRUG_ID, { dragId });
 
-export const setNewTimeTableEditorAC = (newCards: TimeTablesCardType[]) => {
-  return typedAction(SET_NEW_TIME_TABLE_EDITOR_CARDS, { newCards });
-};
+export const setNewTimeTableEditorAC = (newCards: TimeTablesCardType[]) =>
+  typedAction(SET_NEW_TIME_TABLE_EDITOR_CARDS, { newCards });
 
 export const updateTimeTableEditorCardsAC = (
   updatedCard: { lessonStart: string; lessonEnd: string; student: string },
   boxId: string
-) => {
-  return typedAction(UPDATE_TIME_TABLE_EDITOR_CARDS, { updatedCard, boxId });
-};
+) => typedAction(UPDATE_TIME_TABLE_EDITOR_CARDS, { updatedCard, boxId });
 
-export const getChosenDateAC = (chosenDate: string) => {
-  return typedAction(GET_CHOSEN_DATE, { chosenDate });
-};
+export const getChosenDateAC = (chosenDate: string) => typedAction(GET_CHOSEN_DATE, { chosenDate });
 
-export const getCardToUpdatedAC = (cardId: string) => {
-  return typedAction(GET_CARD_TO_UPDATE, { cardId });
-};
+export const getCardToUpdatedAC = (cardId: string) => typedAction(GET_CARD_TO_UPDATE, { cardId });
 
-export const loadingTimetableAC = (isLoading: boolean) => {
-  return typedAction(LOADING_TIME_TABLE, { isLoading });
-};
+export const loadingTimetableAC = (isLoading: boolean) => typedAction(LOADING_TIME_TABLE, { isLoading });
 
-export const setCardsIdToUpdatedAC = (id: string) => {
-  return typedAction(SET_CARDS_ID_TO_UPDATE, { id });
-};
+export const setCardsIdToUpdatedAC = (id: string) => typedAction(SET_CARDS_ID_TO_UPDATE, { id });
 
-export const setErrorOccuredAC = (errorOccured: boolean) => {
-  return typedAction(SET_ERROR_OCCURED, { errorOccured });
-};
+export const setErrorOccuredAC = (errorOccured: boolean) => typedAction(SET_ERROR_OCCURED, { errorOccured });
 
 export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, getState: () => RootState) => {
   try {
     dispatch(setErrorOccuredAC(false));
     dispatch(loadingTimetableAC(true));
+
     const newTimetableData = {
       cards: getState().timeTableEditorReducer.timeTablesCards,
       date: getState().timeTableEditorReducer.date,
@@ -67,6 +53,7 @@ export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, get
     console.log(newTimetableData);
 
     await newTimetable(newTimetableData);
+
     dispatch(loadingTimetableAC(false));
   } catch (error) {
     console.log(error);
@@ -79,6 +66,7 @@ export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispat
   try {
     dispatch(setErrorOccuredAC(false));
     dispatch(loadingTimetableAC(true));
+
     const response = await fetchTimetable();
 
     if (response.status === 200) {
@@ -92,6 +80,7 @@ export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispat
         dispatch(setCardsIdToUpdatedAC(""));
       }
     }
+
     dispatch(loadingTimetableAC(false));
   } catch (error) {
     console.log(error);

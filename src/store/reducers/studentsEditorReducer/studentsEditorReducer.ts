@@ -1,6 +1,13 @@
-import { Reducer } from "redux";
+import { ActionTypes } from "./actions";
 
-import { ActionTypes, Actions } from "./actionTypes";
+import {
+  ADD_NEW_STUDENT,
+  GET_STUDENTS,
+  GET_STUDENT_TO_UPDATE,
+  LOADING_STUDENTS,
+  SET_STUDENTS_ACTION_FAILED,
+  SET_STUDENTS_ACTION_SUCCEED,
+} from "./actionTypes";
 
 export interface NewStudentType {
   firstName: string;
@@ -50,51 +57,51 @@ const initialState = {
   isStudentsActionFailed: undefined,
 };
 
-const studentsEditorReducer: Reducer<StudentsEditorReducerStateType, ActionTypes> = (
-  state = initialState,
+const studentsEditorReducer = (
+  state: StudentsEditorReducerStateType = initialState,
   action: ActionTypes
 ): StudentsEditorReducerStateType => {
   switch (action.type) {
-    case Actions.ADD_NEW_STUDENT: {
+    case ADD_NEW_STUDENT: {
       return {
         ...state,
-        newStudent: action.payload as NewStudentType[],
+        newStudent: action.payload.newStudentData,
       };
     }
 
-    case Actions.GET_STUDENTS: {
+    case GET_STUDENTS: {
       return {
         ...state,
-        students: action.payload as StudentsType[],
+        students: action.payload.students,
       };
     }
 
-    case Actions.LOADING_STUDENTS: {
+    case LOADING_STUDENTS: {
       return {
         ...state,
-        loadingStudents: action.payload as boolean,
+        loadingStudents: action.payload.loadingStudents,
       };
     }
 
-    case Actions.GET_STUDENT_TO_UPDATE: {
+    case GET_STUDENT_TO_UPDATE: {
       return {
         ...state,
-        studentToUpdate: state.students.filter((student) => student._id === (action.payload as string)),
+        studentToUpdate: state.students.filter((student) => student._id === action.payload.studentToUpdate),
       };
     }
 
-    case Actions.SET_STUDENTS_ACTION_SUCCEED: {
+    case SET_STUDENTS_ACTION_SUCCEED: {
       return {
         ...state,
-        isStudentsActionSucceed: action.payload as boolean,
+        isStudentsActionSucceed: action.payload.isStudentsActionSucceed,
         isStudentsActionFailed: (state.isStudentsActionFailed = false),
       };
     }
 
-    case Actions.SET_STUDENTS_ACTION_FAILED: {
+    case SET_STUDENTS_ACTION_FAILED: {
       return {
         ...state,
-        isStudentsActionFailed: action.payload as boolean,
+        isStudentsActionFailed: action.payload.isStudentsActionFailed,
         isStudentsActionSucceed: (state.isStudentsActionSucceed = false),
       };
     }

@@ -1,6 +1,4 @@
-import { Reducer } from "redux";
-
-import { ActionTypes, Actions } from "./actionTypes";
+import { AnyAction, Reducer } from "redux";
 
 import loginImage01 from "./../../../assets/login-vector.svg";
 import joinImage01 from "./../../../assets/join-vector.svg";
@@ -26,13 +24,11 @@ const initialState = {
   ],
 };
 
-const globalReducer: Reducer<GlobalReducerStateType> = (state = initialState, action: ActionTypes): GlobalReducerStateType => {
+const globalReducer: Reducer<GlobalReducerStateType> = (
+  state = initialState,
+  action: AnyAction
+): GlobalReducerStateType => {
   switch (action.type) {
-    case Actions.GET_START_PAGE_CARDS_INFO: {
-      return {
-        ...state,
-      };
-    }
     default:
       return state;
   }

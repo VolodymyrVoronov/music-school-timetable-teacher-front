@@ -24,6 +24,7 @@ const Calendar = (): React.ReactElement => {
   const onDayClick = (e: { toLocaleString: (arg0: string, arg1: { timeZoneName: string }) => string }): void => {
     const date = e.toLocaleString("uk-UA", { timeZoneName: "short" }).slice(0, 10);
     dispatch(getChosenDateAC(date));
+
     history.push({
       pathname: "/timetable-editor",
       state: {
