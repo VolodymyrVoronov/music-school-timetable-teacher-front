@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../styles/colorPalette";
 import { boxShadow } from "../../styles/globalStylesVariables";
 
-import { s4, s8, s16, s20, s24, s32, s48, s64, s96, s160 } from "./../../styles/spacer";
+import { s32, s48, s64, s160 } from "./../../styles/spacer";
 
 const CalendarContainer = styled.div`
   display: flex;
@@ -15,6 +15,8 @@ const CalendarContainer = styled.div`
 
   margin: auto;
   margin-top: ${s160};
+  margin-bottom: ${s64};
+
   padding: ${s48};
 
   background-color: ${colors.white};
@@ -43,12 +45,14 @@ const CalendarBlock = styled.div`
     margin-right: 0;
   }
 
-  .DayPicker:not(.DayPicker--interactionDisabled) .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside) {
+  .DayPicker:not(.DayPicker--interactionDisabled)
+    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside) {
     border-radius: 0;
     transition: 0.5s ease;
   }
 
-  .DayPicker:not(.DayPicker--interactionDisabled) .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
+  .DayPicker:not(.DayPicker--interactionDisabled)
+    .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
     background-color: ${colors.primary};
     color: ${colors.white};
     border-radius: 0;

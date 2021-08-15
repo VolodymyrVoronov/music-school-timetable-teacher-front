@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { colors } from "../../styles/colorPalette";
 import { boxShadow } from "../../styles/globalStylesVariables";
 
-import { s4, s8, s16, s20, s24, s32, s48, s64, s96, s160 } from "./../../styles/spacer";
+import { s8, s20, s32, s64, s96 } from "./../../styles/spacer";
 
 const FormContainer = styled.div`
   display: flex;
@@ -13,6 +13,7 @@ const FormContainer = styled.div`
 
   margin: auto;
   margin-top: ${s96};
+  margin-bottom: ${s64};
 
   background-color: ${colors.white};
   box-shadow: ${boxShadow};
@@ -102,4 +103,12 @@ const FormError = styled.p`
   color: ${colors.error};
 `;
 
-export { FormContainer, FormContainerLeft, FormContainerLeftImage, FormContainerLeftTitle, FormContainerRight, FormContainerRightInfoButton, FormError };
+export {
+  FormContainer,
+  FormContainerLeft,
+  FormContainerLeftImage,
+  FormContainerLeftTitle,
+  FormContainerRight,
+  FormContainerRightInfoButton,
+  FormError,
+};

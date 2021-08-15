@@ -1,5 +1,3 @@
-import { Reducer } from "redux";
-
 import { ActionTypes } from "./actions";
 
 import {

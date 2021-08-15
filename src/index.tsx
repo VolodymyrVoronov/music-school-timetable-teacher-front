@@ -10,13 +10,13 @@ import App from "./components/App/App";
 import GlobalStyles from "./styles/globalStyles";
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <BrowserRouter>
       <GlobalStyles />
       <Provider store={store}>
         <App />
       </Provider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </>,
   document.getElementById("root")
 );
