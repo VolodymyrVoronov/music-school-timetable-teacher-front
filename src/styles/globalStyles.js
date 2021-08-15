@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
+import { colors } from "./colorPalette";
+
 import bgPattern from "./../assets/bg-pattern.png";
 
 const GlobalStyles = createGlobalStyle`
@@ -170,25 +172,21 @@ const GlobalStyles = createGlobalStyle`
     user-select: none;
   }
 
-  /* width */
-::-webkit-scrollbar {
-  /* width: 5px; */
-}
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
 
-/* Track */
-::-webkit-scrollbar-track {
-  /* background: transparent; */
-}
+  ::-webkit-scrollbar-track {
+    background: ${colors.primaryOpacity01};
+  }
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  /* background: darkgray; */
-}
+  ::-webkit-scrollbar-thumb {
+    background: ${colors.primaryOpacity05};
+  }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  /* background: gray; */
-}
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${colors.primaryOpacity07};
+  }
 `;
 
 export default GlobalStyles;
