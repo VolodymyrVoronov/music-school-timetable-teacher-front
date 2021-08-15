@@ -1,6 +1,6 @@
 # Timetable and students editor.
 
-**Start page.**
+**Start page**
 ![](./screenshots/start-page.JPG)
 
 **Login form**
