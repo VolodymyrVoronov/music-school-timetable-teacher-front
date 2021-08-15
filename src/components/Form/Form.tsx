@@ -90,8 +90,6 @@ const Form = (): React.ReactElement => {
     setTouched(() => true);
   };
 
-  console.log(formData);
-
   const onAuthButtonClick = () => {
     if (formType === "login") {
       dispatch(setLogin(formData, history));

@@ -50,7 +50,6 @@ export const setNewTimetableAC = () => async (dispatch: Dispatch<AnyAction>, get
       cards: getState().timeTableEditorReducer.timeTablesCards,
       date: getState().timeTableEditorReducer.date,
     };
-    console.log(newTimetableData);
 
     await newTimetable(newTimetableData);
 
