@@ -7,7 +7,7 @@ type FormData = {
 };
 
 const regexLogin = /^[A-Za-z0-9]*$/;
-const regexPassword = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9]{8,})$/;
+const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
 export const checkInputsSigninFormValidity = (formData: FormData) => {
   const errors: { [key: string]: string } = {};
