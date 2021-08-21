@@ -16,6 +16,8 @@ import {
 } from "./actionTypes";
 import { AuthDataType } from "./authReducer";
 
+import { NETWORK_STATUS } from "../../../const/const";
+
 interface RegistrationData {
   firstName?: string;
   secondName?: string;
@@ -46,7 +48,7 @@ export const setLogin =
     try {
       dispatch(isAuthorizingAC(true));
       const response = await login(loginData);
-      if (response.status === 200) {
+      if (response.status === NETWORK_STATUS.OK) {
         localStorage.setItem(`profile`, JSON.stringify(await { ...response.data }));
         dispatch(loginAC(response.data));
         dispatch(setUserNameAC(response.data.result.firstName, response.data.result.secondName));
@@ -67,7 +69,7 @@ export const setRegistration = (registrationData: RegistrationData) => async (di
   try {
     dispatch(isAuthorizingAC(true));
     const response = await registration(registrationData);
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       localStorage.setItem(`profile`, JSON.stringify(await { ...response.data }));
       dispatch(registrationAC(response.data));
       dispatch(setUserNameAC(response.data.result.firstName, response.data.result.secondName));

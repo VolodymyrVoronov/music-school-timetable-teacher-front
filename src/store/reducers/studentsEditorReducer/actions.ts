@@ -15,6 +15,8 @@ import {
   SET_STUDENTS_ACTION_FAILED,
 } from "./actionTypes";
 
+import { NETWORK_STATUS } from "../../../const/const";
+
 export const addNewStudentAC = (newStudentData: NewStudentType[]) => typedAction(ADD_NEW_STUDENT, { newStudentData });
 
 export const getStudentAC = (students: StudentsType[]) => typedAction(GET_STUDENTS, { students });
@@ -34,13 +36,13 @@ export const addNewStudent = (newStudentData: NewStudentType) => async (dispatch
   try {
     dispatch(loadginStudentAC(true));
     const responseNewStudent = await newStudent(newStudentData);
-    if (responseNewStudent.status === 201) {
+    if (responseNewStudent.status === NETWORK_STATUS.CREATED) {
       dispatch(addNewStudentAC(responseNewStudent.data));
       dispatch(loadginStudentAC(false));
     }
 
     const response = await fetchStudents();
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
 
@@ -60,7 +62,7 @@ export const getStudents = () => async (dispatch: Dispatch<AnyAction>) => {
   try {
     dispatch(loadginStudentAC(true));
     const response = await fetchStudents();
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
 
@@ -82,7 +84,7 @@ export const deleteStudentAC = (id: string) => async (dispatch: Dispatch<AnyActi
     await deleteStudent(id);
 
     const response = await fetchStudents();
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
 
@@ -104,7 +106,7 @@ export const updateStudentAC = (id: string, updatedStudent: any) => async (dispa
     await updateStudent(id, updatedStudent);
 
     const response = await fetchStudents();
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       dispatch(getStudentAC(response.data));
       dispatch(loadginStudentAC(false));
       dispatch(getStudentToUpdatedAC(""));

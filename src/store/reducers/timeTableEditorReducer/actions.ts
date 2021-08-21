@@ -6,6 +6,8 @@ import { newTimetable, fetchTimetable, updateTimetable } from "../../../api/api"
 
 import { typedAction } from "../helpers";
 
+import { TimeTablesCardType } from "./timeTableEditorReducer";
+
 import {
   GET_CHOSEN_DATE,
   SET_CURRENT_DRUG_ID,
@@ -17,7 +19,7 @@ import {
   SET_ERROR_OCCURED,
 } from "./actionTypes";
 
-import { TimeTablesCardType } from "./timeTableEditorReducer";
+import { NETWORK_STATUS } from "../../../const/const";
 
 import { cards } from "../../../data/cardsShape";
 
@@ -68,7 +70,7 @@ export const fetchTimetableAC = (chosenDate?: string) => async (dispatch: Dispat
 
     const response = await fetchTimetable();
 
-    if (response.status === 200) {
+    if (response.status === NETWORK_STATUS.OK) {
       const filteredCards = response.data.filter((d: { date: string }) => d.date === chosenDate);
 
       if (filteredCards.length !== 0) {
